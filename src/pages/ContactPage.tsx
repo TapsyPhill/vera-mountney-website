@@ -13,17 +13,19 @@ export function ContactPage() {
       <section className="section-padding hero-gradient">
         <div className="container-narrow">
           <SectionHeading title={t('contact.title')} subtitle={t('contact.subtitle')} />
-          <p className="mx-auto mb-10 max-w-2xl text-center text-sm text-brand-200 light:text-brand-700">
+          <p className="mx-auto mb-8 max-w-2xl text-center text-sm text-brand-200 light:text-brand-800 sm:mb-10">
             {t('contact.description')}
           </p>
 
-          <div className="grid gap-10 lg:grid-cols-5">
-            <div className="space-y-6 lg:col-span-2">
-              <div className="glass-card p-6">
-                <h3 className="font-display text-xl font-semibold">{t('contact.email')}</h3>
+          <div className="grid gap-6 lg:grid-cols-5 lg:gap-10">
+            <div className="space-y-4 sm:space-y-6 lg:col-span-2">
+              <div className="glass-card p-5 sm:p-6">
+                <h3 className="font-display text-lg font-semibold sm:text-xl light:text-brand-950">
+                  {t('contact.email')}
+                </h3>
                 <a
                   href={`mailto:${profile.email}`}
-                  className="mt-2 block text-accent-400 hover:underline"
+                  className="mt-2 block break-all text-accent-glow hover:underline"
                 >
                   {profile.email}
                 </a>
@@ -32,11 +34,13 @@ export function ContactPage() {
                 </a>
               </div>
 
-              <div className="glass-card p-6">
-                <h3 className="font-display text-xl font-semibold">{t('contact.phone')}</h3>
+              <div className="glass-card p-5 sm:p-6">
+                <h3 className="font-display text-lg font-semibold sm:text-xl light:text-brand-950">
+                  {t('contact.phone')}
+                </h3>
                 <a
                   href={`tel:${profile.phone.replace(/\s/g, '')}`}
-                  className="mt-2 block text-accent-400 hover:underline"
+                  className="mt-2 block text-accent-glow hover:underline"
                 >
                   {profile.phone}
                 </a>
@@ -48,21 +52,11 @@ export function ContactPage() {
                 </a>
               </div>
 
-              <div className="glass-card p-6">
-                <h3 className="font-display text-xl font-semibold">{t('contact.whatsapp')}</h3>
-                <a
-                  href={`https://wa.me/${profile.whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary mt-4 inline-flex text-xs"
-                >
-                  {t('contact.chatWhatsApp')}
-                </a>
-              </div>
-
-              <div className="glass-card p-6">
-                <h3 className="font-display text-xl font-semibold">{t('contact.appointment')}</h3>
-                <p className="mt-2 text-sm text-brand-200 light:text-brand-700">
+              <div className="glass-card p-5 sm:p-6">
+                <h3 className="font-display text-lg font-semibold sm:text-xl light:text-brand-950">
+                  {t('contact.appointment')}
+                </h3>
+                <p className="mt-2 text-sm text-brand-200 light:text-brand-800">
                   {t('contact.appointmentNote')}
                 </p>
               </div>

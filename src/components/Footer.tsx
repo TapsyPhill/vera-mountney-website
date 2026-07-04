@@ -8,18 +8,18 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-white/10 bg-surface-dark-elevated light:border-brand-200/50 light:bg-brand-50/50">
-      <div className="container-narrow section-padding !py-12">
-        <div className="grid gap-10 md:grid-cols-3">
+    <footer className="border-t border-white/10 bg-surface-dark-elevated light:border-brand-200/60 light:bg-brand-100/80">
+      <div className="container-narrow section-padding !py-10 sm:!py-12">
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 md:gap-10">
           <div>
-            <p className="font-display text-2xl font-semibold">Vera Mountney</p>
+            <p className="font-display text-xl font-semibold sm:text-2xl light:text-brand-950">Vera Mountney</p>
             <p className="mt-2 text-sm text-brand-300 light:text-brand-700">
               {t('footer.tagline')}
             </p>
           </div>
 
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent-400">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-accent-glow">
               {t('footer.quickLinks')}
             </p>
             <ul className="space-y-2 text-sm">
@@ -33,16 +33,11 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link to="/faq" className="transition-colors hover:text-accent-400 light:text-brand-800">
-                  {t('nav.faq')}
-                </Link>
-              </li>
             </ul>
           </div>
 
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent-400">
+          <div className="sm:col-span-2 md:col-span-1">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-accent-glow">
               {t('footer.contact')}
             </p>
             <ul className="space-y-2 text-sm light:text-brand-800">
@@ -57,11 +52,21 @@ export function Footer() {
                 </a>
               </li>
               <li>{profile.location}</li>
+              <li>
+                <a
+                  href={profile.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-accent-400"
+                >
+                  Instagram {profile.instagramHandle}
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-gray-400 light:border-brand-200/50 light:text-brand-600">
+        <div className="mt-8 border-t border-white/10 pt-6 text-center text-xs text-gray-400 light:border-brand-200/50 light:text-brand-600 sm:mt-10">
           © {year} Vera Mountney. {t('footer.rights')}
         </div>
       </div>

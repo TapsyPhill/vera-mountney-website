@@ -18,11 +18,6 @@ export function ServiceCard({ service }: ServiceCardProps) {
       <p className="mt-2 text-sm leading-relaxed text-brand-200 light:text-brand-700">
         {description}
       </p>
-      {service.featured && (
-        <span className="mt-4 inline-block rounded-full bg-accent-400/15 px-3 py-1 text-xs font-semibold text-accent-400">
-          ★
-        </span>
-      )}
     </article>
   )
 }

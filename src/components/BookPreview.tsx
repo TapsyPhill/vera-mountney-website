@@ -30,8 +30,8 @@ export function BookPreview() {
             </div>
             <div className="p-4">
               <h3 className="font-display text-base font-semibold leading-snug">{book.title}</h3>
-              <Link to="/book" className="mt-3 inline-block text-sm font-semibold text-accent-400 hover:underline">
-                {t('book.ctaHome')} →
+              <Link to="/book" className="mt-3 inline-block text-sm font-semibold text-accent-glow hover:underline">
+                {t('book.ctaHome')}
               </Link>
             </div>
           </article>

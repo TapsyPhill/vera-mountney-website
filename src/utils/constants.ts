@@ -8,13 +8,6 @@ export const NAV_LINKS = [
   { key: 'contact', path: '/contact' },
 ] as const
 
-export const OPTIONAL_NAV = [
-  { key: 'faq', path: '/faq' },
-  { key: 'testimonials', path: '/#testimonials' },
-  { key: 'guestbook', path: '/#guestbook' },
-  { key: 'blog', path: '/#blog' },
-] as const
-
 export const THEME_STORAGE_KEY = 'vera-theme'
 export const LANGUAGE_STORAGE_KEY = 'vera-language'
 

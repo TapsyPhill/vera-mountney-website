@@ -26,7 +26,7 @@ export function AboutPage() {
                 <img
                   src={PROFILE_IMAGE}
                   alt="Vera Mountney"
-                  className="aspect-[4/5] w-full object-cover"
+                  className="aspect-[3/2] w-full object-cover"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none'
                   }}
@@ -103,7 +103,7 @@ export function AboutPage() {
 
           <div className="mt-12 text-center">
             <Link to="/contact" className="btn-primary">
-              {t('about.cta')}
+              {t('nav.cta')}
             </Link>
           </div>
         </div>

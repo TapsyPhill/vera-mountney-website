@@ -1,32 +1,32 @@
 const en = {
   meta: {
     home: {
-      title: 'Vera Mountney — Coach, Trainer, Author & Adviser',
+      title: 'Vera Mountney, Coach, Trainer, Author & Adviser',
       description:
         'Coaching, guidance, authorship and intercultural support in Verden. Personal support for applications, career, integration and communication.',
     },
     about: {
       title: 'About Vera Mountney',
       description:
-        'Learn more about Vera Mountney — author, coach, trainer and adviser with an international background.',
+        'Learn more about Vera Mountney, author, coach, trainer and adviser with an international background.',
     },
     services: {
-      title: 'Services — Vera Mountney',
+      title: 'Services, Vera Mountney',
       description:
-        'Coaching, consultation, application support, intercultural training and more — personal and professional.',
+        'Coaching, consultation, application support, intercultural training and more, personal and professional.',
     },
     book: {
-      title: 'Book — Vera Mountney',
+      title: 'Book, Vera Mountney',
       description:
-        'When the Bats Fly, I Dream of Nigeria — Vera Mountney\'s personal story as a teacher in Ibadan.',
+        'When the Bats Fly, I Dream of Nigeria, Vera Mountney\'s personal story as a teacher in Ibadan.',
     },
     contact: {
-      title: 'Contact — Vera Mountney',
+      title: 'Contact, Vera Mountney',
       description:
         'Contact Vera Mountney by email, WhatsApp or phone. Appointment requests welcome.',
     },
     faq: {
-      title: 'FAQ — Vera Mountney',
+      title: 'FAQ, Vera Mountney',
       description:
         'Frequently asked questions about coaching, services, the book and contact options.',
     },
@@ -41,26 +41,26 @@ const en = {
     testimonials: 'Testimonials',
     guestbook: 'Guestbook',
     blog: 'Blog',
-    cta: 'Get in touch',
+    cta: 'Inquiry Now',
   },
   hero: {
-    badge: 'Coach · Trainer · Author · Adviser',
+    badge: 'Coach, Trainer, Author, Adviser',
     title: 'Vera Mountney',
     subtitle:
-      'Coaching, guidance, authorship and intercultural support — professional, personal and tailored.',
+      'Coaching, guidance, authorship and intercultural support, professional, personal and tailored.',
     tagline: 'Strategy. Growth. Success.',
     description:
-      'Professional guidance with international experience and a personal touch — for people in Germany seeking support with communication, applications, integration and personal development.',
-    ctaPrimary: 'Request appointment',
+      'Professional guidance with international experience and a personal touch, for people in Germany seeking support with communication, applications, integration and personal development.',
+    ctaPrimary: 'Inquiry Now',
     ctaSecondary: 'Explore services',
     ctaBook: 'Discover the book',
-    animationPlaceholder: 'Animation area — Phase 2',
+    animationPlaceholder: 'Animation area, Phase 2',
   },
   specialOffer: {
     label: 'Special Offer 2026',
     title: 'Individual Coaching Package 2026',
     description:
-      'Start the year with focused support — for applications, career, integration or personal development. Limited places available.',
+      'Start the year with focused support, for applications, career, integration or personal development. Limited places available.',
     cta: 'Enquire now',
   },
   trust: {
@@ -68,13 +68,13 @@ const en = {
     subtitle: 'Qualifications, experience and trust',
   },
   credentials: {
-    aevo: 'AEVO / IHK Bremen — trainer qualification',
+    aevo: 'AEVO / IHK Bremen, trainer qualification',
     systemicCoach: 'Certified systemic coach & process adviser',
     communication: 'Extensive experience in communication & languages',
-    bamf: 'Official approval for German courses (BAMF, A2–C2) and vocational language courses',
+    bamf: 'Official approval for German courses (BAMF, A2 to C2) and vocational language courses',
     certifications: 'Various communication and professional certifications',
     biqEsf: 'Experience in BIQ / ESF projects',
-    telc: 'TELC exam preparation (A2–C1)',
+    telc: 'TELC exam preparation (A2 to C1)',
     supervisor: 'Registered supervisor / support professional for Landkreis Verden',
     socialEngagement: 'Committed social engagement',
     intercultural: 'International & intercultural competence',
@@ -96,7 +96,7 @@ const en = {
   },
   services: {
     title: 'Services',
-    subtitle: 'Personal support — clear, professional and tailored to you',
+    subtitle: 'Personal support, clear, professional and tailored to you',
     viewAll: 'View all services',
     featured: 'Highlights',
     consultation: {
@@ -150,14 +150,14 @@ const en = {
         'Readings, presentations and events around the book and authorship.',
     },
     publishing: {
-      title: 'Publishing — Publish your book',
+      title: 'Publishing, Publish your book',
       description:
         'Guidance and support on the path to publishing your own book.',
     },
     zoomTraining: {
       title: 'Training via Zoom',
       description:
-        'Flexible online sessions — convenient from anywhere, professional and personal.',
+        'Flexible online sessions, convenient from anywhere, professional and personal.',
     },
     germanTest: {
       title: 'German Test Preparation',
@@ -165,7 +165,7 @@ const en = {
         'Targeted preparation for German exams as part of your integration and career planning.',
     },
     telc: {
-      title: 'TELC A2–C1 Preparation',
+      title: 'TELC A2 to C1 Preparation',
       description:
         'Structured exam preparation for TELC certificates from A2 to C1.',
     },
@@ -177,7 +177,7 @@ const en = {
     specialOffer2026: {
       title: 'Special Offer 2026',
       description:
-        'Exclusive coaching package for 2026 — individual, focused and limited availability.',
+        'Exclusive coaching package for 2026, individual, focused and limited availability.',
     },
   },
   about: {
@@ -214,15 +214,15 @@ const en = {
       nigeria: 'Nigeria',
       asia: 'Extensive travel in Asia',
     },
-    cta: 'Get in touch',
+    cta: 'Inquiry Now',
   },
   book: {
     title: 'My Book',
     subtitle: 'A personal story from Nigeria',
     description:
-      'In this book, Vera Mountney tells of her time as a teacher in Ibadan, Nigeria — a vivid portrait of culture, education and personal growth.',
+      'In this book, Vera Mountney tells of her time as a teacher in Ibadan, Nigeria, a vivid portrait of culture, education and personal growth.',
     descriptionExtended:
-      'The book is available in English and German editions. Direct sales on this website are not set up yet — you will be directed to external purchase options.',
+      'The book is available in English and German editions. Direct sales on this website are not set up yet, you will be directed to external purchase options.',
     buyEn: 'Buy the English edition',
     buyDe: 'Buy the German edition',
     viewEn: 'View English edition',
@@ -283,15 +283,15 @@ const en = {
       },
       coaching: {
         q: 'Does she offer coaching?',
-        a: 'Yes. Vera is a certified systemic coach and offers individual coaching for professional and personal development — in person and via Zoom.',
+        a: 'Yes. Vera is a certified systemic coach and offers individual coaching for professional and personal development, in person and via Zoom.',
       },
       cvHelp: {
         q: 'Can I get help with my CV or application?',
-        a: 'Yes. Vera supports with CV, cover letter and overall application strategy — professionally and individually.',
+        a: 'Yes. Vera supports with CV, cover letter and overall application strategy, professionally and individually.',
       },
       intercultural: {
         q: 'Does she offer intercultural training?',
-        a: 'Yes. Intercultural training and integration guidance are core competencies — for individuals, groups and organisations.',
+        a: 'Yes. Intercultural training and integration guidance are core competencies, for individuals, groups and organisations.',
       },
       appointment: {
         q: 'How can I request an appointment?',
@@ -303,7 +303,7 @@ const en = {
       },
       book: {
         q: 'Where can I buy the book?',
-        a: 'The book is available in English and German editions. Purchase via the external links on the book page — direct sales on this website may follow later.',
+        a: 'The book is available in English and German editions. Purchase via the external links on the book page, direct sales on this website may follow later.',
       },
       languages: {
         q: 'What languages does she speak?',
@@ -315,7 +315,7 @@ const en = {
       },
       pricing: {
         q: 'What do the services cost?',
-        a: 'Prices depend on the type and scope of the service. Contact Vera for an individual quote — the 2026 special offer has limited availability.',
+        a: 'Prices depend on the type and scope of the service. Contact Vera for an individual quote, the 2026 special offer has limited availability.',
       },
       onlineSessions: {
         q: 'Are online sessions possible?',
@@ -326,7 +326,7 @@ const en = {
   chatbot: {
     title: 'Vera Assistant',
     subtitle: 'How can I help?',
-    subtitleAi: 'AI-powered assistant — how can I help?',
+    subtitleAi: 'AI-powered assistant, how can I help?',
     placeholder: 'Ask a question…',
     send: 'Send',
     open: 'Open chat',
@@ -339,7 +339,7 @@ const en = {
       services:
         'Vera offers coaching, consultation, job coaching, application help, proofreading, integration guidance, intercultural training, workshops and more.',
       coaching:
-        'Yes, Vera is a certified systemic coach and offers individual coaching — in person and via Zoom.',
+        'Yes, Vera is a certified systemic coach and offers individual coaching, in person and via Zoom.',
       cvHelp:
         'Yes! Vera supports with CV, cover letter and application strategy. Use the contact form to enquire.',
       intercultural:
@@ -356,7 +356,7 @@ const en = {
       greeting: 'Hello! How can I help you?',
       thanks: 'You\'re welcome! Feel free to ask if you have more questions.',
       fallback:
-        'I\'m not sure about that. Ask me about services, contact, the book, appointments or languages — or use the contact form.',
+        'I\'m not sure about that. Ask me about services, contact, the book, appointments or languages, or use the contact form.',
     },
   },
   footer: {
@@ -382,12 +382,12 @@ const en = {
     bookPreview: 'My book',
     aboutPreview: 'Brief profile',
     aboutTeaser:
-      'Author, coach and adviser with an international background — personal guidance for your path.',
+      'Author, coach and adviser with an international background, personal guidance for your path.',
     ctaSection: {
       title: 'Ready for the next step?',
       description:
-        'Whether coaching, applications, integration or the book — I look forward to your enquiry.',
-      cta: 'Get in touch now',
+        'Whether coaching, applications, integration or the book, I look forward to your enquiry.',
+      cta: 'Inquiry Now',
     },
     testimonials: {
       title: 'Testimonials',

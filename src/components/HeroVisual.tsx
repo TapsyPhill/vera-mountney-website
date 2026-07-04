@@ -88,10 +88,10 @@ export function HeroVisual() {
       </div>
 
       <div className="absolute -bottom-3 -right-3 hidden rounded-2xl border border-accent-400/30 bg-brand-900/90 px-4 py-3 shadow-xl backdrop-blur-md sm:block light:bg-white/90">
-        <p className="font-display text-sm font-semibold text-accent-400">
+        <p className="font-display text-sm font-semibold text-accent-glow">
           {t('hero.badge')}
         </p>
-        <p className="text-xs text-brand-200 light:text-brand-600">Verden · Germany</p>
+        <p className="text-xs text-brand-200 light:text-brand-700">Verden, Germany</p>
       </div>
     </div>
   )

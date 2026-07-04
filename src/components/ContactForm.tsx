@@ -95,7 +95,6 @@ export function ContactForm() {
           >
             <option value="email">{t('contact.form.contactMethods.email')}</option>
             <option value="phone">{t('contact.form.contactMethods.phone')}</option>
-            <option value="whatsapp">{t('contact.form.contactMethods.whatsapp')}</option>
           </select>
         </div>
       </div>

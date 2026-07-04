@@ -1,12 +1,13 @@
 export const bookLinks = {
   buyUrlEn:
     import.meta.env.VITE_BOOK_BUY_URL_EN ||
-    'https://example.com/buy-when-the-bats-fly-en',
+    'https://verlag-kern.de/unsere-bucher/when-the-bats-fly-i-dream-of-nigeria/',
   buyUrlDe:
     import.meta.env.VITE_BOOK_BUY_URL_DE ||
-    'https://example.com/buy-wenn-fledermaeuse-fliegen-de',
+    'https://verlag-kern.de/unsere-bucher/wenn-fledermaeuse-fliegen-traeume-ich-von-nigeria/',
   authorPageUrl:
-    import.meta.env.VITE_BOOK_AUTHOR_URL || 'https://vera-mountney.de/book',
+    import.meta.env.VITE_BOOK_AUTHOR_URL ||
+    'https://verlag-kern.de/autor/vera-mountney/',
 } as const
 
 export const books = {

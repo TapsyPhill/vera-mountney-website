@@ -7,7 +7,7 @@
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "DM Sans", system-ui, sans-serif;
 
-  --color-brand-50: #f5f3ff;
+  --color-brand-50: #f3f0ff;
   --color-brand-100: #ede9fe;
   --color-brand-200: #ddd6fe;
   --color-brand-300: #c4b5fd;
@@ -19,15 +19,15 @@
   --color-brand-900: #4c1d95;
   --color-brand-950: #2e1065;
 
-  --color-accent-300: #fcd34d;
-  --color-accent-400: #e8c99b;
-  --color-accent-500: #d4a574;
-  --color-accent-600: #b8864a;
+  --color-accent-300: #fde68a;
+  --color-accent-400: #fbbf24;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
 
   --color-surface-dark: #120a24;
   --color-surface-dark-elevated: #1a1033;
-  --color-surface-light: #faf8f5;
-  --color-surface-light-elevated: #ffffff;
+  --color-surface-light: #f0ebf8;
+  --color-surface-light-elevated: #f5f1fa;
 
   --animate-fade-in: fade-in 0.7s ease-out both;
   --animate-fade-in-up: fade-in-up 0.7s ease-out both;
@@ -49,13 +49,25 @@
   }
 }
 
+@keyframes gold-glow {
+  0%, 100% { box-shadow: 0 0 12px rgba(251, 191, 36, 0.25); }
+  50% { box-shadow: 0 0 24px rgba(251, 191, 36, 0.45); }
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-body);
-  @apply bg-surface-light text-gray-900 antialiased transition-colors duration-300;
+  @apply antialiased transition-colors duration-300;
+}
+
+.light body {
+  @apply bg-surface-light text-brand-900;
+  background-image:
+    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(139, 92, 246, 0.12), transparent 70%),
+    radial-gradient(ellipse 80% 50% at 100% 100%, rgba(251, 191, 36, 0.06), transparent 60%);
 }
 
 .dark body {
@@ -66,12 +78,16 @@ h1, h2, h3, h4 {
   font-family: var(--font-display);
 }
 
+.light h1, .light h2, .light h3, .light h4 {
+  @apply text-brand-950;
+}
+
 .glass-card {
   @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md;
 }
 
 .light .glass-card {
-  @apply border-brand-200/60 bg-white/80 shadow-lg shadow-brand-900/5;
+  @apply border-brand-300/50 bg-brand-50/70 shadow-lg shadow-brand-900/5;
 }
 
 .dark .glass-card {
@@ -80,10 +96,19 @@ h1, h2, h3, h4 {
 
 .btn-primary {
   @apply inline-flex items-center justify-center rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-900/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-500 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35), inset 0 1px 0 rgba(251, 191, 36, 0.15);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 28px rgba(124, 58, 237, 0.45), 0 0 20px rgba(251, 191, 36, 0.2), inset 0 1px 0 rgba(251, 191, 36, 0.25);
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center rounded-full border border-brand-400/40 bg-transparent px-6 py-3 text-sm font-semibold text-brand-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-500 hover:bg-brand-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500;
+  @apply inline-flex items-center justify-center rounded-full border border-brand-400/40 bg-transparent px-6 py-3 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500;
+}
+
+.light .btn-secondary {
+  @apply border-brand-400/60 text-brand-800 hover:border-accent-500/60 hover:bg-brand-100/80;
 }
 
 .dark .btn-secondary {
@@ -91,7 +116,7 @@ h1, h2, h3, h4 {
 }
 
 .section-padding {
-  @apply px-4 py-16 sm:px-6 lg:px-8 lg:py-24;
+  @apply px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24;
 }
 
 .container-narrow {
@@ -99,15 +124,28 @@ h1, h2, h3, h4 {
 }
 
 .gradient-text {
-  @apply bg-gradient-to-r from-brand-300 via-brand-400 to-accent-400 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-accent-300 via-accent-400 to-accent-500 bg-clip-text text-transparent;
+  filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.15));
+}
+
+.text-accent-glow {
+  @apply text-accent-400;
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.35);
 }
 
 .hero-gradient {
   background:
     radial-gradient(ellipse 80% 60% at 20% 20%, rgba(124, 58, 237, 0.35), transparent),
     radial-gradient(ellipse 60% 50% at 80% 30%, rgba(59, 130, 246, 0.2), transparent),
-    radial-gradient(ellipse 50% 40% at 50% 90%, rgba(212, 165, 116, 0.15), transparent);
+    radial-gradient(ellipse 50% 40% at 50% 90%, rgba(251, 191, 36, 0.18), transparent);
   animation: hero-shift 12s ease-in-out infinite alternate;
+}
+
+.light .hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(139, 92, 246, 0.15), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(124, 58, 237, 0.08), transparent),
+    radial-gradient(ellipse 50% 40% at 50% 90%, rgba(251, 191, 36, 0.1), transparent);
 }
 
 @keyframes hero-shift {
@@ -131,9 +169,9 @@ h1, h2, h3, h4 {
   background: linear-gradient(
     105deg,
     transparent 40%,
-    rgba(255, 255, 255, 0.06) 45%,
-    rgba(255, 255, 255, 0.12) 50%,
-    rgba(255, 255, 255, 0.06) 55%,
+    rgba(251, 191, 36, 0.04) 45%,
+    rgba(251, 191, 36, 0.1) 50%,
+    rgba(251, 191, 36, 0.04) 55%,
     transparent 60%
   );
   transform: translateX(-100%);
@@ -142,6 +180,11 @@ h1, h2, h3, h4 {
 
 .card-shine:hover::after {
   transform: translateX(100%);
+}
+
+.light .text-brand-200,
+.light .text-brand-300 {
+  @apply text-brand-700;
 }
 
 @media (prefers-reduced-motion: reduce) {
