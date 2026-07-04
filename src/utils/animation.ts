@@ -1,4 +1,4 @@
-/** Placeholder utilities for Phase 2 animation libraries (Framer Motion, GSAP, Lottie). */
+/** Animation utilities — GSAP is used in HeroVisual, Hero, and ScrollReveal. */
 export const animationConfig = {
   fadeIn: 'animate-fade-in',
   fadeInUp: 'animate-fade-in-up',

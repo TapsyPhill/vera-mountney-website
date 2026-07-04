@@ -326,6 +326,7 @@ const de = {
   chatbot: {
     title: 'Vera Assistent',
     subtitle: 'Wie kann ich helfen?',
+    subtitleAi: 'KI-gestützter Assistent — wie kann ich helfen?',
     placeholder: 'Stellen Sie eine Frage…',
     send: 'Senden',
     open: 'Chat öffnen',

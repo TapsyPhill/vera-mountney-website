@@ -14,7 +14,7 @@ export function BookPreview() {
             key={lang}
             className="glass-card overflow-hidden transition-all duration-300 hover:-translate-y-1"
           >
-            <div className="aspect-[3/4] max-h-48 overflow-hidden bg-brand-900/30 sm:max-h-none">
+            <div className="aspect-[7/10] max-h-56 overflow-hidden bg-brand-900/30 sm:max-h-none">
               <img
                 src={book.cover}
                 alt={book.title}

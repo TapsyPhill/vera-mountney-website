@@ -29,7 +29,7 @@ export function BookSection({ compact = false }: BookSectionProps) {
                 key={lang}
                 className="glass-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
               >
-                <div className="aspect-[3/4] overflow-hidden bg-brand-900/30">
+                <div className="aspect-[7/10] overflow-hidden bg-brand-900/30">
                   <img
                     src={book.cover}
                     alt={book.title}

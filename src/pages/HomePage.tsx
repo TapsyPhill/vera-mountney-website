@@ -8,6 +8,7 @@ import { ServiceCard } from '../components/ServiceCard'
 import { BookPreview } from '../components/BookPreview'
 import { TrustHighlights } from '../components/TrustHighlights'
 import { WorkedWithStrip } from '../components/WorkedWithStrip'
+import { ScrollReveal } from '../components/ScrollReveal'
 import { services } from '../data/services'
 
 export function HomePage() {
@@ -20,15 +21,17 @@ export function HomePage() {
       <Hero />
       <SpecialOfferBanner />
 
-      <section className="section-padding">
+      <ScrollReveal className="section-padding">
         <div className="container-narrow">
           <SectionHeading
             title={t('home.servicesPreview')}
             subtitle={t('services.subtitle')}
           />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredServices.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+            {featuredServices.map((service, i) => (
+              <ScrollReveal key={service.id} delay={i * 0.05}>
+                <ServiceCard service={service} />
+              </ScrollReveal>
             ))}
           </div>
           <div className="mt-10 text-center">
@@ -37,9 +40,9 @@ export function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section className="section-padding bg-white/5 light:bg-brand-50/80">
+      <ScrollReveal className="section-padding bg-white/5 light:bg-brand-50/80">
         <div className="container-narrow grid items-center gap-10 lg:grid-cols-2">
           <div>
             <SectionHeading
@@ -55,37 +58,23 @@ export function HomePage() {
           </div>
           <BookPreview />
         </div>
-      </section>
+      </ScrollReveal>
 
-      <TrustHighlights />
-      <WorkedWithStrip />
+      <ScrollReveal>
+        <TrustHighlights />
+      </ScrollReveal>
+      <ScrollReveal>
+        <WorkedWithStrip />
+      </ScrollReveal>
 
-      <section id="testimonials" className="section-padding">
+      <ScrollReveal className="section-padding">
         <div className="container-narrow text-center">
           <SectionHeading title={t('home.testimonials.title')} />
           <p className="text-sm text-brand-300 light:text-brand-600">
             {t('home.testimonials.comingSoon')}
           </p>
         </div>
-      </section>
-
-      <section id="guestbook" className="section-padding bg-white/5 light:bg-brand-50/50">
-        <div className="container-narrow text-center">
-          <SectionHeading title={t('home.guestbook.title')} />
-          <p className="text-sm text-brand-300 light:text-brand-600">
-            {t('home.guestbook.comingSoon')}
-          </p>
-        </div>
-      </section>
-
-      <section id="blog" className="section-padding">
-        <div className="container-narrow text-center">
-          <SectionHeading title={t('home.blog.title')} />
-          <p className="text-sm text-brand-300 light:text-brand-600">
-            {t('home.blog.comingSoon')}
-          </p>
-        </div>
-      </section>
+      </ScrollReveal>
 
       <section className="section-padding bg-gradient-to-br from-brand-900/80 to-brand-950 light:from-brand-100 light:to-brand-50">
         <div className="container-narrow text-center">
