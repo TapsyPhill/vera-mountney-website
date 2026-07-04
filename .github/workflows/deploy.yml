@@ -8,12 +8,28 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to FTP
+    name: Build and deploy to FTP
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+        env:
+          VITE_BOOK_BUY_URL_EN: ${{ vars.VITE_BOOK_BUY_URL_EN }}
+          VITE_BOOK_BUY_URL_DE: ${{ vars.VITE_BOOK_BUY_URL_DE }}
+          VITE_BOOK_AUTHOR_URL: ${{ vars.VITE_BOOK_AUTHOR_URL }}
 
       - name: Deploy to FTP server
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
@@ -22,6 +38,6 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
-          protocol: ${{ secrets.FTP_PROTOCOL }}
-          local-dir: ./public/
-          server-dir: ${{ secrets.FTP_TARGET_DIR }}
+          protocol: ftps
+          local-dir: ./dist/
+          server-dir: ${{ secrets.DEPLOY_DIR || secrets.FTP_TARGET_DIR }}
