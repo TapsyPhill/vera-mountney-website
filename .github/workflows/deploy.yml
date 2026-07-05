@@ -40,25 +40,28 @@ jobs:
           SMTP_FROM: ${{ secrets.SMTP_FROM }}
           SMTP_FROM_NAME: ${{ secrets.SMTP_FROM_NAME }}
           SMTP_ENCRYPTION: ${{ secrets.SMTP_ENCRYPTION }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
         run: |
-          if [ -n "$SMTP_PASS" ] && [ -n "$SMTP_USER" ] && [ -n "$SMTP_HOST" ]; then
-            node <<'NODE'
+          if [ -z "$SMTP_PASS" ] || [ -z "$SMTP_USER" ] || [ -z "$SMTP_HOST" ]; then
+            echo "Error: SMTP secrets are required (SMTP_HOST, SMTP_USER, SMTP_PASS)."
+            exit 1
+          fi
+          node <<'NODE'
           const fs = require('fs');
           const config = {
-            host: process.env.SMTP_HOST || 'smtp.gmail.com',
-            port: Number(process.env.SMTP_PORT || 587),
-            encryption: process.env.SMTP_ENCRYPTION || 'tls',
+            host: process.env.SMTP_HOST || 'vera-mountney.de',
+            port: Number(process.env.SMTP_PORT || 465),
+            encryption: process.env.SMTP_ENCRYPTION || 'ssl',
             username: process.env.SMTP_USER || '',
             password: process.env.SMTP_PASS || '',
             from_email: process.env.SMTP_FROM || process.env.SMTP_USER || '',
             from_name: process.env.SMTP_FROM_NAME || 'Vera Mountney Website',
+            recipient_email: process.env.RECIPIENT_EMAIL || 'phillmhembere@gmail.com',
           };
           const body = `<?php\nreturn json_decode(${JSON.stringify(JSON.stringify(config))}, true);\n`;
           fs.writeFileSync('dist/api/smtp.config.php', body);
+          console.log('SMTP config written for', config.from_email, '->', config.recipient_email);
           NODE
-          else
-            echo "SMTP secrets not configured — contact form will use PHP mail() fallback."
-          fi
 
       - name: Deploy to FTP server
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0

@@ -1,14 +1,16 @@
 <?php
 /**
- * Copy to smtp.config.php on the server, or set GitHub Actions secrets:
- * SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM (optional)
+ * Production config is generated at deploy from GitHub Actions secrets:
+ * SMTP_HOST, SMTP_PORT, SMTP_ENCRYPTION, SMTP_USER, SMTP_PASS,
+ * SMTP_FROM, SMTP_FROM_NAME, RECIPIENT_EMAIL
  */
 return [
-    'host' => 'smtp.gmail.com',
-    'port' => 587,
-    'encryption' => 'tls',
-    'username' => 'phillmhembere@gmail.com',
-    'password' => 'your-app-password-here',
-    'from_email' => 'phillmhembere@gmail.com',
+    'host' => 'vera-mountney.de',
+    'port' => 465,
+    'encryption' => 'ssl',
+    'username' => 'noreply@vera-mountney.de',
+    'password' => 'your-mailbox-password',
+    'from_email' => 'noreply@vera-mountney.de',
     'from_name' => 'Vera Mountney Website',
+    'recipient_email' => 'phillmhembere@gmail.com',
 ];

@@ -95,8 +95,10 @@ if ($errors !== []) {
     exit;
 }
 
-// TEST RECIPIENT ONLY - change to veramountney@gmx.net before final handover
-$recipient = 'phillmhembere@gmail.com';
+// Recipient comes from smtp.config.php (RECIPIENT_EMAIL secret at deploy time)
+require_once __DIR__ . '/send-mail.php';
+
+$recipient = getInquiryRecipient();
 
 $sourceLabel = $source === 'vera_assistant' ? 'Vera Assistant' : 'Contact Form';
 $appointmentLabel = $appointmentRequest ? 'Yes / Ja' : 'No / Nein';
@@ -147,8 +149,6 @@ $bodyLines = [
 ];
 
 $body = implode("\r\n", $bodyLines);
-
-require_once __DIR__ . '/send-mail.php';
 
 $mailResult = sendInquiryEmail(
     $recipient,

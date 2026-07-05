@@ -8,6 +8,36 @@ require_once __DIR__ . '/vendor/phpmailer/phpmailer/PHPMailer.php';
 require_once __DIR__ . '/vendor/phpmailer/phpmailer/SMTP.php';
 require_once __DIR__ . '/vendor/phpmailer/phpmailer/Exception.php';
 
+const DEFAULT_RECIPIENT = 'phillmhembere@gmail.com';
+
+/**
+ * @return array<string, mixed>|null
+ */
+function loadMailConfig(): ?array
+{
+    $configPath = __DIR__ . '/smtp.config.php';
+    if (!is_readable($configPath)) {
+        return null;
+    }
+
+    /** @var array<string, mixed>|null $config */
+    $config = require $configPath;
+
+    return is_array($config) ? $config : null;
+}
+
+function getInquiryRecipient(): string
+{
+    $config = loadMailConfig();
+    $recipient = trim((string)($config['recipient_email'] ?? ''));
+
+    if ($recipient !== '' && filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
+        return $recipient;
+    }
+
+    return DEFAULT_RECIPIENT;
+}
+
 /**
  * @return array{sent: bool, method: string, error: string|null}
  */
@@ -18,17 +48,12 @@ function sendInquiryEmail(
     string $replyToEmail,
     string $replyToName
 ): array {
-    $configPath = __DIR__ . '/smtp.config.php';
-    if (is_readable($configPath)) {
-        /** @var array<string, mixed> $smtpConfig */
-        $smtpConfig = require $configPath;
-        $result = sendViaSmtp($smtpConfig, $recipient, $subject, $body, $replyToEmail, $replyToName);
-        if ($result['sent']) {
-            return $result;
-        }
+    $smtpConfig = loadMailConfig();
+    if ($smtpConfig !== null) {
+        return sendViaSmtp($smtpConfig, $recipient, $subject, $body, $replyToEmail, $replyToName);
     }
 
-    $fallbackFrom = 'vera_deploy@vera-mountney.de';
+    $fallbackFrom = 'noreply@vera-mountney.de';
     $headers = [
         'MIME-Version: 1.0',
         'From: Vera Mountney Website <' . $fallbackFrom . '>',
