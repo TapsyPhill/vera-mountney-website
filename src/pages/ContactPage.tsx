@@ -23,15 +23,9 @@ export function ContactPage() {
                 <h3 className="font-display text-lg font-semibold sm:text-xl light:text-brand-950">
                   {t('contact.email')}
                 </h3>
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="mt-2 block break-all text-accent-glow hover:underline"
-                >
-                  {profile.email}
-                </a>
-                <a href={`mailto:${profile.email}`} className="btn-secondary mt-4 inline-flex text-xs">
-                  {t('contact.writeEmail')}
-                </a>
+                <p className="mt-2 text-sm text-brand-200 light:text-brand-800">
+                  {t('contact.formHint')}
+                </p>
               </div>
 
               <div className="glass-card p-5 sm:p-6">

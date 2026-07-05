@@ -274,6 +274,8 @@ const de = {
     description:
       'Anfragen per Mail mit kurzer Beschreibung. Teilen Sie mir mit, wie ich Sie am besten erreichen kann.',
     email: 'E-Mail',
+    formHint:
+      'Bitte nutzen Sie das Formular auf dieser Seite oder den Vera Assistenten im Chat. Ihre Nachricht wird direkt gesendet.',
     phone: 'Telefon',
     whatsapp: 'WhatsApp',
     appointment: 'Termin per Telefon',
@@ -342,11 +344,11 @@ const de = {
       },
       appointment: {
         q: 'Wie kann ich einen Termin anfragen?',
-        a: 'Über das Kontaktformular, per E-Mail an veramountney@gmx.net oder telefonisch unter 0173 9595 752. Bitte beschreiben Sie Ihr Anliegen kurz.',
+        a: 'Über das Kontaktformular, den Vera Assistenten im Chat oder telefonisch unter 0173 9595 752. Bitte beschreiben Sie Ihr Anliegen kurz.',
       },
       contact: {
         q: 'Wie kann ich Vera kontaktieren?',
-        a: 'Per E-Mail (veramountney@gmx.net), Telefon (0173 9595 752) oder WhatsApp. Das Kontaktformular auf dieser Website steht ebenfalls zur Verfügung.',
+        a: 'Über das Kontaktformular, den Vera Assistenten, Telefon (0173 9595 752) oder WhatsApp.',
       },
       book: {
         q: 'Wo kann ich das Buch kaufen?',
@@ -375,7 +377,10 @@ const de = {
   },
   assistant: {
     subtitle: 'Anfragen, Termine und Antworten',
-    greeting: 'Hallo! Wie kann ich Ihnen heute helfen?',
+    greeting: 'Hallo! Sie können eine Frage stellen oder mir schreiben, wobei ich Ihnen helfen kann.',
+    chatFallback:
+      'Vielen Dank für Ihre Nachricht. Wenn Sie eine Anfrage oder einen Terminwunsch senden möchten, schreiben Sie das einfach in Ihren Worten und ich führe Sie durch.',
+    invalidEmail: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
     inquiryIntro: 'Ich helfe Ihnen, eine Anfrage an Vera Mountney zu senden.',
     askService: 'Welche Art von Unterstützung benötigen Sie?',
     askOtherService: 'Bitte beschreiben Sie kurz die gewünschte Leistung.',
@@ -437,7 +442,7 @@ const de = {
       appointment:
         'Termine können über das Kontaktformular, per E-Mail oder telefonisch angefragt werden. Bitte beschreiben Sie Ihr Anliegen kurz.',
       contact:
-        'Erreichbar per E-Mail: veramountney@gmx.net, Telefon: 0173 9595 752, oder WhatsApp.',
+        'Nutzen Sie das Kontaktformular, den Vera Assistenten im Chat oder Telefon: 0173 9595 752.',
       book: 'Das Buch ist in Englisch und Deutsch erhältlich. Besuchen Sie die Buchseite für Kauflinks.',
       languages:
         'Vera spricht Englisch, Italienisch, Spanisch, Deutsch sowie Grundkenntnisse in Portugiesisch und Französisch.',
@@ -454,6 +459,7 @@ const de = {
     rights: 'Alle Rechte vorbehalten.',
     quickLinks: 'Schnellzugriff',
     contact: 'Kontakt',
+    contactForm: 'Nachricht senden',
     comingSoon: 'Demnächst',
   },
   common: {

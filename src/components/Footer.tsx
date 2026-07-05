@@ -42,9 +42,9 @@ export function Footer() {
             </p>
             <ul className="space-y-2 text-sm light:text-brand-800">
               <li>
-                <a href={`mailto:${profile.email}`} className="hover:text-accent-400">
-                  {profile.email}
-                </a>
+                <Link to="/contact" className="hover:text-accent-400">
+                  {t('footer.contactForm')}
+                </Link>
               </li>
               <li>
                 <a href={`tel:${profile.phone.replace(/\s/g, '')}`} className="hover:text-accent-400">

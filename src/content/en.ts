@@ -274,6 +274,7 @@ const en = {
     description:
       'Enquiries by email with a brief description. Let me know how best to reach you.',
     email: 'Email',
+    formHint: 'Please use the form on this page or the Vera Assistant chat. Your message will be sent directly.',
     phone: 'Phone',
     whatsapp: 'WhatsApp',
     appointment: 'Phone appointment',
@@ -342,11 +343,11 @@ const en = {
       },
       appointment: {
         q: 'How can I request an appointment?',
-        a: 'Via the contact form, by email at veramountney@gmx.net or by phone at 0173 9595 752. Please briefly describe your request.',
+        a: 'Via the contact form, the Vera Assistant chat, or by phone at 0173 9595 752. Please briefly describe your request.',
       },
       contact: {
         q: 'How can I contact Vera?',
-        a: 'By email (veramountney@gmx.net), phone (0173 9595 752) or WhatsApp. The contact form on this website is also available.',
+        a: 'Use the contact form on this website, the Vera Assistant chat, phone (0173 9595 752), or WhatsApp.',
       },
       book: {
         q: 'Where can I buy the book?',
@@ -375,7 +376,10 @@ const en = {
   },
   assistant: {
     subtitle: 'Inquiries, appointments and answers',
-    greeting: 'Hello! How can I help you today?',
+    greeting: 'Hello! You can ask a question or tell me how I can help.',
+    chatFallback:
+      'Thank you for your message. If you would like to send an inquiry or request an appointment, just write that in your own words and I will guide you.',
+    invalidEmail: 'Please enter a valid email address.',
     inquiryIntro: 'I will help you send an inquiry to Vera Mountney.',
     askService: 'What kind of support do you need?',
     askOtherService: 'Please briefly describe the service you need.',
@@ -436,7 +440,7 @@ const en = {
       appointment:
         'Appointments can be requested via the contact form, by email or phone. Please briefly describe your request.',
       contact:
-        'Reachable by email: veramountney@gmx.net, phone: 0173 9595 752, or WhatsApp.',
+        'Use the contact form on this site, the Vera Assistant chat, or phone: 0173 9595 752.',
       book: 'The book is available in English and German. Visit the book page for purchase links.',
       languages:
         'Vera speaks English, Italian, Spanish, German, plus basic Portuguese and French.',
@@ -453,6 +457,7 @@ const en = {
     rights: 'All rights reserved.',
     quickLinks: 'Quick links',
     contact: 'Contact',
+    contactForm: 'Send a message',
     comingSoon: 'Coming soon',
   },
   common: {

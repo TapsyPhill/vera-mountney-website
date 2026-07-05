@@ -27,7 +27,7 @@ interface InquiryDraft {
   appointmentRequest: boolean
 }
 
-type Mode = 'menu' | 'chat' | 'inquiry'
+type Mode = 'chat' | 'inquiry'
 type InquiryStep =
   | 'service'
   | 'otherService'
@@ -53,6 +53,26 @@ const emptyDraft = (): InquiryDraft => ({
   message: '',
   appointmentRequest: false,
 })
+
+const inquiryKeywords = [
+  'appointment',
+  'termin',
+  'anfrage',
+  'inquiry',
+  'contact',
+  'kontakt',
+  'send',
+  'schicken',
+  'request',
+  'anmelden',
+  'buchen',
+  'book a session',
+]
+
+function wantsInquiry(text: string): boolean {
+  const n = text.toLowerCase()
+  return inquiryKeywords.some((kw) => n.includes(kw))
+}
 
 function findLocalResponse(input: string, t: (key: string) => string): string | null {
   const normalized = input.toLowerCase().trim()
@@ -82,15 +102,19 @@ function ChatIcon() {
   )
 }
 
+const selectClass =
+  'w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-sm outline-none focus:border-accent-400 light:border-brand-300 light:bg-white light:text-brand-900'
+
 export function VeraAssistant() {
   const { t, i18n } = useTranslation()
   const [open, setOpen] = useState(false)
-  const [mode, setMode] = useState<Mode>('menu')
+  const [mode, setMode] = useState<Mode>('chat')
   const [inquiryStep, setInquiryStep] = useState<InquiryStep>('service')
   const [draft, setDraft] = useState<InquiryDraft>(emptyDraft)
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
-  const [submitError, setSubmitError] = useState(false)
+  const [servicePick, setServicePick] = useState('')
+  const [contactPick, setContactPick] = useState<PreferredContactMethod | ''>('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const language = (i18n.language === 'en' ? 'en' : 'de') as InquiryLanguage
@@ -104,18 +128,16 @@ export function VeraAssistant() {
   }
 
   const appendUser = (text: string) => {
-    setMessages((prev) => [
-      ...prev,
-      { id: `user-${Date.now()}`, role: 'user', text },
-    ])
+    setMessages((prev) => [...prev, { id: `user-${Date.now()}`, role: 'user', text }])
   }
 
   const resetAssistant = () => {
-    setMode('menu')
+    setMode('chat')
     setInquiryStep('service')
     setDraft(emptyDraft())
     setInput('')
-    setSubmitError(false)
+    setServicePick('')
+    setContactPick('')
     setMessages([{ id: 'welcome', role: 'assistant', text: t('assistant.greeting') }])
   }
 
@@ -127,20 +149,11 @@ export function VeraAssistant() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, inquiryStep, mode])
 
-  const startInquiry = (service?: InquiryServiceId) => {
+  const beginInquiry = () => {
     setMode('inquiry')
-    setDraft({ ...emptyDraft(), selectedService: service || '' })
-    appendAssistant(t('assistant.inquiryIntro'))
-    if (!service) {
-      appendAssistant(t('assistant.askService'))
-      setInquiryStep('service')
-    } else if (service === 'other') {
-      appendAssistant(t('assistant.askOtherService'))
-      setInquiryStep('otherService')
-    } else {
-      appendAssistant(t('assistant.askName'))
-      setInquiryStep('name')
-    }
+    setDraft(emptyDraft())
+    setInquiryStep('service')
+    appendAssistant(t('assistant.askService'))
   }
 
   const buildSummary = () => {
@@ -171,11 +184,10 @@ export function VeraAssistant() {
 
   const submitInquiryRequest = async () => {
     setInquiryStep('submitting')
-    setSubmitError(false)
 
     const serviceLabel =
       draft.selectedService === 'other'
-        ? t('inquiryServices.other')
+        ? draft.otherService || t('inquiryServices.other')
         : getInquiryServiceLabel(draft.selectedService as InquiryServiceId, t)
 
     const result = await submitInquiry({
@@ -200,84 +212,66 @@ export function VeraAssistant() {
       return
     }
 
-    setSubmitError(true)
     setInquiryStep('confirm')
     appendAssistant(t('assistant.errorSend'))
   }
 
   const advanceInquiry = (value: string) => {
     const trimmed = value.trim()
-    if (!trimmed && inquiryStep !== 'preferredDateTime') return
-
-    appendUser(trimmed || (language === 'de' ? 'Überspringen' : 'Skip'))
 
     switch (inquiryStep) {
-      case 'service': {
-        const match = inquiryServiceIds.find(
-          (id) => getInquiryServiceLabel(id, t).toLowerCase() === trimmed.toLowerCase(),
-        )
-        const serviceId = (match || trimmed) as InquiryServiceId
-        setDraft((d) => ({ ...d, selectedService: serviceId }))
-        if (serviceId === 'other') {
-          appendAssistant(t('assistant.askOtherService'))
-          setInquiryStep('otherService')
-        } else {
-          appendAssistant(t('assistant.askName'))
-          setInquiryStep('name')
-        }
-        break
-      }
-      case 'otherService':
-        setDraft((d) => ({ ...d, otherService: trimmed }))
-        appendAssistant(t('assistant.askName'))
-        setInquiryStep('name')
-        break
       case 'name':
+        if (!trimmed) return
+        appendUser(trimmed)
         setDraft((d) => ({ ...d, name: trimmed }))
         appendAssistant(t('assistant.askEmail'))
         setInquiryStep('email')
         break
       case 'email':
+        if (!trimmed || !trimmed.includes('@')) {
+          appendAssistant(t('assistant.invalidEmail'))
+          return
+        }
+        appendUser(trimmed)
         setDraft((d) => ({ ...d, email: trimmed }))
         appendAssistant(t('assistant.askPhone'))
         setInquiryStep('phone')
         break
       case 'phone':
+        appendUser(trimmed || (language === 'de' ? 'Keine Angabe' : 'Not provided'))
         setDraft((d) => ({ ...d, phone: trimmed }))
         appendAssistant(t('assistant.askContactMethod'))
         setInquiryStep('contactMethod')
         break
-      case 'contactMethod': {
-        const method = contactMethods.find(
-          (m) => t(`contact.form.contactMethods.${m}`).toLowerCase() === trimmed.toLowerCase(),
-        )
-        if (!method) {
-          appendAssistant(t('assistant.invalidContactMethod'))
-          return
-        }
-        setDraft((d) => ({ ...d, preferredContactMethod: method }))
-        appendAssistant(t('assistant.askPreferredDateTime'))
-        setInquiryStep('preferredDateTime')
-        break
-      }
       case 'preferredDateTime':
+        appendUser(trimmed || (language === 'de' ? 'Keine Angabe' : 'Not provided'))
         setDraft((d) => ({ ...d, preferredDateTime: trimmed }))
         appendAssistant(t('assistant.askMessage'))
         setInquiryStep('message')
         break
       case 'message':
+        if (!trimmed) return
+        appendUser(trimmed)
         setDraft((d) => ({ ...d, message: trimmed }))
         appendAssistant(t('assistant.askAppointment'))
         setInquiryStep('appointment')
         break
       case 'appointment': {
         const yes = ['yes', 'ja', 'y', 'j'].includes(trimmed.toLowerCase())
+        appendUser(trimmed)
         setDraft((d) => ({ ...d, appointmentRequest: yes }))
         appendAssistant(buildSummary())
         appendAssistant(t('assistant.confirmQuestion'))
         setInquiryStep('confirm')
         break
       }
+      case 'otherService':
+        if (!trimmed) return
+        appendUser(trimmed)
+        setDraft((d) => ({ ...d, otherService: trimmed }))
+        appendAssistant(t('assistant.askName'))
+        setInquiryStep('name')
+        break
       default:
         break
     }
@@ -285,24 +279,8 @@ export function VeraAssistant() {
     setInput('')
   }
 
-  const handleFreeText = () => {
-    const trimmed = input.trim()
-    if (!trimmed) return
-
-    if (mode === 'inquiry' && inquiryStep !== 'confirm' && inquiryStep !== 'submitting' && inquiryStep !== 'done') {
-      advanceInquiry(trimmed)
-      return
-    }
-
-    if (mode === 'chat' || mode === 'menu') {
-      appendUser(trimmed)
-      const reply = findLocalResponse(trimmed, t) || t('chatbot.responses.fallback')
-      appendAssistant(reply)
-      setInput('')
-    }
-  }
-
-  const handleServicePick = (id: InquiryServiceId) => {
+  const handleServiceSelect = (id: InquiryServiceId) => {
+    setServicePick(id)
     appendUser(getInquiryServiceLabel(id, t))
     setDraft((d) => ({ ...d, selectedService: id }))
     if (id === 'other') {
@@ -314,28 +292,40 @@ export function VeraAssistant() {
     }
   }
 
-  const handleContactMethodPick = (method: PreferredContactMethod) => {
+  const handleContactSelect = (method: PreferredContactMethod) => {
+    setContactPick(method)
     appendUser(t(`contact.form.contactMethods.${method}`))
     setDraft((d) => ({ ...d, preferredContactMethod: method }))
     appendAssistant(t('assistant.askPreferredDateTime'))
     setInquiryStep('preferredDateTime')
   }
 
-  const menuOptions: { labelKey: string; action: () => void }[] = [
-    { labelKey: 'assistant.menu.cv', action: () => startInquiry('applicationHelp') },
-    { labelKey: 'assistant.menu.career', action: () => startInquiry('careerCoaching') },
-    { labelKey: 'assistant.menu.germanTest', action: () => startInquiry('germanTest') },
-    { labelKey: 'assistant.menu.intercultural', action: () => startInquiry('intercultural') },
-    {
-      labelKey: 'assistant.menu.book',
-      action: () => {
-        setMode('chat')
-        appendAssistant(t('chatbot.responses.book'))
-      },
-    },
-    { labelKey: 'assistant.menu.appointment', action: () => startInquiry() },
-    { labelKey: 'assistant.menu.other', action: () => startInquiry('other') },
-  ]
+  const handleSend = () => {
+    const trimmed = input.trim()
+    if (!trimmed || inquiryStep === 'submitting') return
+
+    if (mode === 'inquiry' && !['service', 'contactMethod', 'confirm', 'done'].includes(inquiryStep)) {
+      advanceInquiry(trimmed)
+      return
+    }
+
+    appendUser(trimmed)
+
+    if (mode === 'chat') {
+      if (wantsInquiry(trimmed)) {
+        beginInquiry()
+      } else {
+        const reply = findLocalResponse(trimmed, t)
+        if (reply) {
+          appendAssistant(reply)
+        } else {
+          appendAssistant(t('assistant.chatFallback'))
+        }
+      }
+    }
+
+    setInput('')
+  }
 
   const showTextInput =
     mode === 'chat' ||
@@ -346,7 +336,7 @@ export function VeraAssistant() {
     <>
       {open && (
         <div
-          className="fixed inset-x-4 bottom-20 z-50 flex max-h-[min(75vh,560px)] flex-col overflow-hidden rounded-2xl border border-accent-400/20 bg-surface-dark-elevated shadow-2xl shadow-brand-950/50 sm:inset-x-auto sm:right-5 sm:bottom-24 sm:w-[min(100vw-2.5rem,420px)] light:border-brand-300/60 light:bg-brand-100"
+          className="fixed inset-x-4 bottom-20 z-50 flex max-h-[min(75vh,560px)] flex-col overflow-hidden rounded-2xl border border-accent-400/20 bg-surface-dark-elevated shadow-2xl shadow-brand-950/50 sm:inset-x-auto sm:right-5 sm:bottom-24 sm:w-[min(100vw-2.5rem,400px)] light:border-brand-300/60 light:bg-brand-100"
           role="dialog"
           aria-label={t('chatbot.title')}
         >
@@ -386,92 +376,50 @@ export function VeraAssistant() {
               </div>
             ))}
 
-            {mode === 'menu' && messages.length <= 1 && (
-              <div className="flex flex-col gap-2 pt-1">
-                {menuOptions.map((opt) => (
-                  <button
-                    key={opt.labelKey}
-                    type="button"
-                    onClick={opt.action}
-                    className="rounded-xl border border-brand-400/25 bg-white/5 px-3 py-2.5 text-left text-sm transition hover:border-accent-400/40 hover:bg-white/10 light:border-brand-300 light:bg-white/80 light:text-brand-900 light:hover:border-accent-400/50"
-                  >
-                    {t(opt.labelKey)}
-                  </button>
-                ))}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMode('chat')
-                    appendAssistant(t('assistant.freeChatHint'))
-                  }}
-                  className="text-xs text-accent-glow underline-offset-2 hover:underline"
-                >
-                  {t('assistant.freeChatLink')}
-                </button>
-              </div>
-            )}
-
             {mode === 'inquiry' && inquiryStep === 'service' && (
-              <div className="flex flex-wrap gap-2">
-                {inquiryServiceIds.map((id) => (
-                  <button
-                    key={id}
-                    type="button"
-                    onClick={() => handleServicePick(id)}
-                    className="rounded-full border border-brand-400/30 px-3 py-1.5 text-xs transition hover:border-accent-400 light:border-brand-300 light:bg-white/80 light:text-brand-900"
-                  >
-                    {getInquiryServiceLabel(id, t)}
-                  </button>
-                ))}
+              <div className="rounded-xl border border-white/10 bg-white/5 p-3 light:border-brand-200 light:bg-white">
+                <label htmlFor="assistant-service" className="mb-2 block text-xs font-medium light:text-brand-800">
+                  {t('contact.form.service')}
+                </label>
+                <select
+                  id="assistant-service"
+                  value={servicePick}
+                  onChange={(e) => handleServiceSelect(e.target.value as InquiryServiceId)}
+                  className={selectClass}
+                >
+                  <option value="">{t('contact.form.servicePlaceholder')}</option>
+                  {inquiryServiceIds.map((id) => (
+                    <option key={id} value={id}>
+                      {getInquiryServiceLabel(id, t)}
+                    </option>
+                  ))}
+                </select>
               </div>
             )}
 
             {mode === 'inquiry' && inquiryStep === 'contactMethod' && (
-              <div className="flex flex-wrap gap-2">
-                {contactMethods.map((method) => (
-                  <button
-                    key={method}
-                    type="button"
-                    onClick={() => handleContactMethodPick(method)}
-                    className="rounded-full border border-brand-400/30 px-3 py-1.5 text-xs transition hover:border-accent-400 light:border-brand-300 light:bg-white/80 light:text-brand-900"
-                  >
-                    {t(`contact.form.contactMethods.${method}`)}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {mode === 'inquiry' && inquiryStep === 'preferredDateTime' && (
-              <button
-                type="button"
-                onClick={() => advanceInquiry('')}
-                className="self-start rounded-full border border-brand-400/30 px-3 py-1.5 text-xs light:border-brand-300 light:bg-white/80"
-              >
-                {t('assistant.skip')}
-              </button>
-            )}
-
-            {mode === 'inquiry' && inquiryStep === 'appointment' && (
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => advanceInquiry(language === 'de' ? 'Ja' : 'Yes')}
-                  className="rounded-full border border-brand-400/30 px-4 py-1.5 text-xs light:border-brand-300 light:bg-white/80"
+              <div className="rounded-xl border border-white/10 bg-white/5 p-3 light:border-brand-200 light:bg-white">
+                <label htmlFor="assistant-contact" className="mb-2 block text-xs font-medium light:text-brand-800">
+                  {t('contact.form.contactMethod')}
+                </label>
+                <select
+                  id="assistant-contact"
+                  value={contactPick}
+                  onChange={(e) => handleContactSelect(e.target.value as PreferredContactMethod)}
+                  className={selectClass}
                 >
-                  {language === 'de' ? 'Ja' : 'Yes'}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => advanceInquiry(language === 'de' ? 'Nein' : 'No')}
-                  className="rounded-full border border-brand-400/30 px-4 py-1.5 text-xs light:border-brand-300 light:bg-white/80"
-                >
-                  {language === 'de' ? 'Nein' : 'No'}
-                </button>
+                  <option value="">{t('contact.form.servicePlaceholder')}</option>
+                  {contactMethods.map((method) => (
+                    <option key={method} value={method}>
+                      {t(`contact.form.contactMethods.${method}`)}
+                    </option>
+                  ))}
+                </select>
               </div>
             )}
 
             {mode === 'inquiry' && inquiryStep === 'confirm' && (
-              <div className="flex flex-wrap gap-2">
+              <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={submitInquiryRequest}
@@ -481,18 +429,8 @@ export function VeraAssistant() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
-                    setInquiryStep('name')
-                    appendAssistant(t('assistant.askName'))
-                  }}
-                  className="btn-secondary !px-4 !py-2 !text-xs"
-                >
-                  {t('assistant.editDetails')}
-                </button>
-                <button
-                  type="button"
                   onClick={resetAssistant}
-                  className="rounded-full border border-white/20 px-4 py-2 text-xs light:border-brand-300"
+                  className="btn-secondary !px-4 !py-2 !text-xs"
                 >
                   {t('assistant.cancel')}
                 </button>
@@ -507,18 +445,14 @@ export function VeraAssistant() {
               </div>
             )}
 
-            {submitError && inquiryStep === 'confirm' && (
-              <p className="text-xs text-red-400 light:text-red-700">{t('assistant.errorSend')}</p>
-            )}
-
             <div ref={messagesEndRef} />
           </div>
 
-          {showTextInput && inquiryStep !== 'done' && (
+          {showTextInput && (
             <form
               onSubmit={(e) => {
                 e.preventDefault()
-                handleFreeText()
+                handleSend()
               }}
               className="border-t border-white/10 bg-brand-950/30 p-3 light:border-brand-200 light:bg-brand-200/50"
             >
@@ -543,7 +477,7 @@ export function VeraAssistant() {
             </form>
           )}
 
-          {(mode === 'inquiry' && inquiryStep === 'done') && (
+          {mode === 'inquiry' && inquiryStep === 'done' && (
             <div className="border-t border-white/10 p-3 light:border-brand-200">
               <button type="button" onClick={resetAssistant} className="btn-secondary w-full !py-2 !text-xs">
                 {t('assistant.newRequest')}

@@ -3,6 +3,19 @@ declare(strict_types=1);
 
 header('Content-Type: application/json; charset=utf-8');
 
+$allowedOrigins = ['https://vera-mountney.de', 'https://www.vera-mountney.de'];
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if (in_array($origin, $allowedOrigins, true)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204);
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['success' => false, 'message' => 'Method not allowed']);
@@ -32,11 +45,19 @@ function sanitize(string $value, int $maxLength = 5000): string
     return $value;
 }
 
+function encodeSubject(string $subject): string
+{
+    if (function_exists('mb_encode_mimeheader')) {
+        return mb_encode_mimeheader($subject, 'UTF-8', 'B', "\r\n");
+    }
+    return $subject;
+}
+
 $name = sanitize((string)($data['name'] ?? ''), 200);
 $email = sanitize((string)($data['email'] ?? ''), 200);
 $phone = sanitize((string)($data['phone'] ?? ''), 50);
 $preferredContactMethod = sanitize((string)($data['preferredContactMethod'] ?? ''), 50);
-$selectedService = sanitize((string)($data['selectedService'] ?? ''), 100);
+$selectedService = sanitize((string)($data['selectedService'] ?? ''), 200);
 $otherService = sanitize((string)($data['otherService'] ?? ''), 300);
 $preferredDateTime = sanitize((string)($data['preferredDateTime'] ?? ''), 300);
 $address = sanitize((string)($data['address'] ?? ''), 300);
@@ -74,7 +95,7 @@ if ($errors !== []) {
     exit;
 }
 
-// TEST RECIPIENT - change to veramountney@gmx.net before final handover
+// TEST RECIPIENT ONLY - change to veramountney@gmx.net before final handover
 $recipient = 'phillmhembere@gmail.com';
 
 $sourceLabel = $source === 'vera_assistant' ? 'Vera Assistant' : 'Contact Form';
@@ -125,16 +146,74 @@ $bodyLines = [
     'https://vera-mountney.de',
 ];
 
-$body = implode("\n", $bodyLines);
+$body = implode("\r\n", $bodyLines);
+
+$fromEmail = 'vera_deploy@vera-mountney.de';
+$fromName = 'Vera Mountney Website';
+
+ini_set('sendmail_from', $fromEmail);
 
 $headers = [
-    'From: Vera Mountney Website <no-reply@vera-mountney.de>',
-    'Reply-To: ' . $email,
+    'MIME-Version: 1.0',
+    'From: ' . $fromName . ' <' . $fromEmail . '>',
+    'Reply-To: ' . $name . ' <' . $email . '>',
+    'Return-Path: ' . $fromEmail,
     'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: 8bit',
     'X-Mailer: PHP/' . phpversion(),
 ];
 
-$sent = mail($recipient, $emailSubject, $body, implode("\r\n", $headers));
+$headerString = implode("\r\n", $headers);
+$encodedSubject = encodeSubject($emailSubject);
+
+$sent = @mail(
+    $recipient,
+    $encodedSubject,
+    $body,
+    $headerString,
+    '-f' . $fromEmail
+);
+
+if (!$sent) {
+    $sent = @mail(
+        $recipient,
+        $encodedSubject,
+        $body,
+        $headerString
+    );
+}
+
+$backupDir = __DIR__ . '/inquiries';
+if (!is_dir($backupDir)) {
+    @mkdir($backupDir, 0755, true);
+}
+
+$backupPayload = [
+    'savedAt' => date('c'),
+    'mailSent' => $sent,
+    'recipient' => $recipient,
+    'data' => [
+        'name' => $name,
+        'email' => $email,
+        'phone' => $phone,
+        'preferredContactMethod' => $preferredContactMethod,
+        'selectedService' => $selectedService,
+        'otherService' => $otherService,
+        'preferredDateTime' => $preferredDateTime,
+        'address' => $address,
+        'subject' => $subject,
+        'message' => $message,
+        'appointmentRequest' => $appointmentRequest,
+        'language' => $language,
+        'source' => $source,
+    ],
+];
+
+@file_put_contents(
+    $backupDir . '/inquiry-' . date('Ymd-His') . '-' . bin2hex(random_bytes(4)) . '.json',
+    json_encode($backupPayload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE),
+    LOCK_EX
+);
 
 if (!$sent) {
     http_response_code(500);
