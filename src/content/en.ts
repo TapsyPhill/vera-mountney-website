@@ -49,6 +49,8 @@ const en = {
     subtitle:
       'Coaching, guidance, authorship and intercultural support, professional, personal and tailored.',
     tagline: 'Strategy. Growth. Success.',
+    taglineWords: ['Strategy', 'Growth', 'Success'],
+    serviceTickerHint: 'Explore all services',
     description:
       'Professional guidance with international experience and a personal touch, for people in Germany seeking support with communication, applications, integration and personal development.',
     ctaPrimary: 'Inquiry Now',
@@ -198,6 +200,12 @@ const en = {
       pedagogy: 'Pedagogy',
     },
     languagesTitle: 'Languages',
+    languagesSubtitle: 'Multilingual communication across cultures',
+    languageLevels: {
+      native: 'Native',
+      fluent: 'Fluent',
+      basic: 'Basic',
+    },
     languages: {
       english: 'English',
       italian: 'Italian',
@@ -231,6 +239,34 @@ const en = {
     externalNote:
       'Purchase via external platform. Direct sales on this website may be added later.',
     ctaHome: 'View now',
+    inclVat: 'incl. VAT',
+    categoriesLabel: 'Categories',
+    keywordsLabel: 'Keywords',
+    formats: {
+      ebook: 'E-book edition',
+      print: 'Print edition, softcover',
+    },
+    categories: {
+      biography: 'Biography, Life Experience',
+      distantLands: 'Distant Lands',
+      novelsStories: 'Novels & Stories',
+    },
+    keywords: {
+      africa: 'Africa',
+      workingAbroad: 'Working abroad',
+      abroad: 'Abroad',
+      women: 'Women',
+      friendship: 'Friendship',
+      ibadan: 'Ibadan',
+      intercultural: 'Intercultural',
+      lifeExperience: 'Life experience',
+      teacher: 'Teacher',
+      nigeria: 'Nigeria',
+      travel: 'Travel',
+      travelReport: 'Travel report',
+      school: 'School',
+      solidarity: 'Solidarity',
+    },
   },
   contact: {
     title: 'Contact',

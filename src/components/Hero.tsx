@@ -4,6 +4,8 @@ import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { HeroVisual } from './HeroVisual'
+import { HeroAnimatedTagline } from './HeroAnimatedTagline'
+import { HeroServiceTicker } from './HeroServiceTicker'
 import { prefersReducedMotion } from '../utils/animation'
 
 gsap.registerPlugin(useGSAP)
@@ -19,8 +21,7 @@ export function Hero() {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
       tl.from('.hero-badge', { opacity: 0, y: 20, duration: 0.6 })
         .from('.hero-title', { opacity: 0, y: 30, duration: 0.8 }, '-=0.3')
-        .from('.hero-tagline', { opacity: 0, y: 20, duration: 0.6 }, '-=0.4')
-        .from('.hero-text', { opacity: 0, y: 16, duration: 0.6, stagger: 0.1 }, '-=0.3')
+        .from('.hero-text', { opacity: 0, y: 16, duration: 0.6, stagger: 0.1 }, '-=0.1')
         .from('.hero-cta', { opacity: 0, y: 16, duration: 0.5, stagger: 0.08 }, '-=0.2')
     },
     { scope: contentRef },
@@ -36,9 +37,10 @@ export function Hero() {
           <h1 className="hero-title font-display text-4xl font-semibold leading-tight sm:text-5xl lg:text-7xl light:text-brand-950">
             {t('hero.title')}
           </h1>
-          <p className="hero-tagline mt-2 text-base font-medium gradient-text sm:text-lg lg:text-xl">
-            {t('hero.tagline')}
-          </p>
+
+          <HeroAnimatedTagline />
+          <HeroServiceTicker />
+
           <p className="hero-text mt-5 max-w-xl text-sm leading-relaxed text-brand-100 light:text-brand-800 sm:mt-6 sm:text-base lg:text-lg">
             {t('hero.subtitle')}
           </p>

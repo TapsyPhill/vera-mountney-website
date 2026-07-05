@@ -49,6 +49,8 @@ const de = {
     subtitle:
       'Coaching, Beratung, Autorenschaft und interkulturelle Unterstützung, professionell, individuell und menschlich.',
     tagline: 'Strategie. Wachstum. Erfolg.',
+    taglineWords: ['Strategie', 'Wachstum', 'Erfolg'],
+    serviceTickerHint: 'Alle Leistungen entdecken',
     description:
       'Individuelle Begleitung mit Erfahrung, Herz und internationalem Blick, für Menschen in Deutschland, die Unterstützung bei Kommunikation, Bewerbung, Integration und persönlicher Entwicklung suchen.',
     ctaPrimary: 'Jetzt anfragen',
@@ -198,6 +200,12 @@ const de = {
       pedagogy: 'Pädagogik',
     },
     languagesTitle: 'Sprachen',
+    languagesSubtitle: 'Mehrsprachige Kommunikation über Kulturen hinweg',
+    languageLevels: {
+      native: 'Muttersprache',
+      fluent: 'Fließend',
+      basic: 'Grundkenntnisse',
+    },
     languages: {
       english: 'Englisch',
       italian: 'Italienisch',
@@ -231,6 +239,34 @@ const de = {
     externalNote:
       'Kauf über externe Plattform. Direkter Verkauf auf dieser Website kann später ergänzt werden.',
     ctaHome: 'Jetzt ansehen',
+    inclVat: 'inkl. MwSt.',
+    categoriesLabel: 'Kategorien',
+    keywordsLabel: 'Schlagworte',
+    formats: {
+      ebook: 'E-Book Ausgabe',
+      print: 'Print-Ausgabe, Softcover',
+    },
+    categories: {
+      biography: 'Biografie, Lebenserfahrung',
+      distantLands: 'Ferne Länder',
+      novelsStories: 'Romane & Erzählungen',
+    },
+    keywords: {
+      africa: 'Afrika',
+      workingAbroad: 'Arbeiten im Ausland',
+      abroad: 'Ausland',
+      women: 'Frauen',
+      friendship: 'Freundschaft',
+      ibadan: 'Ibadan',
+      intercultural: 'Interkulturell',
+      lifeExperience: 'Lebenserfahrung',
+      teacher: 'Lehrer',
+      nigeria: 'Nigeria',
+      travel: 'Reise',
+      travelReport: 'Reisebericht',
+      school: 'Schule',
+      solidarity: 'Solidarität',
+    },
   },
   contact: {
     title: 'Kontakt',

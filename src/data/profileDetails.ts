@@ -1,3 +1,21 @@
+export const languages = [
+  'german',
+  'english',
+  'italian',
+  'spanish',
+  'portuguese',
+  'french',
+] as const
+
+export const languageLevels: Record<(typeof languages)[number], 'native' | 'fluent' | 'basic'> = {
+  german: 'native',
+  english: 'fluent',
+  italian: 'fluent',
+  spanish: 'fluent',
+  portuguese: 'basic',
+  french: 'basic',
+}
+
 export const credentials = [
   'aevo',
   'systemicCoach',
@@ -23,15 +41,6 @@ export const workedWith = [
   'mars',
   'marella',
   'olitra',
-] as const
-
-export const languages = [
-  'english',
-  'italian',
-  'spanish',
-  'portuguese',
-  'french',
-  'german',
 ] as const
 
 export const internationalExperience = [
