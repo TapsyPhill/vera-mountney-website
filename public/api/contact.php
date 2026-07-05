@@ -101,61 +101,47 @@ require_once __DIR__ . '/send-mail.php';
 $recipient = getInquiryRecipient();
 
 $sourceLabel = $source === 'vera_assistant' ? 'Vera Assistant' : 'Contact Form';
-$appointmentLabel = $appointmentRequest ? 'Yes / Ja' : 'No / Nein';
+$appointmentLabel = $appointmentRequest ? 'Ja / Yes' : 'Nein / No';
+
+$contactMethodLabels = [
+    'email' => 'E-Mail / Email',
+    'phone' => 'Telefon / Phone',
+    'whatsapp' => 'WhatsApp',
+    'noPreference' => 'Keine Präferenz / No preference',
+];
+$contactMethodLabel = $contactMethodLabels[$preferredContactMethod] ?? $preferredContactMethod;
 
 $emailSubject = $subject !== ''
-    ? 'Neue Anfrage über vera-mountney.de: ' . $subject
-    : 'Neue Anfrage über vera-mountney.de';
+    ? 'Anfrage: ' . $selectedService . ' — vera-mountney.de'
+    : 'Neue Anfrage: ' . $selectedService . ' — vera-mountney.de';
 
-$bodyLines = [
-    'New inquiry from vera-mountney.de',
-    '',
-    'Source:',
-    $sourceLabel,
-    '',
-    'Name:',
-    $name,
-    'Email:',
-    $email,
-    'Phone:',
-    $phone !== '' ? $phone : '-',
-    'Preferred contact method:',
-    $preferredContactMethod,
-    'Selected service:',
-    $selectedService,
-    'Other service:',
-    $otherService !== '' ? $otherService : '-',
-    'Preferred appointment date/time:',
-    $preferredDateTime !== '' ? $preferredDateTime : '-',
-    'Address:',
-    $address !== '' ? $address : '-',
-    'Appointment request:',
-    $appointmentLabel,
-    'Language:',
-    $language,
-    'Subject:',
-    $subject !== '' ? $subject : '-',
-    '',
-    'Message:',
-    '',
-    $message,
-    '',
-    'Submitted at:',
-    date('Y-m-d H:i:s T'),
-    'User agent:',
-    sanitize((string)($_SERVER['HTTP_USER_AGENT'] ?? '-'), 500),
-    'Website:',
-    'https://vera-mountney.de',
+require_once __DIR__ . '/format-email.php';
+
+$rows = [
+    'Name' => $name,
+    'E-Mail' => $email,
+    'Telefon / Phone' => displayValue($phone),
+    'Kontaktart / Contact' => $contactMethodLabel,
+    'Leistung / Service' => $selectedService,
+    'Sonstige Leistung / Other' => displayValue($otherService),
+    'Wunschtermin / Preferred time' => displayValue($preferredDateTime),
+    'Adresse / Address' => displayValue($address),
+    'Terminwunsch / Appointment' => $appointmentLabel,
+    'Sprache / Language' => strtoupper($language),
+    'Betreff / Subject' => displayValue($subject),
 ];
 
-$body = implode("\r\n", $bodyLines);
+$footer = 'Eingegangen am ' . date('d.m.Y, H:i') . ' Uhr · vera-mountney.de';
+$plainBody = buildInquiryPlainText($rows, $message, $footer);
+$htmlBody = buildInquiryHtml($rows, $message, $footer, $sourceLabel);
 
 $mailResult = sendInquiryEmail(
     $recipient,
     encodeSubject($emailSubject),
-    $body,
+    $plainBody,
     $email,
-    $name
+    $name,
+    $htmlBody
 );
 
 $sent = $mailResult['sent'];

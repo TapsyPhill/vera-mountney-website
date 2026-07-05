@@ -30,7 +30,7 @@ export function Navbar() {
     }`
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-surface-dark/85 backdrop-blur-xl dark:bg-surface-dark/85 light:border-brand-200/60 light:bg-brand-50/90">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-surface-dark/85 backdrop-blur-xl pt-[env(safe-area-inset-top,0px)] dark:bg-surface-dark/85 light:border-brand-200/60 light:bg-brand-50/90">
       <div className="container-narrow flex items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
         <Link
           to="/"
@@ -57,7 +57,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 lg:hidden light:border-brand-300"
+          className="flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-white/20 lg:hidden light:border-brand-300"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
           aria-label="Toggle menu"

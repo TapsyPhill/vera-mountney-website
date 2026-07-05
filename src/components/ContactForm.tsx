@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
+import { DateTimePicker } from './DateTimePicker'
 import { inquiryServiceIds, getInquiryServiceLabel } from '../data/services'
 import type { InquiryLanguage, PreferredContactMethod } from '../types/inquiry'
 import { submitInquiry } from '../utils/submitInquiry'
@@ -7,7 +8,7 @@ import { submitInquiry } from '../utils/submitInquiry'
 type FormStatus = 'idle' | 'loading' | 'success' | 'error'
 
 const inputClass =
-  'w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm outline-none transition focus:border-accent-400 light:border-brand-300 light:bg-white light:text-brand-900'
+  'w-full min-h-[48px] rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-base outline-none transition focus:border-accent-400 sm:text-sm light:border-brand-300 light:bg-white light:text-brand-900'
 
 export function ContactForm() {
   const { t, i18n } = useTranslation()
@@ -15,6 +16,7 @@ export function ContactForm() {
   const [selectedService, setSelectedService] = useState('')
   const [preferredContactMethod, setPreferredContactMethod] = useState<PreferredContactMethod>('email')
   const [appointmentRequest, setAppointmentRequest] = useState(false)
+  const [preferredDateTime, setPreferredDateTime] = useState('')
   const [honeypot, setHoneypot] = useState('')
 
   const language = (i18n.language === 'en' ? 'en' : 'de') as InquiryLanguage
@@ -76,6 +78,7 @@ export function ContactForm() {
       form.reset()
       setSelectedService('')
       setPreferredContactMethod('email')
+      setPreferredDateTime('')
       setAppointmentRequest(false)
       return
     }
@@ -84,7 +87,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="relative glass-card space-y-5 p-6 sm:p-8" noValidate>
+    <form onSubmit={handleSubmit} className="relative glass-card space-y-5 p-5 sm:space-y-5 sm:p-8" noValidate>
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input
@@ -172,10 +175,15 @@ export function ContactForm() {
       )}
 
       <div>
-        <label htmlFor="preferredDateTime" className="mb-1.5 block text-sm font-medium">
+        <label className="mb-1.5 block text-sm font-medium">
           {t('contact.form.preferredDateTime')}
         </label>
-        <input id="preferredDateTime" name="preferredDateTime" type="text" className={inputClass} />
+        <DateTimePicker
+          id="preferredDateTime"
+          name="preferredDateTime"
+          value={preferredDateTime}
+          onChange={setPreferredDateTime}
+        />
         <p className="mt-1.5 text-xs text-brand-400 light:text-brand-600">
           {t('contact.form.preferredDateTimeNote')}
         </p>
@@ -225,7 +233,7 @@ export function ContactForm() {
 
       <p className="text-xs text-brand-300 light:text-brand-700">{t('contact.form.privacy')}</p>
 
-      <button type="submit" disabled={status === 'loading'} className="btn-primary w-full sm:w-auto disabled:opacity-60">
+      <button type="submit" disabled={status === 'loading'} className="btn-primary w-full min-h-[48px] sm:w-auto disabled:opacity-60">
         {status === 'loading' ? t('contact.form.sending') : t('contact.form.submit')}
       </button>
     </form>

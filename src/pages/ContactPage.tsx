@@ -18,7 +18,7 @@ export function ContactPage() {
           </p>
 
           <div className="grid gap-6 lg:grid-cols-5 lg:gap-10">
-            <div className="space-y-4 sm:space-y-6 lg:col-span-2">
+            <div className="order-2 space-y-4 sm:space-y-6 lg:order-1 lg:col-span-2">
               <div className="glass-card p-5 sm:p-6">
                 <h3 className="font-display text-lg font-semibold sm:text-xl light:text-brand-950">
                   {t('contact.email')}
@@ -56,7 +56,7 @@ export function ContactPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-3">
+            <div className="order-1 lg:order-2 lg:col-span-3">
               <ContactForm />
             </div>
           </div>

@@ -8,6 +8,7 @@ import {
 } from '../data/services'
 import type { InquiryLanguage, PreferredContactMethod } from '../types/inquiry'
 import { submitInquiry } from '../utils/submitInquiry'
+import { DateTimePickerPanel } from './DateTimePicker'
 
 interface Message {
   id: string
@@ -115,6 +116,7 @@ export function VeraAssistant() {
   const [input, setInput] = useState('')
   const [servicePick, setServicePick] = useState('')
   const [contactPick, setContactPick] = useState<PreferredContactMethod | ''>('')
+  const [dateTimePick, setDateTimePick] = useState('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const language = (i18n.language === 'en' ? 'en' : 'de') as InquiryLanguage
@@ -138,6 +140,7 @@ export function VeraAssistant() {
     setInput('')
     setServicePick('')
     setContactPick('')
+    setDateTimePick('')
     setMessages([{ id: 'welcome', role: 'assistant', text: t('assistant.greeting') }])
   }
 
@@ -296,8 +299,24 @@ export function VeraAssistant() {
     setContactPick(method)
     appendUser(t(`contact.form.contactMethods.${method}`))
     setDraft((d) => ({ ...d, preferredContactMethod: method }))
+    setDateTimePick('')
     appendAssistant(t('assistant.askPreferredDateTime'))
     setInquiryStep('preferredDateTime')
+  }
+
+  const handleDateTimeConfirm = (value: string) => {
+    appendUser(value)
+    setDraft((d) => ({ ...d, preferredDateTime: value }))
+    appendAssistant(t('assistant.askMessage'))
+    setInquiryStep('message')
+  }
+
+  const handleDateTimeSkip = () => {
+    const skipLabel = language === 'de' ? 'Keine Angabe' : 'Not specified'
+    appendUser(skipLabel)
+    setDraft((d) => ({ ...d, preferredDateTime: '' }))
+    appendAssistant(t('assistant.askMessage'))
+    setInquiryStep('message')
   }
 
   const handleSend = () => {
@@ -330,13 +349,15 @@ export function VeraAssistant() {
   const showTextInput =
     mode === 'chat' ||
     (mode === 'inquiry' &&
-      !['service', 'contactMethod', 'confirm', 'submitting', 'done'].includes(inquiryStep))
+      !['service', 'contactMethod', 'preferredDateTime', 'confirm', 'submitting', 'done'].includes(
+        inquiryStep
+      ))
 
   return (
     <>
       {open && (
         <div
-          className="fixed inset-x-4 bottom-20 z-50 flex max-h-[min(75vh,560px)] flex-col overflow-hidden rounded-2xl border border-accent-400/20 bg-surface-dark-elevated shadow-2xl shadow-brand-950/50 sm:inset-x-auto sm:right-5 sm:bottom-24 sm:w-[min(100vw-2.5rem,400px)] light:border-brand-300/60 light:bg-brand-100"
+          className="fixed inset-x-3 bottom-[calc(5.5rem+env(safe-area-inset-bottom,0px))] z-50 flex max-h-[min(82dvh,620px)] flex-col overflow-hidden rounded-2xl border border-accent-400/20 bg-surface-dark-elevated shadow-2xl shadow-brand-950/50 sm:inset-x-auto sm:right-5 sm:bottom-24 sm:w-[min(100vw-2.5rem,400px)] light:border-brand-300/60 light:bg-brand-100"
           role="dialog"
           aria-label={t('chatbot.title')}
         >
@@ -418,19 +439,28 @@ export function VeraAssistant() {
               </div>
             )}
 
+            {mode === 'inquiry' && inquiryStep === 'preferredDateTime' && (
+              <DateTimePickerPanel
+                value={dateTimePick}
+                onChange={setDateTimePick}
+                onConfirm={handleDateTimeConfirm}
+                onSkip={handleDateTimeSkip}
+              />
+            )}
+
             {mode === 'inquiry' && inquiryStep === 'confirm' && (
-              <div className="flex gap-2">
+              <div className="flex flex-col gap-2 sm:flex-row">
                 <button
                   type="button"
                   onClick={submitInquiryRequest}
-                  className="btn-primary !px-4 !py-2 !text-xs"
+                  className="btn-primary min-h-[44px] !px-4 !py-2.5 !text-xs"
                 >
                   {t('assistant.sendRequest')}
                 </button>
                 <button
                   type="button"
                   onClick={resetAssistant}
-                  className="btn-secondary !px-4 !py-2 !text-xs"
+                  className="btn-secondary min-h-[44px] !px-4 !py-2.5 !text-xs"
                 >
                   {t('assistant.cancel')}
                 </button>
@@ -469,7 +499,7 @@ export function VeraAssistant() {
                 <button
                   type="submit"
                   disabled={!input.trim() || inquiryStep === 'submitting'}
-                  className="btn-primary !h-11 !min-w-[4.5rem] !px-4 !py-2 !text-xs disabled:opacity-50"
+                  className="btn-primary !h-11 !min-h-[44px] !min-w-[4.5rem] shrink-0 !px-4 !py-2 !text-xs disabled:opacity-50"
                 >
                   {t('chatbot.send')}
                 </button>
@@ -490,7 +520,7 @@ export function VeraAssistant() {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="fixed bottom-5 right-4 z-50 flex h-14 items-center gap-2.5 rounded-full border border-accent-400/30 bg-brand-600 px-4 text-sm font-semibold text-white shadow-lg shadow-brand-900/40 transition-all duration-300 hover:scale-105 hover:border-accent-400/50 hover:bg-brand-500 sm:right-5 sm:px-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400"
+        className="fixed z-50 flex h-14 min-h-[56px] items-center gap-2 rounded-full border border-accent-400/30 bg-brand-600 pl-3 pr-4 text-sm font-semibold text-white shadow-lg shadow-brand-900/40 transition-all duration-300 hover:scale-105 hover:border-accent-400/50 hover:bg-brand-500 sm:right-5 sm:pl-4 sm:pr-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400 right-3 bottom-[max(1.25rem,env(safe-area-inset-bottom,0px))]"
         aria-expanded={open}
         aria-label={open ? t('chatbot.close') : t('chatbot.open')}
       >

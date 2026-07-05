@@ -44,13 +44,14 @@ function getInquiryRecipient(): string
 function sendInquiryEmail(
     string $recipient,
     string $subject,
-    string $body,
+    string $plainBody,
     string $replyToEmail,
-    string $replyToName
+    string $replyToName,
+    ?string $htmlBody = null
 ): array {
     $smtpConfig = loadMailConfig();
     if ($smtpConfig !== null) {
-        return sendViaSmtp($smtpConfig, $recipient, $subject, $body, $replyToEmail, $replyToName);
+        return sendViaSmtp($smtpConfig, $recipient, $subject, $plainBody, $replyToEmail, $replyToName, $htmlBody);
     }
 
     $fallbackFrom = 'noreply@vera-mountney.de';
@@ -66,9 +67,9 @@ function sendInquiryEmail(
     ini_set('sendmail_from', $fallbackFrom);
     $headerString = implode("\r\n", $headers);
 
-    $sent = @mail($recipient, $subject, $body, $headerString, '-f' . $fallbackFrom);
+    $sent = @mail($recipient, $subject, $plainBody, $headerString, '-f' . $fallbackFrom);
     if (!$sent) {
-        $sent = @mail($recipient, $subject, $body, $headerString);
+        $sent = @mail($recipient, $subject, $plainBody, $headerString);
     }
 
     return [
@@ -86,9 +87,10 @@ function sendViaSmtp(
     array $config,
     string $recipient,
     string $subject,
-    string $body,
+    string $plainBody,
     string $replyToEmail,
-    string $replyToName
+    string $replyToName,
+    ?string $htmlBody = null
 ): array {
     $host = (string)($config['host'] ?? '');
     $username = (string)($config['username'] ?? '');
@@ -130,8 +132,15 @@ function sendViaSmtp(
         $mail->addAddress($recipient);
         $mail->addReplyTo($replyToEmail, $replyToName);
         $mail->Subject = $subject;
-        $mail->Body = $body;
-        $mail->isHTML(false);
+
+        if ($htmlBody !== null && $htmlBody !== '') {
+            $mail->isHTML(true);
+            $mail->Body = $htmlBody;
+            $mail->AltBody = $plainBody;
+        } else {
+            $mail->isHTML(false);
+            $mail->Body = $plainBody;
+        }
 
         $mail->send();
 
