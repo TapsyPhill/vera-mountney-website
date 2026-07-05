@@ -57,9 +57,6 @@ export function BookSection({ compact = false }: BookSectionProps) {
           title={t('book.title')}
           subtitle={compact ? undefined : t('book.subtitle')}
         />
-        <p className="mx-auto mb-10 max-w-3xl text-center text-sm leading-relaxed text-brand-200 light:text-brand-800">
-          {t('book.description')}
-        </p>
 
         <div className="grid gap-8 md:grid-cols-2">
           {(['en', 'de'] as const).map((lang) => {

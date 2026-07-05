@@ -39,3 +39,29 @@ export const services: Service[] = [
   { id: 'bsk', icon: 'bsk' },
   { id: 'specialOffer2026', icon: 'special', featured: true },
 ]
+
+/** Shared service list for contact form and Vera Assistant inquiries */
+export const inquiryServiceIds = [
+  'applicationHelp',
+  'careerCoaching',
+  'jobCoaching',
+  'consultation',
+  'intercultural',
+  'germanTest',
+  'telc',
+  'bsk',
+  'proofreading',
+  'publishing',
+  'workshops',
+  'other',
+] as const
+
+export type InquiryServiceId = (typeof inquiryServiceIds)[number]
+
+export function getInquiryServiceLabel(
+  id: InquiryServiceId,
+  t: (key: string) => string,
+): string {
+  if (id === 'other') return t('inquiryServices.other')
+  return t(`services.${id}.title`)
+}

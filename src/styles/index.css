@@ -26,8 +26,8 @@
 
   --color-surface-dark: #120a24;
   --color-surface-dark-elevated: #1a1033;
-  --color-surface-light: #f0ebf8;
-  --color-surface-light-elevated: #f5f1fa;
+  --color-surface-light: #ddd6e8;
+  --color-surface-light-elevated: #d4c9e0;
 
   --animate-fade-in: fade-in 0.7s ease-out both;
   --animate-fade-in-up: fade-in-up 0.7s ease-out both;
@@ -66,8 +66,8 @@ body {
 .light body {
   @apply bg-surface-light text-brand-900;
   background-image:
-    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(139, 92, 246, 0.12), transparent 70%),
-    radial-gradient(ellipse 80% 50% at 100% 100%, rgba(251, 191, 36, 0.06), transparent 60%);
+    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(109, 40, 217, 0.14), transparent 70%),
+    radial-gradient(ellipse 80% 50% at 100% 100%, rgba(180, 140, 60, 0.05), transparent 60%);
 }
 
 .dark body {
@@ -87,7 +87,7 @@ h1, h2, h3, h4 {
 }
 
 .light .glass-card {
-  @apply border-brand-300/50 bg-brand-50/70 shadow-lg shadow-brand-900/5;
+  @apply border-brand-400/40 bg-brand-100/85 shadow-lg shadow-brand-900/8;
 }
 
 .dark .glass-card {
@@ -143,9 +143,9 @@ h1, h2, h3, h4 {
 
 .light .hero-gradient {
   background:
-    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(139, 92, 246, 0.15), transparent),
-    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(124, 58, 237, 0.08), transparent),
-    radial-gradient(ellipse 50% 40% at 50% 90%, rgba(251, 191, 36, 0.1), transparent);
+    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(109, 40, 217, 0.12), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(91, 33, 182, 0.08), transparent),
+    radial-gradient(ellipse 50% 40% at 50% 90%, rgba(180, 140, 60, 0.06), transparent);
 }
 
 @keyframes hero-shift {

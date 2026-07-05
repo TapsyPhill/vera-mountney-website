@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
 import { Footer } from '../components/Footer'
-import { Chatbot } from '../components/Chatbot'
+import { VeraAssistant } from '../components/VeraAssistant'
 import { useLanguageSync } from '../hooks/useLanguageSync'
 
 export function MainLayout() {
@@ -14,7 +14,7 @@ export function MainLayout() {
         <Outlet />
       </main>
       <Footer />
-      <Chatbot />
+      <VeraAssistant />
     </div>
   )
 }
