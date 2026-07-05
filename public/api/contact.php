@@ -148,40 +148,17 @@ $bodyLines = [
 
 $body = implode("\r\n", $bodyLines);
 
-$fromEmail = 'vera_deploy@vera-mountney.de';
-$fromName = 'Vera Mountney Website';
+require_once __DIR__ . '/send-mail.php';
 
-ini_set('sendmail_from', $fromEmail);
-
-$headers = [
-    'MIME-Version: 1.0',
-    'From: ' . $fromName . ' <' . $fromEmail . '>',
-    'Reply-To: ' . $name . ' <' . $email . '>',
-    'Return-Path: ' . $fromEmail,
-    'Content-Type: text/plain; charset=UTF-8',
-    'Content-Transfer-Encoding: 8bit',
-    'X-Mailer: PHP/' . phpversion(),
-];
-
-$headerString = implode("\r\n", $headers);
-$encodedSubject = encodeSubject($emailSubject);
-
-$sent = @mail(
+$mailResult = sendInquiryEmail(
     $recipient,
-    $encodedSubject,
+    encodeSubject($emailSubject),
     $body,
-    $headerString,
-    '-f' . $fromEmail
+    $email,
+    $name
 );
 
-if (!$sent) {
-    $sent = @mail(
-        $recipient,
-        $encodedSubject,
-        $body,
-        $headerString
-    );
-}
+$sent = $mailResult['sent'];
 
 $backupDir = __DIR__ . '/inquiries';
 if (!is_dir($backupDir)) {
@@ -191,6 +168,8 @@ if (!is_dir($backupDir)) {
 $backupPayload = [
     'savedAt' => date('c'),
     'mailSent' => $sent,
+    'mailMethod' => $mailResult['method'],
+    'mailError' => $mailResult['error'],
     'recipient' => $recipient,
     'data' => [
         'name' => $name,

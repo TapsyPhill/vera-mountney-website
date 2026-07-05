@@ -7,3 +7,5 @@ build
 .vscode
 *.local
 .cache
+public/api/smtp.config.php
+dist/api/smtp.config.php

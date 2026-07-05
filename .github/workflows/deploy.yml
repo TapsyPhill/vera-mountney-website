@@ -31,6 +31,35 @@ jobs:
           VITE_BOOK_BUY_URL_DE: ${{ vars.VITE_BOOK_BUY_URL_DE }}
           VITE_BOOK_AUTHOR_URL: ${{ vars.VITE_BOOK_AUTHOR_URL }}
 
+      - name: Write SMTP config for production
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+          SMTP_FROM_NAME: ${{ secrets.SMTP_FROM_NAME }}
+          SMTP_ENCRYPTION: ${{ secrets.SMTP_ENCRYPTION }}
+        run: |
+          if [ -n "$SMTP_PASS" ] && [ -n "$SMTP_USER" ] && [ -n "$SMTP_HOST" ]; then
+            node <<'NODE'
+          const fs = require('fs');
+          const config = {
+            host: process.env.SMTP_HOST || 'smtp.gmail.com',
+            port: Number(process.env.SMTP_PORT || 587),
+            encryption: process.env.SMTP_ENCRYPTION || 'tls',
+            username: process.env.SMTP_USER || '',
+            password: process.env.SMTP_PASS || '',
+            from_email: process.env.SMTP_FROM || process.env.SMTP_USER || '',
+            from_name: process.env.SMTP_FROM_NAME || 'Vera Mountney Website',
+          };
+          const body = `<?php\nreturn json_decode(${JSON.stringify(JSON.stringify(config))}, true);\n`;
+          fs.writeFileSync('dist/api/smtp.config.php', body);
+          NODE
+          else
+            echo "SMTP secrets not configured — contact form will use PHP mail() fallback."
+          fi
+
       - name: Deploy to FTP server
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
