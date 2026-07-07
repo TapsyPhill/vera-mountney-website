@@ -39,6 +39,51 @@ function getInquiryRecipient(): string
 }
 
 /**
+ * @param array<string, mixed> $config
+ * @return list<array{host: string, port: int, encryption: string}>
+ */
+function buildSmtpAttempts(array $config): array
+{
+    $primaryHost = trim((string)($config['host'] ?? ''));
+    $primaryPort = (int)($config['port'] ?? 465);
+    $primaryEncryption = strtolower((string)($config['encryption'] ?? 'ssl'));
+    $username = (string)($config['username'] ?? '');
+
+    $domain = '';
+    if (preg_match('/@([^@]+)$/', $username, $matches) === 1) {
+        $domain = $matches[1];
+    }
+
+    $candidates = [
+        ['host' => $primaryHost, 'port' => $primaryPort, 'encryption' => $primaryEncryption],
+    ];
+
+    if ($domain !== '') {
+        $mailHost = 'mail.' . $domain;
+        $candidates[] = ['host' => $mailHost, 'port' => 465, 'encryption' => 'ssl'];
+        $candidates[] = ['host' => $mailHost, 'port' => 587, 'encryption' => 'tls'];
+        $candidates[] = ['host' => $domain, 'port' => 465, 'encryption' => 'ssl'];
+        $candidates[] = ['host' => $domain, 'port' => 587, 'encryption' => 'tls'];
+    }
+
+    $unique = [];
+    $seen = [];
+    foreach ($candidates as $candidate) {
+        if ($candidate['host'] === '') {
+            continue;
+        }
+        $key = $candidate['host'] . ':' . $candidate['port'] . ':' . $candidate['encryption'];
+        if (isset($seen[$key])) {
+            continue;
+        }
+        $seen[$key] = true;
+        $unique[] = $candidate;
+    }
+
+    return $unique;
+}
+
+/**
  * @return array{sent: bool, method: string, error: string|null}
  */
 function sendInquiryEmail(
@@ -92,11 +137,10 @@ function sendViaSmtp(
     string $replyToName,
     ?string $htmlBody = null
 ): array {
-    $host = (string)($config['host'] ?? '');
     $username = (string)($config['username'] ?? '');
     $password = (string)($config['password'] ?? '');
 
-    if ($host === '' || $username === '' || $password === '') {
+    if ($username === '' || $password === '') {
         return [
             'sent' => false,
             'method' => 'smtp',
@@ -104,18 +148,98 @@ function sendViaSmtp(
         ];
     }
 
+    $attempts = buildSmtpAttempts($config);
+    $errors = [];
+
+    foreach ($attempts as $attempt) {
+        $result = attemptSmtpSend(
+            $config,
+            $attempt['host'],
+            $attempt['port'],
+            $attempt['encryption'],
+            $recipient,
+            $subject,
+            $plainBody,
+            $replyToEmail,
+            $replyToName,
+            $htmlBody
+        );
+
+        if ($result['sent']) {
+            $result['method'] = 'smtp:' . $attempt['host'] . ':' . $attempt['port'];
+            return $result;
+        }
+
+        $errors[] = $attempt['host'] . ':' . $attempt['port'] . ' — ' . ($result['error'] ?? 'unknown');
+    }
+
+    // Final fallback: plain text only (some hosts reject HTML)
+    if ($htmlBody !== null && $htmlBody !== '') {
+        foreach ($attempts as $attempt) {
+            $result = attemptSmtpSend(
+                $config,
+                $attempt['host'],
+                $attempt['port'],
+                $attempt['encryption'],
+                $recipient,
+                $subject,
+                $plainBody,
+                $replyToEmail,
+                $replyToName,
+                null
+            );
+
+            if ($result['sent']) {
+                $result['method'] = 'smtp-plain:' . $attempt['host'] . ':' . $attempt['port'];
+                return $result;
+            }
+
+            $errors[] = $attempt['host'] . ':' . $attempt['port'] . ' (plain) — ' . ($result['error'] ?? 'unknown');
+        }
+    }
+
+    return [
+        'sent' => false,
+        'method' => 'smtp',
+        'error' => implode(' | ', $errors),
+    ];
+}
+
+/**
+ * @param array<string, mixed> $config
+ * @return array{sent: bool, method: string, error: string|null}
+ */
+function attemptSmtpSend(
+    array $config,
+    string $host,
+    int $port,
+    string $encryption,
+    string $recipient,
+    string $subject,
+    string $plainBody,
+    string $replyToEmail,
+    string $replyToName,
+    ?string $htmlBody
+): array {
     $mail = new PHPMailer(true);
 
     try {
         $mail->isSMTP();
         $mail->Host = $host;
-        $mail->Port = (int)($config['port'] ?? 587);
+        $mail->Port = $port;
         $mail->SMTPAuth = true;
-        $mail->Username = $username;
-        $mail->Password = $password;
+        $mail->Username = (string)($config['username'] ?? '');
+        $mail->Password = (string)($config['password'] ?? '');
         $mail->CharSet = PHPMailer::CHARSET_UTF8;
+        $mail->Timeout = 20;
+        $mail->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ],
+        ];
 
-        $encryption = strtolower((string)($config['encryption'] ?? 'tls'));
         if ($encryption === 'ssl') {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         } elseif ($encryption === 'tls') {
@@ -125,7 +249,7 @@ function sendViaSmtp(
             $mail->SMTPSecure = false;
         }
 
-        $fromEmail = (string)($config['from_email'] ?? $username);
+        $fromEmail = (string)($config['from_email'] ?? $mail->Username);
         $fromName = (string)($config['from_name'] ?? 'Vera Mountney Website');
 
         $mail->setFrom($fromEmail, $fromName);

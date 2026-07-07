@@ -48,8 +48,10 @@ jobs:
           fi
           node <<'NODE'
           const fs = require('fs');
+          let host = process.env.SMTP_HOST || 'mail.vera-mountney.de';
+          if (host === 'vera-mountney.de') host = 'mail.vera-mountney.de';
           const config = {
-            host: process.env.SMTP_HOST || 'vera-mountney.de',
+            host,
             port: Number(process.env.SMTP_PORT || 465),
             encryption: process.env.SMTP_ENCRYPTION || 'ssl',
             username: process.env.SMTP_USER || '',

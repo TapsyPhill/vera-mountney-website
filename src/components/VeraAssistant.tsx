@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { chatbotKnowledge } from '../data/chatbotKnowledge'
 import {
   getInquiryServiceLabel,
   inquiryServiceIds,
@@ -8,6 +7,7 @@ import {
 } from '../data/services'
 import type { InquiryLanguage, PreferredContactMethod } from '../types/inquiry'
 import { submitInquiry } from '../utils/submitInquiry'
+import { getAssistantReply, wantsInquiry } from '../utils/assistantBrain'
 import { DateTimePickerPanel } from './DateTimePicker'
 
 interface Message {
@@ -54,38 +54,6 @@ const emptyDraft = (): InquiryDraft => ({
   message: '',
   appointmentRequest: false,
 })
-
-const inquiryKeywords = [
-  'appointment',
-  'termin',
-  'anfrage',
-  'inquiry',
-  'contact',
-  'kontakt',
-  'send',
-  'schicken',
-  'request',
-  'anmelden',
-  'buchen',
-  'book a session',
-]
-
-function wantsInquiry(text: string): boolean {
-  const n = text.toLowerCase()
-  return inquiryKeywords.some((kw) => n.includes(kw))
-}
-
-function findLocalResponse(input: string, t: (key: string) => string): string | null {
-  const normalized = input.toLowerCase().trim()
-  if (!normalized) return null
-  for (const entry of chatbotKnowledge) {
-    if (entry.id === 'fallback') continue
-    if (entry.keywords.some((kw) => normalized.includes(kw))) {
-      return t(`chatbot.responses.${entry.id}`)
-    }
-  }
-  return null
-}
 
 function CloseIcon() {
   return (
@@ -343,12 +311,7 @@ export function VeraAssistant() {
       if (wantsInquiry(trimmed)) {
         beginInquiry()
       } else {
-        const reply = findLocalResponse(trimmed, t)
-        if (reply) {
-          appendAssistant(reply)
-        } else {
-          appendAssistant(t('assistant.chatFallback'))
-        }
+        appendAssistant(getAssistantReply(trimmed, t))
       }
     }
 

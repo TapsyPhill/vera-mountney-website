@@ -316,7 +316,7 @@ const en = {
       successPhone:
         'Thank you. Your request has been sent. Vera Mountney will get back to you or call you as soon as possible.',
       errorSend:
-        'Unfortunately, the request could not be sent. Please email phillmhembere@gmail.com directly.',
+        'Your message could not be sent just now. Please try again in a moment, or call 0178 854 7697.',
       error: 'Please fill in all required fields.',
       privacy:
         'By submitting, you agree that your details will be used to process your request.',
@@ -351,11 +351,11 @@ const en = {
       },
       appointment: {
         q: 'How can I request an appointment?',
-        a: 'Via the contact form, the Vera Assistant chat, or by phone at 0173 9595 752. Please briefly describe your request.',
+        a: 'Via the contact form, the Vera Assistant chat, or by phone at 0178 854 7697. Please briefly describe your request.',
       },
       contact: {
         q: 'How can I contact Vera?',
-        a: 'Use the contact form on this website, the Vera Assistant chat, phone (0173 9595 752), or WhatsApp.',
+        a: 'Use the contact form on this website, the Vera Assistant chat, phone (0178 854 7697), or WhatsApp.',
       },
       book: {
         q: 'Where can I buy the book?',
@@ -384,7 +384,7 @@ const en = {
   },
   assistant: {
     subtitle: 'Inquiries, appointments and answers',
-    greeting: 'Hello! You can ask a question or tell me how I can help.',
+    greeting: 'Hello! I\'m here for Vera Mountney — ask about her services, the book, or how to get in touch.',
     chatFallback:
       'Thank you for your message. If you would like to send an inquiry or request an appointment, just write that in your own words and I will guide you.',
     invalidEmail: 'Please enter a valid email address.',
@@ -410,7 +410,7 @@ const en = {
     successPhone:
       'Thank you. Your request has been sent. Vera Mountney will get back to you or call you as soon as possible.',
     errorSend:
-      'Unfortunately, the request could not be sent. Please email phillmhembere@gmail.com directly.',
+      'Your message could not be sent just now. Please try again in a moment, or call 0178 854 7697.',
     newRequest: 'Start a new request',
     freeChatHint: 'You can also ask a question here.',
     freeChatLink: 'Or ask a free-text question',
@@ -432,32 +432,53 @@ const en = {
     send: 'Send',
     open: 'Open chat',
     close: 'Close chat',
-    greeting:
-      'Hello! I\'m Vera Mountney\'s assistant. Ask me about services, contact, the book or appointments.',
+    greeting: 'Hello! I\'m here for Vera Mountney — ask me anything about her services, the book, or how to get in touch.',
     responses: {
       whoIsVera:
-        'Vera Mountney is an author, coach, trainer and adviser from Verden. She supports people with coaching, applications, integration and intercultural communication.',
+        'Vera Mountney is an author, coach, trainer and adviser based in Verden, Germany. She works internationally and supports people with coaching, applications, integration and intercultural communication — always with a personal touch.',
       services:
-        'Vera offers coaching, consultation, job coaching, application help, proofreading, integration guidance, intercultural training, workshops and more.',
+        'Vera offers coaching, consultation, job and career coaching, application and CV support, proofreading, integration guidance, intercultural training, workshops, German test preparation and more. Tell me what you are looking for and I can point you in the right direction.',
       coaching:
-        'Yes, Vera is a certified systemic coach and offers individual coaching, in person and via Zoom.',
+        'Yes — Vera is a certified systemic coach. Sessions can take place in person in Verden or online via Zoom, depending on what suits you best.',
       cvHelp:
-        'Yes! Vera supports with CV, cover letter and application strategy. Use the contact form to enquire.',
+        'Absolutely. Vera helps with CVs, cover letters and application strategy — especially for people navigating the German job market. If you would like personal support, I can help you send an inquiry.',
       intercultural:
-        'Yes, intercultural training and integration guidance are core services of Vera.',
+        'Intercultural training and integration guidance are a big part of what Vera does. She helps people communicate confidently across cultures and settle into life in Germany.',
+      germanTest:
+        'Vera prepares clients for German language tests including telc and BSK, with practical support tailored to your level and goals.',
+      pricing:
+        'Costs depend on the type and scope of support. Vera offers individual quotes — and there is a special coaching package for 2026 with limited availability. I can help you send an inquiry if you would like.',
+      onlineSessions:
+        'Yes, many sessions take place online via Zoom — flexible and convenient wherever you are.',
+      location:
+        'Vera is based in Verden, Germany. In-person sessions are possible there, and online sessions are available too.',
       appointment:
-        'Appointments can be requested via the contact form, by email or phone. Please briefly describe your request.',
+        'You can request an appointment through this chat or the contact form. Just tell me what you need and we can get your request to Vera.',
       contact:
-        'Use the contact form on this site, the Vera Assistant chat, or phone: 0173 9595 752.',
-      book: 'The book is available in English and German. Visit the book page for purchase links.',
+        'You can reach Vera through this chat, the contact form, or by phone at 0178 854 7697. WhatsApp is also available.',
+      book: 'Vera\'s book is available in English and German through Verlag Kern. Visit the Book page on this site for details and purchase links.',
       languages:
-        'Vera speaks English, Italian, Spanish, German, plus basic Portuguese and French.',
+        'Vera speaks English, Italian, Spanish and German, with basic Portuguese and French as well — which is especially helpful in intercultural work.',
       englishSite:
-        'Yes! Use the DE/EN switcher at the top to view the website in English.',
-      greeting: 'Hello! How can I help you?',
-      thanks: 'You\'re welcome! Feel free to ask if you have more questions.',
+        'Yes — use the DE / EN switcher at the top of the page to view the whole site in English.',
+      workshops:
+        'Vera offers workshops for individuals, teams and organisations — on communication, integration, intercultural topics and more.',
+      proofreading:
+        'Yes, Vera offers proofreading and text support for applications, professional documents and creative writing.',
+      specialOffer:
+        'There is a special individual coaching package for 2026 with limited availability. Ask me about it or send an inquiry and Vera will follow up personally.',
+      greeting:
+        'Hello — good to hear from you. How can I help you today?',
+      thanks:
+        'You\'re very welcome. If anything else comes to mind, just write here.',
+      offTopic:
+        'I understand — that\'s a little outside what I can help with here. Vera focuses on coaching, applications, integration and language support. What would you like help with today?',
+      unclear:
+        'I want to make sure I understand you. Are you looking for coaching, help with an application, German test preparation, or something else from Vera\'s services?',
+      conversational:
+        'Thank you for your message. I may not have the exact answer, but Vera covers coaching, applications, integration, intercultural training and her book. Tell me a bit more about what you need, or say "send an inquiry" and I will guide you through.',
       fallback:
-        'I\'m not sure about that. Ask me about services, contact, the book, appointments or languages, or use the contact form.',
+        'Tell me a little more about what you need — I am here to help with Vera\'s services, appointments and questions about her work.',
     },
   },
   footer: {
