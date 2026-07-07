@@ -12,5 +12,5 @@ return [
     'password' => 'your-mailbox-password',
     'from_email' => 'noreply@vera-mountney.de',
     'from_name' => 'Vera Mountney Website',
-    'recipient_email' => 'phillmhembere@gmail.com',
+    'recipient_email' => 'veramountney@gmx.net',
 ];
