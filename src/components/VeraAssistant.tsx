@@ -104,7 +104,7 @@ function ChatIcon() {
 }
 
 const selectClass =
-  'w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-sm outline-none focus:border-accent-400 light:border-brand-300 light:bg-white light:text-brand-900'
+  'w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-base outline-none focus:border-accent-400 sm:text-sm light:border-brand-300 light:bg-white light:text-brand-900'
 
 export function VeraAssistant() {
   const { t, i18n } = useTranslation()
@@ -151,6 +151,15 @@ export function VeraAssistant() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, inquiryStep, mode])
+
+  useEffect(() => {
+    if (!open) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [open])
 
   const beginInquiry = () => {
     setMode('inquiry')
@@ -357,7 +366,8 @@ export function VeraAssistant() {
     <>
       {open && (
         <div
-          className="fixed inset-x-3 bottom-[calc(5.5rem+env(safe-area-inset-bottom,0px))] z-50 flex max-h-[min(82dvh,620px)] flex-col overflow-hidden rounded-2xl border border-accent-400/20 bg-surface-dark-elevated shadow-2xl shadow-brand-950/50 sm:inset-x-auto sm:right-5 sm:bottom-24 sm:w-[min(100vw-2.5rem,400px)] light:border-brand-300/60 light:bg-brand-100"
+          className="fixed inset-0 z-50 flex flex-col overflow-hidden border-accent-400/20 bg-surface-dark-elevated sm:inset-x-auto sm:inset-y-auto sm:right-5 sm:bottom-24 sm:top-auto sm:h-auto sm:max-h-[min(82dvh,620px)] sm:w-[min(100vw-2.5rem,400px)] sm:rounded-2xl sm:border light:border-brand-300/60 light:bg-brand-100"
+          style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
           role="dialog"
           aria-label={t('chatbot.title')}
         >
@@ -383,11 +393,11 @@ export function VeraAssistant() {
             </button>
           </div>
 
-          <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-4 py-4">
+          <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto overscroll-contain px-4 py-4">
             {messages.map((msg) => (
               <div
                 key={msg.id}
-                className={`max-w-[92%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                className={`max-w-[92%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-base leading-relaxed sm:text-sm ${
                   msg.role === 'user'
                     ? 'ml-auto rounded-br-md bg-brand-600 text-white shadow-md shadow-brand-900/30'
                     : 'rounded-bl-md border border-white/10 bg-white/8 text-brand-100 light:border-brand-200/80 light:bg-white light:text-brand-900'
@@ -484,7 +494,7 @@ export function VeraAssistant() {
                 e.preventDefault()
                 handleSend()
               }}
-              className="border-t border-white/10 bg-brand-950/30 p-3 light:border-brand-200 light:bg-brand-200/50"
+              className="border-t border-white/10 bg-brand-950/30 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] light:border-brand-200 light:bg-brand-200/50"
             >
               <div className="flex items-end gap-2">
                 <textarea
@@ -493,7 +503,7 @@ export function VeraAssistant() {
                   onChange={(e) => setInput(e.target.value)}
                   disabled={inquiryStep === 'submitting'}
                   placeholder={t('chatbot.placeholder')}
-                  className="max-h-28 min-h-[44px] flex-1 resize-none rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-sm outline-none transition focus:border-accent-400/60 disabled:opacity-50 light:border-brand-300 light:bg-white light:text-brand-900"
+                  className="max-h-28 min-h-[48px] flex-1 resize-none rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-base outline-none transition focus:border-accent-400/60 disabled:opacity-50 sm:text-sm light:border-brand-300 light:bg-white light:text-brand-900"
                   aria-label={t('chatbot.placeholder')}
                 />
                 <button
@@ -517,18 +527,20 @@ export function VeraAssistant() {
         </div>
       )}
 
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="fixed z-50 flex h-14 min-h-[56px] items-center gap-2 rounded-full border border-accent-400/30 bg-brand-600 pl-3 pr-4 text-sm font-semibold text-white shadow-lg shadow-brand-900/40 transition-all duration-300 hover:scale-105 hover:border-accent-400/50 hover:bg-brand-500 sm:right-5 sm:pl-4 sm:pr-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400 right-3 bottom-[max(1.25rem,env(safe-area-inset-bottom,0px))]"
-        aria-expanded={open}
-        aria-label={open ? t('chatbot.close') : t('chatbot.open')}
-      >
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-400/20 text-accent-300">
-          <ChatIcon />
-        </span>
-        <span className="hidden sm:inline">{t('chatbot.title')}</span>
-      </button>
+      {!open && (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="fixed z-50 flex h-14 min-h-[56px] items-center gap-2 rounded-full border border-accent-400/30 bg-brand-600 pl-3 pr-4 text-sm font-semibold text-white shadow-lg shadow-brand-900/40 transition-all duration-300 hover:scale-105 hover:border-accent-400/50 hover:bg-brand-500 sm:right-5 sm:pl-4 sm:pr-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400 right-3 bottom-[max(1.25rem,env(safe-area-inset-bottom,0px))]"
+          aria-expanded={false}
+          aria-label={t('chatbot.open')}
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-400/20 text-accent-300">
+            <ChatIcon />
+          </span>
+          <span className="hidden sm:inline">{t('chatbot.title')}</span>
+        </button>
+      )}
     </>
   )
 }
