@@ -18,7 +18,7 @@ export interface InquiryPayload {
   appointmentRequest?: boolean
   language: InquiryLanguage
   source: InquirySource
-  website?: string
+  botcheck?: string
 }
 
 export interface InquirySubmitResult {

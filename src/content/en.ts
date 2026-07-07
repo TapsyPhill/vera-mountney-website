@@ -316,7 +316,7 @@ const en = {
       successPhone:
         'Thank you. Your request has been sent. Vera Mountney will get back to you or call you as soon as possible.',
       errorSend:
-        'Your message could not be sent just now. Please try again in a moment, or call 0178 854 7697.',
+        'Your request could not be sent right now. Please try again in a moment.',
       error: 'Please fill in all required fields.',
       privacy:
         'By submitting, you agree that your details will be used to process your request.',
@@ -351,11 +351,11 @@ const en = {
       },
       appointment: {
         q: 'How can I request an appointment?',
-        a: 'Via the contact form, the Vera Assistant chat, or by phone at 0178 854 7697. Please briefly describe your request.',
+        a: 'Via the contact form, the Vera Assistant chat, or by phone at 0178 8547697. Please briefly describe your request.',
       },
       contact: {
         q: 'How can I contact Vera?',
-        a: 'Use the contact form on this website, the Vera Assistant chat, phone (0178 854 7697), or WhatsApp.',
+        a: 'Use the contact form on this website, the Vera Assistant chat, phone (0178 8547697), or WhatsApp.',
       },
       book: {
         q: 'Where can I buy the book?',
@@ -384,11 +384,19 @@ const en = {
   },
   assistant: {
     subtitle: 'Inquiries, appointments and answers',
-    greeting: 'Hello! I\'m here for Vera Mountney — ask about her services, the book, or how to get in touch.',
+    greeting: 'Hello! I am here for Vera Mountney — ask about her services, book, appointments or send an inquiry.',
     chatFallback:
-      'Thank you for your message. If you would like to send an inquiry or request an appointment, just write that in your own words and I will guide you.',
+      'Tell me a little more about what you need, and I will point you in the right direction.',
     invalidEmail: 'Please enter a valid email address.',
-    inquiryIntro: 'I will help you send an inquiry to Vera Mountney.',
+    inquiryIntro: 'Of course — I will help you send an inquiry. Let us start with the service you need.',
+    emptyInput: 'I am listening — what would you like to know?',
+    offTopic:
+      'I understand. That is a bit outside what Vera covers here, but I am happy to help with coaching, applications, integration, her book or an appointment request.',
+    unclear:
+      'Could you tell me a little more? For example, are you looking for coaching, application help, a German test course, or would you like to send an inquiry?',
+    gentleFallback:
+      'I want to make sure I understand you correctly. Vera supports people with coaching, career and application guidance, integration, intercultural training and her book. What would be most helpful for you right now?',
+    thinking: 'One moment…',
     askService: 'What kind of support do you need?',
     askOtherService: 'Please briefly describe the service you need.',
     askName: 'What is your name?',
@@ -410,7 +418,7 @@ const en = {
     successPhone:
       'Thank you. Your request has been sent. Vera Mountney will get back to you or call you as soon as possible.',
     errorSend:
-      'Your message could not be sent just now. Please try again in a moment, or call 0178 854 7697.',
+      'Your request could not be sent right now. Please try again in a moment, or use Inquiry Now to reach us.',
     newRequest: 'Start a new request',
     freeChatHint: 'You can also ask a question here.',
     freeChatLink: 'Or ask a free-text question',
@@ -432,53 +440,46 @@ const en = {
     send: 'Send',
     open: 'Open chat',
     close: 'Close chat',
-    greeting: 'Hello! I\'m here for Vera Mountney — ask me anything about her services, the book, or how to get in touch.',
+    greeting:
+      'Hello! I assist Vera Mountney here on the website. Ask me anything about her work, or tell me if you would like to send an inquiry.',
     responses: {
       whoIsVera:
-        'Vera Mountney is an author, coach, trainer and adviser based in Verden, Germany. She works internationally and supports people with coaching, applications, integration and intercultural communication — always with a personal touch.',
+        'Vera Mountney is an author, coach, trainer and adviser based in Verden, Germany. With an international background, she supports people through coaching, applications, integration and intercultural communication — personally or via Zoom.',
       services:
-        'Vera offers coaching, consultation, job and career coaching, application and CV support, proofreading, integration guidance, intercultural training, workshops, German test preparation and more. Tell me what you are looking for and I can point you in the right direction.',
+        'Vera offers consultation, coaching, job and career coaching, application help, proofreading, integration guidance, intercultural training, workshops, German test preparation and publishing guidance. Tell me what you are looking for and I can narrow it down.',
       coaching:
-        'Yes — Vera is a certified systemic coach. Sessions can take place in person in Verden or online via Zoom, depending on what suits you best.',
+        'Yes. Vera is a certified systemic coach and works with people individually — in person in Verden or online via Zoom, depending on what suits you best.',
       cvHelp:
-        'Absolutely. Vera helps with CVs, cover letters and application strategy — especially for people navigating the German job market. If you would like personal support, I can help you send an inquiry.',
+        'Absolutely. Vera helps with CVs, cover letters and application strategy — especially when you want your profile to come across clearly and confidently. If you like, we can start an inquiry right here.',
+      career:
+        'Career coaching is one of Vera\'s core areas — whether you are searching, changing direction or preparing for the next step. I can help you send an inquiry if you would like to talk with her.',
       intercultural:
-        'Intercultural training and integration guidance are a big part of what Vera does. She helps people communicate confidently across cultures and settle into life in Germany.',
+        'Yes. Intercultural training and integration guidance are central to Vera\'s work. She supports people navigating life, work and communication in Germany.',
       germanTest:
-        'Vera prepares clients for German language tests including telc and BSK, with practical support tailored to your level and goals.',
-      pricing:
-        'Costs depend on the type and scope of support. Vera offers individual quotes — and there is a special coaching package for 2026 with limited availability. I can help you send an inquiry if you would like.',
-      onlineSessions:
-        'Yes, many sessions take place online via Zoom — flexible and convenient wherever you are.',
-      location:
-        'Vera is based in Verden, Germany. In-person sessions are possible there, and online sessions are available too.',
-      appointment:
-        'You can request an appointment through this chat or the contact form. Just tell me what you need and we can get your request to Vera.',
-      contact:
-        'You can reach Vera through this chat, the contact form, or by phone at 0178 854 7697. WhatsApp is also available.',
-      book: 'Vera\'s book is available in English and German through Verlag Kern. Visit the Book page on this site for details and purchase links.',
-      languages:
-        'Vera speaks English, Italian, Spanish and German, with basic Portuguese and French as well — which is especially helpful in intercultural work.',
-      englishSite:
-        'Yes — use the DE / EN switcher at the top of the page to view the whole site in English.',
-      workshops:
-        'Vera offers workshops for individuals, teams and organisations — on communication, integration, intercultural topics and more.',
+        'Vera prepares people for German tests such as DTZ, telc and BSK — with practical language support tailored to the exam and everyday life.',
       proofreading:
-        'Yes, Vera offers proofreading and text support for applications, professional documents and creative writing.',
+        'Yes, Vera offers proofreading and text review — for applications, professional texts and other important documents.',
+      pricing:
+        'Costs depend on the service and scope. Vera prepares individual quotes. The easiest next step is to send a short inquiry describing what you need.',
+      onlineSessions:
+        'Yes. Many sessions take place via Zoom, so you can work with Vera flexibly from anywhere.',
+      appointment:
+        'You can request an appointment through the inquiry form or here in chat. Share your preferred time and a brief description of your request, and Vera will get back to you.',
+      contact:
+        'You can reach Vera through this chat, the inquiry form on the contact page, or by phone at 0178 8547697.',
+      book: 'Vera\'s book is available in English and German through Verlag Kern. Visit the book page on this site for details and purchase links.',
+      languages:
+        'Vera speaks English, Italian, Spanish and German, with basic Portuguese and French. Sessions can be arranged in the language that works best for you.',
+      location:
+        'Vera is based in Verden, Germany. Sessions are available locally and online via Zoom.',
+      englishSite:
+        'Yes — use the DE/EN switch at the top of the page to view the site in English or German.',
       specialOffer:
-        'There is a special individual coaching package for 2026 with limited availability. Ask me about it or send an inquiry and Vera will follow up personally.',
-      greeting:
-        'Hello — good to hear from you. How can I help you today?',
-      thanks:
-        'You\'re very welcome. If anything else comes to mind, just write here.',
-      offTopic:
-        'I understand — that\'s a little outside what I can help with here. Vera focuses on coaching, applications, integration and language support. What would you like help with today?',
-      unclear:
-        'I want to make sure I understand you. Are you looking for coaching, help with an application, German test preparation, or something else from Vera\'s services?',
-      conversational:
-        'Thank you for your message. I may not have the exact answer, but Vera covers coaching, applications, integration, intercultural training and her book. Tell me a bit more about what you need, or say "send an inquiry" and I will guide you through.',
+        'Vera is currently offering an individual coaching package for 2026 with limited availability. Send an inquiry if you would like details.',
+      greeting: 'Hello! Good to hear from you. How can I help you today?',
+      thanks: 'You are very welcome. If anything else comes to mind, just write to me here.',
       fallback:
-        'Tell me a little more about what you need — I am here to help with Vera\'s services, appointments and questions about her work.',
+        'I am here to help with Vera\'s services, book, contact options and appointments. What would you like to know?',
     },
   },
   footer: {

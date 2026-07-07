@@ -317,7 +317,7 @@ const de = {
       successPhone:
         'Vielen Dank. Ihre Anfrage wurde gesendet. Vera Mountney wird sich so bald wie möglich bei Ihnen melden oder Sie zurückrufen.',
       errorSend:
-        'Ihre Nachricht konnte gerade nicht gesendet werden. Bitte versuchen Sie es gleich noch einmal oder rufen Sie 0178 854 7697 an.',
+        'Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es gleich erneut.',
       error: 'Bitte füllen Sie alle Pflichtfelder aus.',
       privacy:
         'Mit dem Absenden erklären Sie sich einverstanden, dass Ihre Angaben zur Bearbeitung Ihrer Anfrage verwendet werden.',
@@ -352,11 +352,11 @@ const de = {
       },
       appointment: {
         q: 'Wie kann ich einen Termin anfragen?',
-        a: 'Über das Kontaktformular, den Vera Assistenten im Chat oder telefonisch unter 0178 854 7697. Bitte beschreiben Sie Ihr Anliegen kurz.',
+        a: 'Über das Kontaktformular, den Vera Assistenten im Chat oder telefonisch unter 0178 8547697. Bitte beschreiben Sie Ihr Anliegen kurz.',
       },
       contact: {
         q: 'Wie kann ich Vera kontaktieren?',
-        a: 'Über das Kontaktformular, den Vera Assistenten, Telefon (0178 854 7697) oder WhatsApp.',
+        a: 'Über das Kontaktformular, den Vera Assistenten, Telefon (0178 8547697) oder WhatsApp.',
       },
       book: {
         q: 'Wo kann ich das Buch kaufen?',
@@ -385,11 +385,19 @@ const de = {
   },
   assistant: {
     subtitle: 'Anfragen, Termine und Antworten',
-    greeting: 'Hallo! Ich bin für Vera Mountney da — fragen Sie zu Leistungen, Buch oder Kontakt.',
+    greeting: 'Hallo! Ich bin für Vera Mountney da — fragen Sie zu Leistungen, Buch, Terminen oder senden Sie eine Anfrage.',
     chatFallback:
-      'Vielen Dank für Ihre Nachricht. Wenn Sie eine Anfrage oder einen Terminwunsch senden möchten, schreiben Sie das einfach in Ihren Worten und ich führe Sie durch.',
+      'Sagen Sie mir gern etwas genauer, wobei ich Ihnen helfen kann.',
     invalidEmail: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
-    inquiryIntro: 'Ich helfe Ihnen, eine Anfrage an Vera Mountney zu senden.',
+    inquiryIntro: 'Sehr gern — ich helfe Ihnen bei Ihrer Anfrage. Womit kann Vera Sie unterstützen?',
+    emptyInput: 'Ich bin da — was möchten Sie wissen?',
+    offTopic:
+      'Das verstehe ich. Das liegt etwas außerhalb von Veras Angebot hier, aber gern helfe ich bei Coaching, Bewerbung, Integration, dem Buch oder einer Terminanfrage weiter.',
+    unclear:
+      'Könnten Sie das bitte etwas genauer sagen? Geht es zum Beispiel um Coaching, Bewerbung, Deutschtest-Vorbereitung oder möchten Sie eine Anfrage senden?',
+    gentleFallback:
+      'Ich möchte Sie richtig verstehen. Vera unterstützt bei Coaching, Karriere und Bewerbung, Integration, interkulturellem Training und ihrem Buch. Wobei darf ich Ihnen gerade am meisten helfen?',
+    thinking: 'Einen Moment…',
     askService: 'Welche Art von Unterstützung benötigen Sie?',
     askOtherService: 'Bitte beschreiben Sie kurz die gewünschte Leistung.',
     askName: 'Wie heißen Sie?',
@@ -412,7 +420,7 @@ const de = {
     successPhone:
       'Vielen Dank. Ihre Anfrage wurde gesendet. Vera Mountney wird sich so bald wie möglich bei Ihnen melden oder Sie zurückrufen.',
     errorSend:
-      'Ihre Nachricht konnte gerade nicht gesendet werden. Bitte versuchen Sie es gleich noch einmal oder rufen Sie 0178 854 7697 an.',
+      'Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es gleich erneut oder nutzen Sie „Jetzt anfragen“.',
     newRequest: 'Neue Anfrage starten',
     freeChatHint: 'Sie können hier auch eine Frage stellen.',
     freeChatLink: 'Oder stellen Sie eine freie Frage',
@@ -434,53 +442,46 @@ const de = {
     send: 'Senden',
     open: 'Chat öffnen',
     close: 'Chat schließen',
-    greeting: 'Hallo! Ich bin für Vera Mountney da — fragen Sie mich zu Leistungen, Buch oder Kontakt.',
+    greeting:
+      'Hallo! Ich unterstütze Sie hier auf der Website im Namen von Vera Mountney. Fragen Sie gern zu ihren Leistungen — oder sagen Sie mir, wenn Sie eine Anfrage senden möchten.',
     responses: {
       whoIsVera:
-        'Vera Mountney ist Autorin, Coach, Trainerin und Beraterin aus Verden. International tätig unterstützt sie Menschen bei Coaching, Bewerbung, Integration und interkultureller Kommunikation — persönlich und auf Augenhöhe.',
+        'Vera Mountney ist Autorin, Coach, Trainerin und Beraterin in Verden. Mit internationalem Hintergrund begleitet sie Menschen bei Coaching, Bewerbung, Integration und interkultureller Kommunikation — persönlich oder via Zoom.',
       services:
-        'Vera bietet Coaching, Beratung, Job- und Karriere-Coaching, Bewerbungsunterstützung, Lektorat, Integrationsbegleitung, interkulturelles Training, Workshops, Deutschtest-Vorbereitung und mehr. Sagen Sie mir, was Sie suchen, und ich helfe weiter.',
+        'Vera bietet Beratung, Coaching, Job- und Karriere-Coaching, Bewerbungshilfe, Lektorat, Integrationsbegleitung, interkulturelles Training, Workshops, Deutschtest-Vorbereitung und Verlagsberatung. Sagen Sie mir, wobei Sie Unterstützung suchen.',
       coaching:
-        'Ja — Vera ist zertifizierte systemische Coach. Termine sind in Verden vor Ort oder online per Zoom möglich.',
+        'Ja. Vera ist zertifizierte systemische Coach und arbeitet individuell mit Menschen — in Verden oder online via Zoom.',
       cvHelp:
-        'Sehr gern. Vera unterstützt bei Lebenslauf, Anschreiben und Bewerbungsstrategie — besonders für den deutschen Arbeitsmarkt. Wenn Sie möchten, leite ich Sie durch eine Anfrage.',
+        'Sehr gern. Vera unterstützt bei Lebenslauf, Anschreiben und Bewerbungsstrategie — besonders wenn Ihr Profil klar und überzeugend wirken soll. Wir können hier direkt eine Anfrage starten.',
+      career:
+        'Karriere-Coaching gehört zu Veras Kernbereichen — ob Jobsuche, Neustart oder der nächste berufliche Schritt. Ich helfe Ihnen gern, eine Anfrage zu senden.',
       intercultural:
-        'Interkulturelles Training und Integrationsbegleitung gehören zu Vera\'s Kernleistungen. Sie hilft Menschen, sich sprachlich und kulturell sicher zu fühlen.',
+        'Ja. Interkulturelles Training und Integrationsbegleitung gehören zu Veras Schwerpunkten — im Alltag, Beruf und in der Kommunikation.',
       germanTest:
-        'Vera bereitet auf Deutschtests wie telc und BSK vor — praxisnah und auf Ihr Ziel abgestimmt.',
+        'Vera bereitet auf Deutschtests wie DTZ, telc und BSK vor — praxisnah und auf Prüfung sowie Alltag ausgerichtet.',
+      proofreading:
+        'Ja, Vera bietet Lektorat und Textkorrektur an — für Bewerbungen, berufliche Texte und andere wichtige Unterlagen.',
       pricing:
-        'Die Kosten hängen von Art und Umfang ab. Vera erstellt individuelle Angebote — und es gibt ein Sonderpaket 2026 mit begrenzten Plätzen. Ich kann Ihnen beim Senden einer Anfrage helfen.',
+        'Die Kosten hängen von Leistung und Umfang ab. Vera erstellt individuelle Angebote. Am einfachsten ist eine kurze Anfrage mit Ihrem Anliegen.',
       onlineSessions:
-        'Ja, viele Termine finden online per Zoom statt — flexibel, von überall.',
-      location:
-        'Vera arbeitet von Verden aus. Vor-Ort-Termine sind möglich, ebenso Online-Sessions.',
+        'Ja. Viele Termine finden via Zoom statt — flexibel und ortsunabhängig.',
       appointment:
-        'Sie können hier im Chat oder über das Kontaktformular einen Termin anfragen. Sagen Sie mir einfach, was Sie brauchen.',
+        'Einen Termin können Sie über das Anfrageformular oder hier im Chat anfragen. Nennen Sie gern Wunschzeit und Anliegen, Vera meldet sich bei Ihnen.',
       contact:
-        'Sie erreichen Vera über diesen Chat, das Kontaktformular oder telefonisch unter 0178 854 7697. WhatsApp ist ebenfalls möglich.',
-      book: 'Vera\'s Buch gibt es auf Deutsch und Englisch beim Verlag Kern. Auf der Buchseite finden Sie Details und Kauflinks.',
+        'Sie erreichen Vera über diesen Chat, das Anfrageformular oder telefonisch unter 0178 8547697.',
+      book: 'Veras Buch gibt es auf Deutsch und Englisch im Verlag Kern. Auf der Buchseite finden Sie Details und Kauflinks.',
       languages:
         'Vera spricht Englisch, Italienisch, Spanisch und Deutsch, dazu Grundkenntnisse in Portugiesisch und Französisch.',
+      location:
+        'Vera arbeitet in Verden, Deutschland. Termine sind vor Ort und online via Zoom möglich.',
       englishSite:
-        'Ja — nutzen Sie den DE / EN-Schalter oben, um die gesamte Website auf Englisch zu sehen.',
-      workshops:
-        'Vera bietet Workshops für Einzelpersonen, Teams und Organisationen — zu Kommunikation, Integration und interkulturellen Themen.',
-      proofreading:
-        'Ja, Vera bietet Lektorat und Textunterstützung für Bewerbungen, Berufstexte und kreatives Schreiben.',
+        'Ja — oben können Sie mit DE/EN zwischen Deutsch und Englisch wechseln.',
       specialOffer:
-        'Es gibt ein individuelles Coaching-Sonderpaket 2026 mit begrenzter Verfügbarkeit. Fragen Sie mich oder senden Sie eine Anfrage — Vera meldet sich persönlich.',
-      greeting:
-        'Hallo — schön, dass Sie da sind. Wobei kann ich Ihnen helfen?',
-      thanks:
-        'Gern geschehen. Wenn noch etwas offen ist, schreiben Sie einfach.',
-      offTopic:
-        'Das verstehe ich — das liegt etwas außerhalb dessen, wobei ich hier helfen kann. Vera unterstützt bei Coaching, Bewerbung, Integration und Sprache. Wobei darf ich Ihnen helfen?',
-      unclear:
-        'Ich möchte Sie richtig verstehen. Geht es um Coaching, Bewerbung, Deutschtest-Vorbereitung oder etwas anderes aus Vera\'s Angebot?',
-      conversational:
-        'Danke für Ihre Nachricht. Vielleicht habe ich nicht die genaue Antwort, aber Vera bietet Coaching, Bewerbungshilfe, Integration, interkulturelles Training und ihr Buch. Erzählen Sie mir etwas mehr — oder schreiben Sie „Anfrage senden“ und ich führe Sie durch.',
+        'Aktuell bietet Vera ein individuelles Coaching-Paket 2026 mit begrenzter Verfügbarkeit an. Senden Sie gern eine Anfrage für Details.',
+      greeting: 'Hallo! Schön, dass Sie schreiben. Wobei darf ich helfen?',
+      thanks: 'Sehr gern. Wenn Sie noch etwas wissen möchten, schreiben Sie mir einfach hier.',
       fallback:
-        'Sagen Sie mir etwas mehr — ich helfe gern bei Leistungen, Terminen und Fragen zu Vera\'s Arbeit.',
+        'Ich helfe gern zu Veras Leistungen, Buch, Kontakt und Terminen. Was möchten Sie wissen?',
     },
   },
   footer: {

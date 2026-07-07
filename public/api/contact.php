@@ -31,7 +31,7 @@ if (!is_array($data)) {
     exit;
 }
 
-if (!empty($data['website'])) {
+if (!empty($data['botcheck'])) {
     echo json_encode(['success' => true]);
     exit;
 }
@@ -146,15 +146,11 @@ $mailResult = sendInquiryEmail(
 
 $sent = $mailResult['sent'];
 
-$backupDir = __DIR__ . '/inquiries';
-if (!is_dir($backupDir)) {
-    @mkdir($backupDir, 0755, true);
-}
-
 $backupPayload = [
     'savedAt' => date('c'),
     'mailSent' => $sent,
     'mailMethod' => $mailResult['method'],
+    'mailHost' => $mailResult['host'] ?? null,
     'mailError' => $mailResult['error'],
     'recipient' => $recipient,
     'data' => [
@@ -174,13 +170,14 @@ $backupPayload = [
     ],
 ];
 
-@file_put_contents(
-    $backupDir . '/inquiry-' . date('Ymd-His') . '-' . bin2hex(random_bytes(4)) . '.json',
-    json_encode($backupPayload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE),
-    LOCK_EX
-);
+$backupSaved = saveInquiryBackup($backupPayload);
 
 if (!$sent) {
+    if ($backupSaved) {
+        echo json_encode(['success' => true, 'saved' => true]);
+        exit;
+    }
+
     http_response_code(500);
     echo json_encode([
         'success' => false,

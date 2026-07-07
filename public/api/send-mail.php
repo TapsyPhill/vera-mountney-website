@@ -9,6 +9,7 @@ require_once __DIR__ . '/vendor/phpmailer/phpmailer/SMTP.php';
 require_once __DIR__ . '/vendor/phpmailer/phpmailer/Exception.php';
 
 const DEFAULT_RECIPIENT = 'phillmhembere@gmail.com';
+const SMTP_TIMEOUT_SECONDS = 12;
 
 /**
  * @return array<string, mixed>|null
@@ -39,52 +40,22 @@ function getInquiryRecipient(): string
 }
 
 /**
- * @param array<string, mixed> $config
- * @return list<array{host: string, port: int, encryption: string}>
+ * @return list<string>
  */
-function buildSmtpAttempts(array $config): array
+function smtpHostCandidates(string $primaryHost): array
 {
-    $primaryHost = trim((string)($config['host'] ?? ''));
-    $primaryPort = (int)($config['port'] ?? 465);
-    $primaryEncryption = strtolower((string)($config['encryption'] ?? 'ssl'));
-    $username = (string)($config['username'] ?? '');
+    $hosts = array_values(array_unique(array_filter([
+        $primaryHost,
+        'mail.vera-mountney.de',
+        'vera-mountney.de',
+        'premium309.web-hosting.com',
+    ])));
 
-    $domain = '';
-    if (preg_match('/@([^@]+)$/', $username, $matches) === 1) {
-        $domain = $matches[1];
-    }
-
-    $candidates = [
-        ['host' => $primaryHost, 'port' => $primaryPort, 'encryption' => $primaryEncryption],
-    ];
-
-    if ($domain !== '') {
-        $mailHost = 'mail.' . $domain;
-        $candidates[] = ['host' => $mailHost, 'port' => 465, 'encryption' => 'ssl'];
-        $candidates[] = ['host' => $mailHost, 'port' => 587, 'encryption' => 'tls'];
-        $candidates[] = ['host' => $domain, 'port' => 465, 'encryption' => 'ssl'];
-        $candidates[] = ['host' => $domain, 'port' => 587, 'encryption' => 'tls'];
-    }
-
-    $unique = [];
-    $seen = [];
-    foreach ($candidates as $candidate) {
-        if ($candidate['host'] === '') {
-            continue;
-        }
-        $key = $candidate['host'] . ':' . $candidate['port'] . ':' . $candidate['encryption'];
-        if (isset($seen[$key])) {
-            continue;
-        }
-        $seen[$key] = true;
-        $unique[] = $candidate;
-    }
-
-    return $unique;
+    return $hosts;
 }
 
 /**
- * @return array{sent: bool, method: string, error: string|null}
+ * @return array{sent: bool, method: string, error: string|null, host: string|null}
  */
 function sendInquiryEmail(
     string $recipient,
@@ -96,7 +67,7 @@ function sendInquiryEmail(
 ): array {
     $smtpConfig = loadMailConfig();
     if ($smtpConfig !== null) {
-        return sendViaSmtp($smtpConfig, $recipient, $subject, $plainBody, $replyToEmail, $replyToName, $htmlBody);
+        return sendViaSmtpWithFallback($smtpConfig, $recipient, $subject, $plainBody, $replyToEmail, $replyToName, $htmlBody);
     }
 
     $fallbackFrom = 'noreply@vera-mountney.de';
@@ -121,15 +92,71 @@ function sendInquiryEmail(
         'sent' => $sent,
         'method' => 'mail',
         'error' => $sent ? null : 'PHP mail() returned false',
+        'host' => null,
     ];
 }
 
 /**
  * @param array<string, mixed> $config
- * @return array{sent: bool, method: string, error: string|null}
+ * @return array{sent: bool, method: string, error: string|null, host: string|null}
  */
-function sendViaSmtp(
+function sendViaSmtpWithFallback(
     array $config,
+    string $recipient,
+    string $subject,
+    string $plainBody,
+    string $replyToEmail,
+    string $replyToName,
+    ?string $htmlBody = null
+): array {
+    $primaryHost = (string)($config['host'] ?? '');
+    $username = (string)($config['username'] ?? '');
+    $password = (string)($config['password'] ?? '');
+
+    if ($username === '' || $password === '') {
+        return [
+            'sent' => false,
+            'method' => 'smtp',
+            'error' => 'SMTP config incomplete',
+            'host' => null,
+        ];
+    }
+
+    $errors = [];
+    foreach (smtpHostCandidates($primaryHost) as $host) {
+        $attempt = sendViaSmtpHost(
+            $config,
+            $host,
+            $recipient,
+            $subject,
+            $plainBody,
+            $replyToEmail,
+            $replyToName,
+            $htmlBody
+        );
+
+        if ($attempt['sent']) {
+            return $attempt;
+        }
+
+        $errors[] = $host . ': ' . ($attempt['error'] ?? 'unknown error');
+    }
+
+    return [
+        'sent' => false,
+        'method' => 'smtp',
+        'error' => implode(' | ', $errors),
+        'host' => null,
+    ];
+}
+
+/**
+ * @param array<string, mixed> $config
+ * @return array{sent: bool, method: string, error: string|null, host: string|null}
+ */
+function sendViaSmtpHost(
+    array $config,
+    string $host,
     string $recipient,
     string $subject,
     string $plainBody,
@@ -140,106 +167,20 @@ function sendViaSmtp(
     $username = (string)($config['username'] ?? '');
     $password = (string)($config['password'] ?? '');
 
-    if ($username === '' || $password === '') {
-        return [
-            'sent' => false,
-            'method' => 'smtp',
-            'error' => 'SMTP config incomplete',
-        ];
-    }
-
-    $attempts = buildSmtpAttempts($config);
-    $errors = [];
-
-    foreach ($attempts as $attempt) {
-        $result = attemptSmtpSend(
-            $config,
-            $attempt['host'],
-            $attempt['port'],
-            $attempt['encryption'],
-            $recipient,
-            $subject,
-            $plainBody,
-            $replyToEmail,
-            $replyToName,
-            $htmlBody
-        );
-
-        if ($result['sent']) {
-            $result['method'] = 'smtp:' . $attempt['host'] . ':' . $attempt['port'];
-            return $result;
-        }
-
-        $errors[] = $attempt['host'] . ':' . $attempt['port'] . ' — ' . ($result['error'] ?? 'unknown');
-    }
-
-    // Final fallback: plain text only (some hosts reject HTML)
-    if ($htmlBody !== null && $htmlBody !== '') {
-        foreach ($attempts as $attempt) {
-            $result = attemptSmtpSend(
-                $config,
-                $attempt['host'],
-                $attempt['port'],
-                $attempt['encryption'],
-                $recipient,
-                $subject,
-                $plainBody,
-                $replyToEmail,
-                $replyToName,
-                null
-            );
-
-            if ($result['sent']) {
-                $result['method'] = 'smtp-plain:' . $attempt['host'] . ':' . $attempt['port'];
-                return $result;
-            }
-
-            $errors[] = $attempt['host'] . ':' . $attempt['port'] . ' (plain) — ' . ($result['error'] ?? 'unknown');
-        }
-    }
-
-    return [
-        'sent' => false,
-        'method' => 'smtp',
-        'error' => implode(' | ', $errors),
-    ];
-}
-
-/**
- * @param array<string, mixed> $config
- * @return array{sent: bool, method: string, error: string|null}
- */
-function attemptSmtpSend(
-    array $config,
-    string $host,
-    int $port,
-    string $encryption,
-    string $recipient,
-    string $subject,
-    string $plainBody,
-    string $replyToEmail,
-    string $replyToName,
-    ?string $htmlBody
-): array {
     $mail = new PHPMailer(true);
 
     try {
         $mail->isSMTP();
         $mail->Host = $host;
-        $mail->Port = $port;
+        $mail->Port = (int)($config['port'] ?? 587);
         $mail->SMTPAuth = true;
-        $mail->Username = (string)($config['username'] ?? '');
-        $mail->Password = (string)($config['password'] ?? '');
+        $mail->Username = $username;
+        $mail->Password = $password;
         $mail->CharSet = PHPMailer::CHARSET_UTF8;
-        $mail->Timeout = 20;
-        $mail->SMTPOptions = [
-            'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-                'allow_self_signed' => true,
-            ],
-        ];
+        $mail->Timeout = SMTP_TIMEOUT_SECONDS;
+        $mail->SMTPKeepAlive = false;
 
+        $encryption = strtolower((string)($config['encryption'] ?? 'tls'));
         if ($encryption === 'ssl') {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         } elseif ($encryption === 'tls') {
@@ -249,7 +190,7 @@ function attemptSmtpSend(
             $mail->SMTPSecure = false;
         }
 
-        $fromEmail = (string)($config['from_email'] ?? $mail->Username);
+        $fromEmail = (string)($config['from_email'] ?? $username);
         $fromName = (string)($config['from_name'] ?? 'Vera Mountney Website');
 
         $mail->setFrom($fromEmail, $fromName);
@@ -272,12 +213,32 @@ function attemptSmtpSend(
             'sent' => true,
             'method' => 'smtp',
             'error' => null,
+            'host' => $host,
         ];
     } catch (MailException $exception) {
         return [
             'sent' => false,
             'method' => 'smtp',
             'error' => $exception->getMessage(),
+            'host' => $host,
         ];
     }
+}
+
+function saveInquiryBackup(array $payload): bool
+{
+    $backupDir = __DIR__ . '/inquiries';
+    if (!is_dir($backupDir)) {
+        if (!@mkdir($backupDir, 0755, true) && !is_dir($backupDir)) {
+            return false;
+        }
+    }
+
+    $file = $backupDir . '/inquiry-' . date('Ymd-His') . '-' . bin2hex(random_bytes(4)) . '.json';
+
+    return @file_put_contents(
+        $file,
+        json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE),
+        LOCK_EX
+    ) !== false;
 }

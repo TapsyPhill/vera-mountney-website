@@ -5,7 +5,7 @@
  * SMTP_FROM, SMTP_FROM_NAME, RECIPIENT_EMAIL
  */
 return [
-    'host' => 'mail.vera-mountney.de',
+    'host' => 'vera-mountney.de',
     'port' => 465,
     'encryption' => 'ssl',
     'username' => 'noreply@vera-mountney.de',

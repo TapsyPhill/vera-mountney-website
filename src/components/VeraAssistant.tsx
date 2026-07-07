@@ -7,7 +7,8 @@ import {
 } from '../data/services'
 import type { InquiryLanguage, PreferredContactMethod } from '../types/inquiry'
 import { submitInquiry } from '../utils/submitInquiry'
-import { getAssistantReply, wantsInquiry } from '../utils/assistantBrain'
+import { buildConversationHistory, getAssistantReply, wantsInquiry } from '../utils/assistantEngine'
+import { getAIResponse } from '../services/aiChat'
 import { DateTimePickerPanel } from './DateTimePicker'
 
 interface Message {
@@ -85,6 +86,7 @@ export function VeraAssistant() {
   const [servicePick, setServicePick] = useState('')
   const [contactPick, setContactPick] = useState<PreferredContactMethod | ''>('')
   const [dateTimePick, setDateTimePick] = useState('')
+  const [thinking, setThinking] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const language = (i18n.language === 'en' ? 'en' : 'de') as InquiryLanguage
@@ -296,9 +298,9 @@ export function VeraAssistant() {
     setInquiryStep('message')
   }
 
-  const handleSend = () => {
+  const handleSend = async () => {
     const trimmed = input.trim()
-    if (!trimmed || inquiryStep === 'submitting') return
+    if (!trimmed || inquiryStep === 'submitting' || thinking) return
 
     if (mode === 'inquiry' && !['service', 'contactMethod', 'confirm', 'done'].includes(inquiryStep)) {
       advanceInquiry(trimmed)
@@ -306,16 +308,25 @@ export function VeraAssistant() {
     }
 
     appendUser(trimmed)
+    setInput('')
 
     if (mode === 'chat') {
       if (wantsInquiry(trimmed)) {
         beginInquiry()
+        return
+      }
+
+      setThinking(true)
+      const history = buildConversationHistory(messages)
+      const aiReply = await getAIResponse(trimmed, language, history)
+      setThinking(false)
+
+      if (aiReply) {
+        appendAssistant(aiReply)
       } else {
-        appendAssistant(getAssistantReply(trimmed, t))
+        appendAssistant(getAssistantReply(trimmed, language, t))
       }
     }
-
-    setInput('')
   }
 
   const showTextInput =
@@ -448,6 +459,13 @@ export function VeraAssistant() {
               </div>
             )}
 
+            {thinking && (
+              <div className="inline-flex items-center gap-2 px-2 py-1 text-sm text-brand-300 light:text-brand-700">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-accent-400" />
+                {t('assistant.thinking')}
+              </div>
+            )}
+
             <div ref={messagesEndRef} />
           </div>
 
@@ -464,14 +482,14 @@ export function VeraAssistant() {
                   rows={1}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  disabled={inquiryStep === 'submitting'}
+                  disabled={inquiryStep === 'submitting' || thinking}
                   placeholder={t('chatbot.placeholder')}
                   className="max-h-28 min-h-[48px] flex-1 resize-none rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-base outline-none transition focus:border-accent-400/60 disabled:opacity-50 sm:text-sm light:border-brand-300 light:bg-white light:text-brand-900"
                   aria-label={t('chatbot.placeholder')}
                 />
                 <button
                   type="submit"
-                  disabled={!input.trim() || inquiryStep === 'submitting'}
+                  disabled={!input.trim() || inquiryStep === 'submitting' || thinking}
                   className="btn-primary !h-11 !min-h-[44px] !min-w-[4.5rem] shrink-0 !px-4 !py-2 !text-xs disabled:opacity-50"
                 >
                   {t('chatbot.send')}

@@ -70,7 +70,7 @@ export function ContactForm() {
       appointmentRequest,
       language,
       source: 'contact_form',
-      website: honeypot,
+      botcheck: honeypot,
     })
 
     if (result.success) {
@@ -89,10 +89,10 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="relative glass-card space-y-5 p-5 sm:space-y-5 sm:p-8" noValidate>
       <div className="absolute -left-[9999px]" aria-hidden="true">
-        <label htmlFor="website">Website</label>
+        <label htmlFor="botcheck">Leave empty</label>
         <input
-          id="website"
-          name="website"
+          id="botcheck"
+          name="botcheck"
           type="text"
           tabIndex={-1}
           autoComplete="off"
