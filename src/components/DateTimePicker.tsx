@@ -8,7 +8,7 @@ const TIME_SLOTS = [
 ]
 
 const inputClass =
-  'w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm outline-none transition focus:border-accent-400 light:border-brand-300 light:bg-white light:text-brand-900'
+  'w-full max-w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-base outline-none transition focus:border-accent-400 sm:text-sm light:border-brand-300 light:bg-white light:text-brand-900'
 
 interface DateTimePickerProps {
   id?: string
@@ -80,19 +80,19 @@ export function DateTimePicker({ id, name, value, onChange, compact = false }: D
     onChange(text)
   }
 
-  const padding = compact ? 'p-3' : 'p-4'
+  const padding = compact ? 'p-2.5 sm:p-3' : 'p-3 sm:p-4'
   const dayBtnClass = (active: boolean) =>
-    `flex min-w-[4.25rem] shrink-0 flex-col items-center rounded-xl border px-2 py-2.5 text-center transition touch-manipulation ${
+    `flex w-full min-w-0 flex-col items-center rounded-lg border px-1 py-2 text-center transition touch-manipulation sm:rounded-xl sm:px-2 sm:py-2.5 ${
       active
         ? 'border-accent-400/60 bg-brand-600/40 text-white shadow-md shadow-brand-900/30 light:border-accent-500 light:bg-brand-600 light:text-white'
         : 'border-white/15 bg-white/5 hover:border-accent-400/40 light:border-brand-300 light:bg-white light:hover:border-brand-500'
     }`
 
   return (
-    <div className={`rounded-xl border border-white/10 bg-white/5 ${padding} light:border-brand-200 light:bg-white`}>
+    <div className={`min-w-0 max-w-full overflow-hidden rounded-xl border border-white/10 bg-white/5 ${padding} light:border-brand-200 light:bg-white`}>
       <input type="hidden" id={id} name={name} value={value} readOnly />
 
-      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2 sm:mb-3">
         <p className="text-xs font-medium text-brand-200 light:text-brand-800">
           {t('contact.form.pickDate')}
         </p>
@@ -106,7 +106,7 @@ export function DateTimePicker({ id, name, value, onChange, compact = false }: D
               applyPicker(selectedDate, selectedTime)
             }
           }}
-          className="text-xs text-accent-glow underline-offset-2 hover:underline light:text-brand-700"
+          className="shrink-0 text-xs text-accent-glow underline-offset-2 hover:underline light:text-brand-700"
         >
           {manualMode ? t('contact.form.useCalendar') : t('contact.form.customDateTime')}
         </button>
@@ -122,7 +122,7 @@ export function DateTimePicker({ id, name, value, onChange, compact = false }: D
         />
       ) : (
         <>
-          <div className="-mx-1 flex gap-2 overflow-x-auto pb-1 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-7 sm:gap-2">
             {days.map((date) => {
               const active = selectedDate ? isSameDay(date, selectedDate) : false
               const isToday = isSameDay(date, today)
@@ -131,16 +131,18 @@ export function DateTimePicker({ id, name, value, onChange, compact = false }: D
                   key={date.toISOString()}
                   type="button"
                   onClick={() => handleDateClick(date)}
-                  className={`${dayBtnClass(active)} snap-start`}
+                  className={dayBtnClass(active)}
                   aria-pressed={active}
                 >
-                  <span className="text-[10px] uppercase tracking-wide opacity-80">{weekLabel(date)}</span>
-                  <span className="mt-0.5 text-base font-semibold leading-none">{date.getDate()}</span>
-                  <span className="mt-1 text-[10px] opacity-75">
+                  <span className="text-[9px] uppercase tracking-wide opacity-80 sm:text-[10px]">
+                    {weekLabel(date)}
+                  </span>
+                  <span className="mt-0.5 text-sm font-semibold leading-none sm:text-base">{date.getDate()}</span>
+                  <span className="mt-0.5 text-[9px] opacity-75 sm:mt-1 sm:text-[10px]">
                     {new Intl.DateTimeFormat(locale, { month: 'short' }).format(date)}
                   </span>
                   {isToday && (
-                    <span className="mt-1 text-[9px] font-medium text-accent-300 light:text-accent-600">
+                    <span className="mt-0.5 text-[8px] font-medium text-accent-300 sm:mt-1 sm:text-[9px] light:text-accent-600">
                       {t('contact.form.today')}
                     </span>
                   )}
@@ -149,7 +151,7 @@ export function DateTimePicker({ id, name, value, onChange, compact = false }: D
             })}
           </div>
 
-          <div className="mt-4">
+          <div className="mt-3 sm:mt-4">
             <label htmlFor={`${id || 'dt'}-time`} className="mb-1.5 block text-xs font-medium text-brand-200 light:text-brand-800">
               {t('contact.form.pickTime')}
             </label>
@@ -169,7 +171,7 @@ export function DateTimePicker({ id, name, value, onChange, compact = false }: D
           </div>
 
           {value && selectedDate && (
-            <p className="mt-3 rounded-lg border border-accent-400/20 bg-accent-400/10 px-3 py-2 text-xs text-accent-glow light:text-brand-900">
+            <p className="mt-3 break-words rounded-lg border border-accent-400/20 bg-accent-400/10 px-3 py-2 text-xs text-accent-glow light:text-brand-900">
               {value}
             </p>
           )}
@@ -195,7 +197,7 @@ export function DateTimePickerPanel({
   const { t } = useTranslation()
 
   return (
-    <div className="space-y-3">
+    <div className="min-w-0 max-w-full space-y-3">
       <DateTimePicker value={value} onChange={onChange} compact={compact} />
       <div className="flex flex-wrap gap-2">
         <button

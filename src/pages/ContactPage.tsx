@@ -10,14 +10,14 @@ export function ContactPage() {
   return (
     <>
       <PageMeta titleKey="meta.contact.title" descriptionKey="meta.contact.description" />
-      <section className="section-padding hero-gradient">
-        <div className="container-narrow">
+      <section className="section-padding hero-gradient overflow-x-hidden">
+        <div className="container-narrow min-w-0">
           <SectionHeading title={t('contact.title')} subtitle={t('contact.subtitle')} />
-          <p className="mx-auto mb-8 max-w-2xl text-center text-sm text-brand-200 light:text-brand-800 sm:mb-10">
+          <p className="mx-auto mb-6 max-w-2xl text-center text-sm text-brand-200 light:text-brand-800 sm:mb-10">
             {t('contact.description')}
           </p>
 
-          <div className="grid gap-6 lg:grid-cols-5 lg:gap-10">
+          <div className="grid min-w-0 gap-4 sm:gap-6 lg:grid-cols-5 lg:gap-10">
             <div className="order-2 space-y-4 sm:space-y-6 lg:order-1 lg:col-span-2">
               <div className="glass-card p-5 sm:p-6">
                 <h3 className="font-display text-lg font-semibold sm:text-xl light:text-brand-950">
@@ -56,7 +56,7 @@ export function ContactPage() {
               </div>
             </div>
 
-            <div className="order-1 lg:order-2 lg:col-span-3">
+            <div className="order-1 min-w-0 lg:order-2 lg:col-span-3">
               <ContactForm />
             </div>
           </div>

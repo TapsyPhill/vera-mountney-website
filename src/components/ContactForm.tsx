@@ -87,7 +87,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="relative glass-card space-y-5 p-5 sm:space-y-5 sm:p-8" noValidate>
+    <form onSubmit={handleSubmit} className="relative min-w-0 max-w-full overflow-hidden glass-card space-y-4 p-4 sm:space-y-5 sm:p-8" noValidate>
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <label htmlFor="botcheck">Leave empty</label>
         <input
@@ -106,13 +106,13 @@ export function ContactForm() {
           <label htmlFor="name" className="mb-1.5 block text-sm font-medium">
             {t('contact.form.name')} *
           </label>
-          <input id="name" name="name" type="text" required className={inputClass} />
+          <input id="name" name="name" type="text" required autoComplete="name" className={inputClass} />
         </div>
         <div>
           <label htmlFor="email" className="mb-1.5 block text-sm font-medium">
             {t('contact.form.email')} *
           </label>
-          <input id="email" name="email" type="email" required className={inputClass} />
+          <input id="email" name="email" type="email" required autoComplete="email" className={inputClass} />
         </div>
       </div>
 
@@ -121,7 +121,7 @@ export function ContactForm() {
           <label htmlFor="phone" className="mb-1.5 block text-sm font-medium">
             {t('contact.form.phone')}
           </label>
-          <input id="phone" name="phone" type="tel" className={inputClass} />
+          <input id="phone" name="phone" type="tel" autoComplete="tel" className={inputClass} />
         </div>
         <div>
           <label htmlFor="contactMethod" className="mb-1.5 block text-sm font-medium">
@@ -174,7 +174,7 @@ export function ContactForm() {
         </div>
       )}
 
-      <div>
+      <div className="min-w-0">
         <label className="mb-1.5 block text-sm font-medium">
           {t('contact.form.preferredDateTime')}
         </label>
@@ -184,7 +184,7 @@ export function ContactForm() {
           value={preferredDateTime}
           onChange={setPreferredDateTime}
         />
-        <p className="mt-1.5 text-xs text-brand-400 light:text-brand-600">
+        <p className="mt-1.5 break-words text-xs leading-relaxed text-brand-400 light:text-brand-600">
           {t('contact.form.preferredDateTimeNote')}
         </p>
       </div>
@@ -207,7 +207,7 @@ export function ContactForm() {
         <label htmlFor="message" className="mb-1.5 block text-sm font-medium">
           {t('contact.form.message')} *
         </label>
-        <textarea id="message" name="message" rows={5} required className={inputClass} />
+        <textarea id="message" name="message" rows={5} required autoComplete="off" className={inputClass} />
       </div>
 
       <label className="flex items-start gap-3 text-sm">

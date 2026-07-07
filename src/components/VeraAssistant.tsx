@@ -8,6 +8,13 @@ import {
 import type { InquiryLanguage, PreferredContactMethod } from '../types/inquiry'
 import { submitInquiry } from '../utils/submitInquiry'
 import { buildConversationHistory, getAssistantReply, wantsInquiry } from '../utils/assistantEngine'
+import {
+  getMissingInquiryFields,
+  looksLikeBulkInquiry,
+  parseInquiryFromText,
+  type InquiryField,
+  type ParsedInquiry,
+} from '../utils/parseInquiryFromText'
 import { getAIResponse } from '../services/aiChat'
 import { DateTimePickerPanel } from './DateTimePicker'
 
@@ -138,30 +145,113 @@ export function VeraAssistant() {
     appendAssistant(t('assistant.askService'))
   }
 
-  const buildSummary = () => {
+  const buildSummary = (source: InquiryDraft = draft) => {
     const serviceLabel =
-      draft.selectedService === 'other'
-        ? draft.otherService
-        : draft.selectedService
-          ? getInquiryServiceLabel(draft.selectedService, t)
+      source.selectedService === 'other'
+        ? source.otherService
+        : source.selectedService
+          ? getInquiryServiceLabel(source.selectedService, t)
           : '-'
 
     return [
       t('assistant.summaryTitle'),
       '',
-      `${t('contact.form.name')}: ${draft.name}`,
-      `${t('contact.form.email')}: ${draft.email}`,
-      `${t('contact.form.phone')}: ${draft.phone || '-'}`,
+      `${t('contact.form.name')}: ${source.name}`,
+      `${t('contact.form.email')}: ${source.email}`,
+      `${t('contact.form.phone')}: ${source.phone || '-'}`,
       `${t('contact.form.contactMethod')}: ${
-        draft.preferredContactMethod
-          ? t(`contact.form.contactMethods.${draft.preferredContactMethod}`)
+        source.preferredContactMethod
+          ? t(`contact.form.contactMethods.${source.preferredContactMethod}`)
           : '-'
       }`,
       `${t('contact.form.service')}: ${serviceLabel}`,
-      `${t('contact.form.preferredDateTime')}: ${draft.preferredDateTime || '-'}`,
-      `${t('contact.form.message')}: ${draft.message}`,
-      `${t('contact.form.appointment')}: ${draft.appointmentRequest ? (language === 'de' ? 'Ja' : 'Yes') : language === 'de' ? 'Nein' : 'No'}`,
+      `${t('contact.form.preferredDateTime')}: ${source.preferredDateTime || '-'}`,
+      `${t('contact.form.message')}: ${source.message}`,
+      `${t('contact.form.appointment')}: ${source.appointmentRequest ? (language === 'de' ? 'Ja' : 'Yes') : language === 'de' ? 'Nein' : 'No'}`,
     ].join('\n')
+  }
+
+  const askForField = (field: InquiryField) => {
+    switch (field) {
+      case 'service':
+        return t('assistant.askService')
+      case 'name':
+        return t('assistant.askName')
+      case 'email':
+        return t('assistant.askEmail')
+      case 'contactMethod':
+        return t('assistant.askContactMethod')
+      case 'message':
+        return t('assistant.askMessage')
+      default:
+        return t('assistant.gentleFallback')
+    }
+  }
+
+  const fieldToStep = (field: InquiryField): InquiryStep => {
+    switch (field) {
+      case 'service':
+        return 'service'
+      case 'name':
+        return 'name'
+      case 'email':
+        return 'email'
+      case 'contactMethod':
+        return 'contactMethod'
+      case 'message':
+        return 'message'
+      default:
+        return 'service'
+    }
+  }
+
+  const parsedToDraft = (parsed: ParsedInquiry): InquiryDraft => ({
+    selectedService: parsed.selectedService || '',
+    otherService: parsed.otherService || '',
+    name: parsed.name || '',
+    email: parsed.email || '',
+    phone: parsed.phone || '',
+    preferredContactMethod: parsed.preferredContactMethod || 'email',
+    preferredDateTime: parsed.preferredDateTime || '',
+    message: parsed.message || '',
+    appointmentRequest: parsed.appointmentRequest ?? Boolean(parsed.preferredDateTime),
+  })
+
+  const goToConfirm = (nextDraft: InquiryDraft) => {
+    setDraft(nextDraft)
+    appendAssistant(buildSummary(nextDraft))
+    appendAssistant(t('assistant.confirmQuestion'))
+    setInquiryStep('confirm')
+  }
+
+  const startInquiryFromParsed = (parsed: ParsedInquiry) => {
+    const nextDraft = parsedToDraft(parsed)
+    setMode('inquiry')
+    setDraft(nextDraft)
+    setServicePick(nextDraft.selectedService)
+    setContactPick(nextDraft.preferredContactMethod || '')
+    setDateTimePick(nextDraft.preferredDateTime)
+
+    appendAssistant(t('assistant.parsedAck'))
+
+    const missing = getMissingInquiryFields({
+      ...parsed,
+      preferredContactMethod: parsed.preferredContactMethod || 'email',
+    })
+
+    if (missing.length === 0) {
+      if (parsed.appointmentRequest === undefined && !parsed.preferredDateTime) {
+        appendAssistant(t('assistant.askAppointment'))
+        setInquiryStep('appointment')
+        return
+      }
+      goToConfirm(nextDraft)
+      return
+    }
+
+    const firstMissing = missing[0]
+    setInquiryStep(fieldToStep(firstMissing))
+    appendAssistant(askForField(firstMissing))
   }
 
   const submitInquiryRequest = async () => {
@@ -241,10 +331,9 @@ export function VeraAssistant() {
       case 'appointment': {
         const yes = ['yes', 'ja', 'y', 'j'].includes(trimmed.toLowerCase())
         appendUser(trimmed)
-        setDraft((d) => ({ ...d, appointmentRequest: yes }))
-        appendAssistant(buildSummary())
-        appendAssistant(t('assistant.confirmQuestion'))
-        setInquiryStep('confirm')
+        const updated = { ...draft, appointmentRequest: yes }
+        setDraft(updated)
+        goToConfirm(updated)
         break
       }
       case 'otherService':
@@ -302,6 +391,16 @@ export function VeraAssistant() {
     const trimmed = input.trim()
     if (!trimmed || inquiryStep === 'submitting' || thinking) return
 
+    const parsed = parseInquiryFromText(trimmed)
+    const bulk = looksLikeBulkInquiry(trimmed, parsed)
+
+    if (mode === 'inquiry' && inquiryStep === 'service' && bulk) {
+      appendUser(trimmed)
+      setInput('')
+      startInquiryFromParsed(parsed)
+      return
+    }
+
     if (mode === 'inquiry' && !['service', 'contactMethod', 'confirm', 'done'].includes(inquiryStep)) {
       advanceInquiry(trimmed)
       return
@@ -311,6 +410,11 @@ export function VeraAssistant() {
     setInput('')
 
     if (mode === 'chat') {
+      if (bulk) {
+        startInquiryFromParsed(parsed)
+        return
+      }
+
       if (wantsInquiry(trimmed)) {
         beginInquiry()
         return

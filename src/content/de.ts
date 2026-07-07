@@ -390,6 +390,8 @@ const de = {
       'Sagen Sie mir gern etwas genauer, wobei ich Ihnen helfen kann.',
     invalidEmail: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
     inquiryIntro: 'Sehr gern — ich helfe Ihnen bei Ihrer Anfrage. Womit kann Vera Sie unterstützen?',
+    parsedAck:
+      'Danke — ich habe Ihre Angaben erfasst. Ich prüfe, was noch fehlt, oder wir senden Ihre Anfrage gleich.',
     emptyInput: 'Ich bin da — was möchten Sie wissen?',
     offTopic:
       'Das verstehe ich. Das liegt etwas außerhalb von Veras Angebot hier, aber gern helfe ich bei Coaching, Bewerbung, Integration, dem Buch oder einer Terminanfrage weiter.',

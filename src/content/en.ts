@@ -389,6 +389,8 @@ const en = {
       'Tell me a little more about what you need, and I will point you in the right direction.',
     invalidEmail: 'Please enter a valid email address.',
     inquiryIntro: 'Of course — I will help you send an inquiry. Let us start with the service you need.',
+    parsedAck:
+      'Thank you — I have noted your details. Let me confirm what I still need, or we can send your request.',
     emptyInput: 'I am listening — what would you like to know?',
     offTopic:
       'I understand. That is a bit outside what Vera covers here, but I am happy to help with coaching, applications, integration, her book or an appointment request.',
