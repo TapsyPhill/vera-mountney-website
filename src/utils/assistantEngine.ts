@@ -120,34 +120,44 @@ function isUnclear(input: string): boolean {
   return unclearPatterns.some((pattern) => pattern.test(trimmed))
 }
 
+export interface AssistantReply {
+  text: string
+  topicId: string | null
+}
+
 export function getAssistantReply(
   input: string,
   _language: Language,
   t: (key: string) => string,
-): string {
+): AssistantReply {
   const trimmed = input.trim()
   if (!trimmed) {
-    return t('assistant.emptyInput')
+    return { text: t('assistant.emptyInput'), topicId: 'unclear' }
   }
 
   if (wantsInquiry(trimmed)) {
-    return t('assistant.inquiryIntro')
+    return { text: t('assistant.inquiryIntro'), topicId: 'appointment' }
   }
 
   const match = findBestMatch(trimmed)
   if (match) {
-    return t(`chatbot.responses.${match.id}`)
+    return { text: t(`chatbot.responses.${match.id}`), topicId: match.id }
   }
 
   if (isOffTopic(trimmed)) {
-    return t('assistant.offTopic')
+    return { text: t('assistant.offTopic'), topicId: 'offTopic' }
   }
 
   if (isUnclear(trimmed)) {
-    return t('assistant.unclear')
+    return { text: t('assistant.unclear'), topicId: 'unclear' }
   }
 
-  return t('assistant.gentleFallback')
+  return { text: t('assistant.gentleFallback'), topicId: 'fallback' }
+}
+
+export function detectTopicId(input: string): string | null {
+  const match = findBestMatch(input.trim())
+  return match?.id ?? null
 }
 
 export function buildConversationHistory(

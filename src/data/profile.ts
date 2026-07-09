@@ -10,6 +10,6 @@ export const profile = {
   phoneSecondary: '',
   whatsapp: '491788547697',
   website: 'https://vera-mountney.de',
-  instagram: 'https://www.instagram.com/veramo777',
-  instagramHandle: '@veramo777',
+  linkedin: 'https://www.linkedin.com/in/vera-mountney-88a05b25',
+  linkedinLabel: 'LinkedIn',
 } as const

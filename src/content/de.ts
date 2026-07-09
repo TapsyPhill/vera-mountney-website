@@ -385,7 +385,7 @@ const de = {
   },
   assistant: {
     subtitle: 'Anfragen, Termine und Antworten',
-    greeting: 'Hallo! Ich bin für Vera Mountney da — fragen Sie zu Leistungen, Buch, Terminen oder senden Sie eine Anfrage.',
+    greeting: 'Hallo! Ich bin für Vera Mountney da — fragen Sie zu Leistungen, Buch, Terminen oder senden Sie eine Anfrage. Nutzen Sie gern auch die Buttons unten.',
     chatFallback:
       'Sagen Sie mir gern etwas genauer, wobei ich Ihnen helfen kann.',
     invalidEmail: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
@@ -426,6 +426,23 @@ const de = {
     newRequest: 'Neue Anfrage starten',
     freeChatHint: 'Sie können hier auch eine Frage stellen.',
     freeChatLink: 'Oder stellen Sie eine freie Frage',
+    actions: {
+      sendInquiry: 'Anfrage senden',
+      services: 'Leistungen ansehen',
+      bookPage: 'Zum Buch',
+      about: 'Über Vera',
+      contact: 'Kontaktseite',
+      linkedin: 'LinkedIn-Profil',
+      buyBookEn: 'Englische Ausgabe kaufen',
+      buyBookDe: 'Deutsche Ausgabe kaufen',
+      authorPage: 'Autorenseite (Verlag Kern)',
+      call: 'Vera anrufen',
+      whatsapp: 'WhatsApp',
+      inquiryCv: 'Anfrage: Bewerbungshilfe',
+      inquiryCareer: 'Anfrage: Karriere-Coaching',
+      inquiryGermanTest: 'Anfrage: Deutschtest-Vorbereitung',
+      inquiryAppointment: 'Termin anfragen',
+    },
     menu: {
       cv: 'Ich brauche Hilfe bei Bewerbung oder Lebenslauf',
       career: 'Ich möchte Karriere-Coaching',
@@ -472,6 +489,8 @@ const de = {
       contact:
         'Sie erreichen Vera über diesen Chat, das Anfrageformular oder telefonisch unter 0178 8547697.',
       book: 'Veras Buch gibt es auf Deutsch und Englisch im Verlag Kern. Auf der Buchseite finden Sie Details und Kauflinks.',
+      linkedin:
+        'Mehr über Veras beruflichen Werdegang finden Sie auf LinkedIn — als Coach, Sprachberaterin und Autorin.',
       languages:
         'Vera spricht Englisch, Italienisch, Spanisch und Deutsch, dazu Grundkenntnisse in Portugiesisch und Französisch.',
       location:

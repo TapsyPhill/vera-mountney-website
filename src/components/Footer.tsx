@@ -54,12 +54,12 @@ export function Footer() {
               <li>{profile.location}</li>
               <li>
                 <a
-                  href={profile.instagram}
+                  href={profile.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-accent-400"
                 >
-                  Instagram {profile.instagramHandle}
+                  {profile.linkedinLabel}
                 </a>
               </li>
             </ul>

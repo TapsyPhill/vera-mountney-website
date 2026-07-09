@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import {
   getInquiryServiceLabel,
@@ -16,12 +17,19 @@ import {
   type ParsedInquiry,
 } from '../utils/parseInquiryFromText'
 import { getAIResponse } from '../services/aiChat'
+import {
+  getActionsForTopic,
+  getActionsForUserMessage,
+  getDefaultActions,
+  type AssistantAction,
+} from '../utils/assistantActions'
 import { DateTimePickerPanel } from './DateTimePicker'
 
 interface Message {
   id: string
   role: 'user' | 'assistant'
   text: string
+  actions?: AssistantAction[]
 }
 
 interface InquiryDraft {
@@ -82,8 +90,36 @@ function ChatIcon() {
 const selectClass =
   'w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-base outline-none focus:border-accent-400 sm:text-sm light:border-brand-300 light:bg-white light:text-brand-900'
 
+function AssistantActionButtons({
+  actions,
+  onAction,
+}: {
+  actions: AssistantAction[]
+  onAction: (action: AssistantAction) => void
+}) {
+  const { t } = useTranslation()
+
+  if (!actions.length) return null
+
+  return (
+    <div className="mt-2 flex flex-wrap gap-2">
+      {actions.map((action) => (
+        <button
+          key={action.id}
+          type="button"
+          onClick={() => onAction(action)}
+          className="rounded-full border border-accent-400/30 bg-accent-400/10 px-3 py-1.5 text-left text-xs font-medium text-accent-glow transition hover:border-accent-400/50 hover:bg-accent-400/20 light:border-brand-400/40 light:bg-brand-100 light:text-brand-900 light:hover:bg-brand-200"
+        >
+          {t(action.labelKey)}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 export function VeraAssistant() {
   const { t, i18n } = useTranslation()
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [mode, setMode] = useState<Mode>('chat')
   const [inquiryStep, setInquiryStep] = useState<InquiryStep>('service')
@@ -99,10 +135,15 @@ export function VeraAssistant() {
   const language = (i18n.language === 'en' ? 'en' : 'de') as InquiryLanguage
   const contactMethods: PreferredContactMethod[] = ['email', 'phone', 'whatsapp', 'noPreference']
 
-  const appendAssistant = (text: string) => {
+  const appendAssistant = (text: string, actions?: AssistantAction[]) => {
     setMessages((prev) => [
       ...prev,
-      { id: `assistant-${Date.now()}-${Math.random()}`, role: 'assistant', text },
+      {
+        id: `assistant-${Date.now()}-${Math.random()}`,
+        role: 'assistant',
+        text,
+        actions,
+      },
     ])
   }
 
@@ -118,7 +159,14 @@ export function VeraAssistant() {
     setServicePick('')
     setContactPick('')
     setDateTimePick('')
-    setMessages([{ id: 'welcome', role: 'assistant', text: t('assistant.greeting') }])
+    setMessages([
+      {
+        id: 'welcome',
+        role: 'assistant',
+        text: t('assistant.greeting'),
+        actions: getDefaultActions(),
+      },
+    ])
   }
 
   useEffect(() => {
@@ -138,11 +186,49 @@ export function VeraAssistant() {
     }
   }, [open])
 
-  const beginInquiry = () => {
+  const beginInquiry = (service?: InquiryServiceId) => {
     setMode('inquiry')
     setDraft(emptyDraft())
+    setServicePick('')
+    setContactPick('')
+    setDateTimePick('')
+
+    if (service) {
+      setDraft((d) => ({ ...d, selectedService: service }))
+      setServicePick(service)
+      setInquiryStep('name')
+      appendAssistant(t('assistant.askName'))
+      return
+    }
+
     setInquiryStep('service')
     appendAssistant(t('assistant.askService'))
+  }
+
+  const handleAction = (action: AssistantAction) => {
+    appendUser(t(action.labelKey))
+
+    switch (action.type) {
+      case 'route':
+        if (action.path) navigate(action.path)
+        break
+      case 'link':
+        if (action.href) window.open(action.href, '_blank', 'noopener,noreferrer')
+        break
+      case 'phone':
+        if (action.phone) window.location.href = `tel:${action.phone}`
+        break
+      case 'whatsapp':
+        if (action.phone) {
+          window.open(`https://wa.me/${action.phone}`, '_blank', 'noopener,noreferrer')
+        }
+        break
+      case 'inquiry':
+        beginInquiry(action.service)
+        break
+      default:
+        break
+    }
   }
 
   const buildSummary = (source: InquiryDraft = draft) => {
@@ -426,9 +512,10 @@ export function VeraAssistant() {
       setThinking(false)
 
       if (aiReply) {
-        appendAssistant(aiReply)
+        appendAssistant(aiReply, getActionsForUserMessage(trimmed))
       } else {
-        appendAssistant(getAssistantReply(trimmed, language, t))
+        const reply = getAssistantReply(trimmed, language, t)
+        appendAssistant(reply.text, getActionsForTopic(reply.topicId))
       }
     }
   }
@@ -482,6 +569,9 @@ export function VeraAssistant() {
                 }`}
               >
                 {msg.text}
+                {msg.role === 'assistant' && msg.actions && (
+                  <AssistantActionButtons actions={msg.actions} onAction={handleAction} />
+                )}
               </div>
             ))}
 

@@ -384,7 +384,7 @@ const en = {
   },
   assistant: {
     subtitle: 'Inquiries, appointments and answers',
-    greeting: 'Hello! I am here for Vera Mountney — ask about her services, book, appointments or send an inquiry.',
+    greeting: 'Hello! I am here for Vera Mountney — ask about her services, book, appointments or send an inquiry. You can also use the buttons below.',
     chatFallback:
       'Tell me a little more about what you need, and I will point you in the right direction.',
     invalidEmail: 'Please enter a valid email address.',
@@ -424,6 +424,23 @@ const en = {
     newRequest: 'Start a new request',
     freeChatHint: 'You can also ask a question here.',
     freeChatLink: 'Or ask a free-text question',
+    actions: {
+      sendInquiry: 'Send an inquiry',
+      services: 'View services',
+      bookPage: 'About the book',
+      about: 'About Vera',
+      contact: 'Contact page',
+      linkedin: 'LinkedIn profile',
+      buyBookEn: 'Buy English edition',
+      buyBookDe: 'Buy German edition',
+      authorPage: 'Author page (Verlag Kern)',
+      call: 'Call Vera',
+      whatsapp: 'WhatsApp',
+      inquiryCv: 'Inquiry: application help',
+      inquiryCareer: 'Inquiry: career coaching',
+      inquiryGermanTest: 'Inquiry: German test prep',
+      inquiryAppointment: 'Request an appointment',
+    },
     menu: {
       cv: 'I need help with my CV or application',
       career: 'I want career coaching',
@@ -470,6 +487,8 @@ const en = {
       contact:
         'You can reach Vera through this chat, the inquiry form on the contact page, or by phone at 0178 8547697.',
       book: 'Vera\'s book is available in English and German through Verlag Kern. Visit the book page on this site for details and purchase links.',
+      linkedin:
+        'You can read more about Vera\'s professional background on LinkedIn — her experience as coach, language adviser and author.',
       languages:
         'Vera speaks English, Italian, Spanish and German, with basic Portuguese and French. Sessions can be arranged in the language that works best for you.',
       location:

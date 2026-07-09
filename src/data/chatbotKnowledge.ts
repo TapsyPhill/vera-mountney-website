@@ -178,6 +178,18 @@ export const chatbotKnowledge: ChatbotEntry[] = [
     ],
   },
   {
+    id: 'linkedin',
+    keywords: [
+      'linkedin',
+      'linked in',
+      'professional profile',
+      'berufliches profil',
+      'network',
+      'netzwerk',
+      'connect on linkedin',
+    ],
+  },
+  {
     id: 'book',
     keywords: [
       'book',
