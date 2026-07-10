@@ -25,6 +25,11 @@ const de = {
       description:
         'Kontaktieren Sie Vera Mountney per E-Mail, WhatsApp oder Telefon. Terminanfragen willkommen.',
     },
+    gallery: {
+      title: 'Einblicke, Vera Mountney',
+      description:
+        'Momente aus Veras Arbeit, Lernräumen, internationaler Erfahrung und persönlichem Weg.',
+    },
     faq: {
       title: 'FAQ, Vera Mountney',
       description:
@@ -36,6 +41,7 @@ const de = {
     about: 'Über mich',
     services: 'Leistungen',
     book: 'Buch',
+    gallery: 'Einblicke',
     contact: 'Kontakt',
     faq: 'FAQ',
     testimonials: 'Stimmen',
@@ -456,6 +462,7 @@ const de = {
       sendInquiry: 'Anfrage senden',
       services: 'Leistungen ansehen',
       bookPage: 'Zum Buch',
+      galleryPage: 'Galerie ansehen',
       about: 'Über Vera',
       contact: 'Kontaktseite',
       linkedin: 'LinkedIn-Profil',
@@ -599,6 +606,8 @@ const de = {
   },
   home: {
     servicesPreview: 'Ausgewählte Leistungen',
+    galleryTeaser: 'Ein kurzer Einblick — alle Momente finden Sie auf der Galerieseite.',
+    galleryCta: 'Alle Einblicke ansehen',
     bookPreview: 'Mein Buch',
     aboutPreview: 'Kurzportrait',
     aboutTeaser:

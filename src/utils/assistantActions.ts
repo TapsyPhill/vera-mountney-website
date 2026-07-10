@@ -14,7 +14,7 @@ export interface AssistantAction {
   phone?: string
 }
 
-const defaultActionIds = ['sendInquiry', 'services', 'bookPage', 'linkedin'] as const
+const defaultActionIds = ['sendInquiry', 'galleryPage', 'services', 'bookPage'] as const
 
 export function getDefaultActions(): AssistantAction[] {
   return defaultActionIds.map((id) => actionById(id)).filter(Boolean) as AssistantAction[]
@@ -26,6 +26,8 @@ function actionById(id: string): AssistantAction | null {
       return { id, type: 'inquiry', labelKey: 'assistant.actions.sendInquiry' }
     case 'services':
       return { id, type: 'route', labelKey: 'assistant.actions.services', path: '/services' }
+    case 'galleryPage':
+      return { id, type: 'route', labelKey: 'assistant.actions.galleryPage', path: '/gallery' }
     case 'bookPage':
       return { id, type: 'route', labelKey: 'assistant.actions.bookPage', path: '/book' }
     case 'about':

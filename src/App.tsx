@@ -4,6 +4,7 @@ import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
 import { ServicesPage } from './pages/ServicesPage'
 import { BookPage } from './pages/BookPage'
+import { GalleryPage } from './pages/GalleryPage'
 import { ContactPage } from './pages/ContactPage'
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/book" element={<BookPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/faq" element={<Navigate to="/" replace />} />
         </Route>

@@ -6,7 +6,7 @@ import { SectionHeading } from '../components/SectionHeading'
 import { ServiceCard } from '../components/ServiceCard'
 import { BookPreview } from '../components/BookPreview'
 import { TrustHighlights } from '../components/TrustHighlights'
-import { GallerySection } from '../components/GallerySection'
+import { GalleryPreview } from '../components/GalleryPreview'
 import { WorkedWithStrip } from '../components/WorkedWithStrip'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { services } from '../data/services'
@@ -60,10 +60,10 @@ export function HomePage() {
       </ScrollReveal>
 
       <ScrollReveal>
-        <TrustHighlights />
+        <GalleryPreview />
       </ScrollReveal>
       <ScrollReveal>
-        <GallerySection />
+        <TrustHighlights />
       </ScrollReveal>
       <ScrollReveal>
         <WorkedWithStrip />

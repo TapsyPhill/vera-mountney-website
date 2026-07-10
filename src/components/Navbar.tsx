@@ -4,8 +4,6 @@ import { NAV_LINKS } from '../utils/constants'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { ThemeToggle } from './ThemeToggle'
 
-const MOBILE_NAV_LINKS = NAV_LINKS.filter(({ key }) => key !== 'contact')
-
 export function Navbar() {
   const { t } = useTranslation()
 
@@ -38,7 +36,7 @@ export function Navbar() {
           className="mt-2 flex items-center justify-center gap-4 overflow-x-auto text-xs font-medium [-ms-overflow-style:none] [scrollbar-width:none] lg:mt-0 lg:hidden [&::-webkit-scrollbar]:hidden"
           aria-label="Mobile"
         >
-          {MOBILE_NAV_LINKS.map(({ key, path }) => (
+          {NAV_LINKS.map(({ key, path }) => (
             <NavLink key={key} to={path} className={navClass}>
               {t(`nav.${key}`)}
             </NavLink>

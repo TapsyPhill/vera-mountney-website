@@ -5,7 +5,7 @@ export const NAV_LINKS = [
   { key: 'about', path: '/about' },
   { key: 'services', path: '/services' },
   { key: 'book', path: '/book' },
-  { key: 'contact', path: '/contact' },
+  { key: 'gallery', path: '/gallery' },
 ] as const
 
 export const THEME_STORAGE_KEY = 'vera-theme'

@@ -25,6 +25,11 @@ const en = {
       description:
         'Contact Vera Mountney by email, WhatsApp or phone. Appointment requests welcome.',
     },
+    gallery: {
+      title: 'Moments & Work, Vera Mountney',
+      description:
+        'Moments from Vera’s work, learning spaces, international experience and personal journey.',
+    },
     faq: {
       title: 'FAQ, Vera Mountney',
       description:
@@ -36,6 +41,7 @@ const en = {
     about: 'About',
     services: 'Services',
     book: 'Book',
+    gallery: 'Moments',
     contact: 'Contact',
     faq: 'FAQ',
     testimonials: 'Testimonials',
@@ -454,6 +460,7 @@ const en = {
       sendInquiry: 'Send an inquiry',
       services: 'View services',
       bookPage: 'About the book',
+      galleryPage: 'View gallery',
       about: 'About Vera',
       contact: 'Contact page',
       linkedin: 'LinkedIn profile',
@@ -597,6 +604,8 @@ const en = {
   },
   home: {
     servicesPreview: 'Selected services',
+    galleryTeaser: 'A quick preview — see the full gallery for all moments.',
+    galleryCta: 'View all moments',
     bookPreview: 'My book',
     aboutPreview: 'Brief profile',
     aboutTeaser:

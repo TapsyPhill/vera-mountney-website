@@ -89,7 +89,7 @@ export function GallerySection() {
   )
 
   return (
-    <section className="section-padding bg-white/5 light:bg-[#F7F2FA]">
+    <section className="section-padding hero-gradient bg-white/5 light:bg-[#F7F2FA]">
       <div className="container-narrow">
         <SectionHeading title={t('gallery.title')} subtitle={t('gallery.intro')} />
 
