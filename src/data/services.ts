@@ -14,6 +14,7 @@ export type ServiceIcon =
   | 'telc'
   | 'bsk'
   | 'special'
+  | 'business'
 
 export interface Service {
   id: string
@@ -25,34 +26,39 @@ export const services: Service[] = [
   { id: 'consultation', icon: 'consultation', featured: true },
   { id: 'coaching', icon: 'coaching', featured: true },
   { id: 'jobCoaching', icon: 'career', featured: true },
-  { id: 'careerCoaching', icon: 'career' },
+  { id: 'careerCoaching', icon: 'career', featured: true },
   { id: 'applicationHelp', icon: 'application', featured: true },
-  { id: 'proofreading', icon: 'proofreading' },
   { id: 'integration', icon: 'integration', featured: true },
   { id: 'intercultural', icon: 'intercultural', featured: true },
+  { id: 'assessmentCenter', icon: 'career' },
+  { id: 'testPreparation', icon: 'german-test', featured: true },
+  { id: 'telc', icon: 'telc' },
+  { id: 'bsk', icon: 'bsk' },
+  { id: 'businessCoaching', icon: 'business', featured: true },
+  { id: 'bookInquiry', icon: 'book' },
+  { id: 'proofreading', icon: 'proofreading' },
   { id: 'workshops', icon: 'workshop' },
   { id: 'bookPresentation', icon: 'book' },
   { id: 'publishing', icon: 'publishing' },
   { id: 'zoomTraining', icon: 'zoom' },
-  { id: 'germanTest', icon: 'german-test' },
-  { id: 'telc', icon: 'telc' },
-  { id: 'bsk', icon: 'bsk' },
-  { id: 'specialOffer2026', icon: 'special', featured: true },
+  { id: 'specialOffer2026', icon: 'special' },
 ]
 
 /** Shared service list for contact form and Vera Assistant inquiries */
 export const inquiryServiceIds = [
-  'applicationHelp',
-  'careerCoaching',
-  'jobCoaching',
   'consultation',
+  'coaching',
+  'jobCoaching',
+  'applicationHelp',
+  'integration',
   'intercultural',
-  'germanTest',
+  'careerCoaching',
+  'assessmentCenter',
+  'testPreparation',
   'telc',
   'bsk',
-  'proofreading',
-  'publishing',
-  'workshops',
+  'businessCoaching',
+  'bookInquiry',
   'other',
 ] as const
 

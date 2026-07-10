@@ -30,39 +30,47 @@ const serviceMatchers: Array<{ id: InquiryServiceId; patterns: RegExp[] }> = [
     patterns: [/cv|resume|bewerbung|lebenslauf|anschreiben|application help|application support/i],
   },
   {
+    id: 'bookInquiry',
+    patterns: [/book inquiry|author inquiry|buchanfrage|frage zum buch|about the book|book question/i],
+  },
+  {
+    id: 'assessmentCenter',
+    patterns: [/assessment center|assessment centre|assessment-center|assessmentcenter/i],
+  },
+  {
+    id: 'businessCoaching',
+    patterns: [/business coach|business coaching|unternehmenscoach|führungskräfte/i],
+  },
+  {
     id: 'careerCoaching',
-    patterns: [/career coach|karriere|career change|beruflich|job change/i],
+    patterns: [/career coach|career support|karriere|career change|beruflich|job change/i],
   },
   {
     id: 'jobCoaching',
     patterns: [/job coach|jobsuche|job search|find a job|neuer job/i],
   },
   {
+    id: 'coaching',
+    patterns: [/coaching|training|systemic coach|systemisch/i],
+  },
+  {
     id: 'consultation',
     patterns: [/consultation|beratung|advice|rat/i],
   },
   {
-    id: 'intercultural',
-    patterns: [/intercultural|interkulturell|integration|cultural training/i],
+    id: 'integration',
+    patterns: [/integration guidance|integrationsbegleitung/i],
   },
   {
-    id: 'germanTest',
-    patterns: [/german test|deutschtest|deutsch prüfung|dtz|sprachprüfung/i],
+    id: 'intercultural',
+    patterns: [/intercultural|interkulturell|cultural training/i],
+  },
+  {
+    id: 'testPreparation',
+    patterns: [/test prep|testvorbereitung|german test|deutschtest|deutsch prüfung|dtz|sprachprüfung|exam prep/i],
   },
   { id: 'telc', patterns: [/\btelc\b/i] },
   { id: 'bsk', patterns: [/\bbsk\b/i] },
-  {
-    id: 'proofreading',
-    patterns: [/proofread|lektorat|korrektur|text review|text prüfen/i],
-  },
-  {
-    id: 'publishing',
-    patterns: [/publish|verlag|publishing|manuscript/i],
-  },
-  {
-    id: 'workshops',
-    patterns: [/workshop|seminar|training session/i],
-  },
 ]
 
 function normalizeWhitespace(text: string): string {

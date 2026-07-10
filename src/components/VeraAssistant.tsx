@@ -108,7 +108,7 @@ function AssistantActionButtons({
           key={action.id}
           type="button"
           onClick={() => onAction(action)}
-          className="rounded-full border border-accent-400/30 bg-accent-400/10 px-3 py-1.5 text-left text-xs font-medium text-accent-glow transition hover:border-accent-400/50 hover:bg-accent-400/20 light:border-brand-400/40 light:bg-brand-100 light:text-brand-900 light:hover:bg-brand-200"
+          className="rounded-full border border-brand-600/30 bg-brand-600/15 px-3 py-1.5 text-left text-xs font-medium text-brand-100 transition hover:border-brand-500/50 hover:bg-brand-600/25 light:border-brand-600/25 light:bg-brand-50 light:text-[#24152F] light:hover:border-brand-600/40 light:hover:bg-brand-100"
         >
           {t(action.labelKey)}
         </button>
@@ -565,7 +565,7 @@ export function VeraAssistant() {
                 className={`max-w-[92%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-base leading-relaxed sm:text-sm ${
                   msg.role === 'user'
                     ? 'ml-auto rounded-br-md bg-brand-600 text-white shadow-md shadow-brand-900/30'
-                    : 'rounded-bl-md border border-white/10 bg-white/8 text-brand-100 light:border-brand-200/80 light:bg-white light:text-brand-900'
+                    : 'rounded-bl-md border border-white/10 bg-white/8 text-brand-100 light:border-brand-300/50 light:bg-white light:text-[#24152F]'
                 }`}
               >
                 {msg.text}

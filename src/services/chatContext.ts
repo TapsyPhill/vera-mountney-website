@@ -4,36 +4,34 @@ import { NAV_LINKS } from '../utils/constants'
 
 const serviceTitlesDe = [
   'Beratung',
-  'Coaching',
+  'Coaching & Training',
   'Job-Coaching',
-  'Karriere-Coaching',
-  'Bewerbungshilfe',
-  'Lektorat',
+  'Bewerbungs- & CV-Hilfe',
   'Integrationsbegleitung',
   'Interkulturelles Training',
-  'Workshops',
-  'Deutschtest-Vorbereitung',
-  'Telc',
-  'BSK',
-  'Zoom-Training',
-  'Verlagsberatung',
+  'Karriereunterstützung',
+  'Assessment Center-Vorbereitung',
+  'Testvorbereitung',
+  'TELC-Vorbereitung',
+  'BSK-Vorbereitung',
+  'Business Coaching',
+  'Buch- / Autoren-Anfrage',
 ]
 
 const serviceTitlesEn = [
-  'Consultation',
-  'Coaching',
-  'Job coaching',
-  'Career coaching',
-  'Application help',
-  'Proofreading',
-  'Integration guidance',
-  'Intercultural training',
-  'Workshops',
-  'German test preparation',
-  'Telc',
-  'BSK',
-  'Zoom training',
-  'Publishing guidance',
+  'Consultation & Advice',
+  'Coaching & Training',
+  'Job Coaching',
+  'Application & CV Help',
+  'Integration Guidance',
+  'Intercultural Training',
+  'Career Support',
+  'Assessment Center Preparation',
+  'Test Preparation',
+  'TELC Preparation',
+  'BSK Preparation & Support',
+  'Business Coaching',
+  'Book / Author Inquiry',
 ]
 
 const sitePages = NAV_LINKS.map(({ key, path }) => `${key}: ${path}`).join(', ')
@@ -53,6 +51,9 @@ export function buildSystemPrompt(language: 'de' | 'en'): string {
 - LinkedIn: ${profile.linkedin}
 - E-Mail für Anfragen: ${profile.email}
 - Leistungen: ${serviceList}
+- Karriereunterstützung umfasst auch Assessment Center erfolgreich bestehen
+- Testvorbereitung ist ein eigener Schwerpunkt — getrennt von Karriere
+- Erfahrung mit BIQ / ESF-Projekten
 - Buch (DE): „${bookDe}“ — ${books.de.price}, ISBN ${books.de.isbn}
 - Buch (EN): „${bookEn}“ — ${books.en.price}, ISBN ${books.en.isbn}, E-Book bei Verlag Kern
 - Autorenseite Verlag Kern: ${bookLinks.authorPageUrl}
@@ -61,6 +62,11 @@ export function buildSystemPrompt(language: 'de' | 'en'): string {
 - Termine persönlich in Verden oder online via Zoom
 
 Website-Seiten: ${sitePages}
+
+Wichtig:
+- Kein Instagram-Link erwähnen
+- Keine Referenzunternehmen nennen
+- Netzwerk-Bereich ist noch leer
 
 Dein Stil:
 - Kurz antworten (2–4 Sätze), freundlich und professionell
@@ -78,6 +84,9 @@ About Vera:
 - LinkedIn: ${profile.linkedin}
 - Email for enquiries: ${profile.email}
 - Services: ${serviceList}
+- Career support includes successfully passing assessment centers
+- Test preparation is a separate focus — distinct from career support
+- Experience with BIQ / ESF projects
 - Book (EN): "${bookEn}" — ${books.en.price}, ISBN ${books.en.isbn}, e-book via Verlag Kern
 - Book (DE): "${bookDe}" — ${books.de.price}, ISBN ${books.de.isbn}
 - Author page at Verlag Kern: ${bookLinks.authorPageUrl}
@@ -86,6 +95,11 @@ About Vera:
 - Sessions in Verden or online via Zoom
 
 Site pages: ${sitePages}
+
+Important:
+- Do not mention Instagram
+- Do not mention reference companies
+- Network section is still empty
 
 Your style:
 - Keep replies short (2–4 sentences), friendly and professional

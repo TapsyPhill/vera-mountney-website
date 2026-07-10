@@ -4,7 +4,7 @@ import { PageMeta } from '../components/PageMeta'
 import { SectionHeading } from '../components/SectionHeading'
 import { AboutHighlights } from '../components/AboutHighlights'
 import { PROFILE_IMAGE } from '../utils/constants'
-import { organizations } from '../data/profileDetails'
+import { profile } from '../data/profile'
 
 export function AboutPage() {
   const { t } = useTranslation()
@@ -18,7 +18,7 @@ export function AboutPage() {
 
           <div className="grid items-start gap-8 lg:grid-cols-5 lg:gap-12">
             <div className="lg:col-span-2">
-              <div className="overflow-hidden rounded-3xl border border-white/15 shadow-2xl">
+              <div className="overflow-hidden rounded-3xl border border-white/15 shadow-2xl light:border-brand-300/40">
                 <img
                   src={PROFILE_IMAGE}
                   alt="Vera Mountney"
@@ -31,43 +31,44 @@ export function AboutPage() {
             </div>
 
             <div className="space-y-5 lg:col-span-3 lg:space-y-6">
-              <p className="text-base leading-relaxed sm:text-lg light:text-brand-900">
+              <p className="text-base leading-relaxed sm:text-lg light:text-[#24152F]">
                 {t('about.intro')}
               </p>
-              <p className="leading-relaxed text-brand-200 light:text-brand-800">
+              <p className="leading-relaxed text-brand-200 light:text-[#5F4A6D]">
                 {t('about.bio1')}
               </p>
-              <p className="leading-relaxed text-brand-200 light:text-brand-800">
+              <p className="leading-relaxed text-brand-200 light:text-[#5F4A6D]">
                 {t('about.bio2')}
               </p>
-              <p className="leading-relaxed text-brand-200 light:text-brand-800">
+              <p className="leading-relaxed text-brand-200 light:text-[#5F4A6D]">
                 {t('about.bio3')}
               </p>
             </div>
           </div>
 
-          <AboutHighlights />
-
-          <div className="mt-12">
-            <h3 className="mb-4 text-center font-display text-xl font-semibold sm:text-2xl light:text-brand-950">
-              {t('organizations.title')}
+          <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-6 light:border-brand-300/40 light:bg-white sm:p-8">
+            <h3 className="font-display text-xl font-semibold light:text-[#24152F]">
+              {t('about.businessCoachTitle')}
             </h3>
-            <div className="flex flex-wrap justify-center gap-2.5 sm:gap-3">
-              {organizations.map((key) => (
-                <span
-                  key={key}
-                  className="rounded-full border border-accent-400/20 bg-white/5 px-4 py-2 text-sm light:border-brand-200 light:bg-white/80 light:text-brand-800"
-                >
-                  {t(`organizations.${key}`)}
-                </span>
-              ))}
-            </div>
+            <p className="mt-3 leading-relaxed text-brand-200 light:text-[#5F4A6D]">
+              {t('about.businessCoach')}
+            </p>
           </div>
 
-          <div className="mt-10 text-center sm:mt-12">
+          <AboutHighlights />
+
+          <div className="mt-10 flex flex-wrap justify-center gap-4 sm:mt-12">
             <Link to="/contact" className="btn-primary">
               {t('nav.cta')}
             </Link>
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+            >
+              {t('common.linkedinProfile')}
+            </a>
           </div>
         </div>
       </section>

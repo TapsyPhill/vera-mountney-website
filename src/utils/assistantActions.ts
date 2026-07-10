@@ -36,7 +36,7 @@ function actionById(id: string): AssistantAction | null {
       return {
         id,
         type: 'link',
-        labelKey: 'assistant.actions.linkedin',
+        labelKey: 'common.linkedinProfile',
         href: profile.linkedin,
       }
     case 'buyBookEn':
@@ -93,7 +93,21 @@ function actionById(id: string): AssistantAction | null {
         id,
         type: 'inquiry',
         labelKey: 'assistant.actions.inquiryGermanTest',
-        service: 'germanTest',
+        service: 'testPreparation',
+      }
+    case 'inquiryAssessment':
+      return {
+        id,
+        type: 'inquiry',
+        labelKey: 'assistant.actions.inquiryAssessment',
+        service: 'assessmentCenter',
+      }
+    case 'inquiryBusiness':
+      return {
+        id,
+        type: 'inquiry',
+        labelKey: 'assistant.actions.inquiryBusiness',
+        service: 'businessCoaching',
       }
     case 'inquiryAppointment':
       return {
@@ -115,6 +129,9 @@ const topicActions: Record<string, string[]> = {
   career: ['inquiryCareer', 'services', 'sendInquiry'],
   intercultural: ['sendInquiry', 'services', 'about'],
   germanTest: ['inquiryGermanTest', 'services', 'sendInquiry'],
+  testPreparation: ['inquiryGermanTest', 'services', 'sendInquiry'],
+  assessmentCenter: ['inquiryAssessment', 'services', 'sendInquiry'],
+  businessCoaching: ['inquiryBusiness', 'services', 'about'],
   proofreading: ['sendInquiry', 'services', 'contact'],
   pricing: ['sendInquiry', 'contact', 'services'],
   onlineSessions: ['sendInquiry', 'services', 'contact'],
@@ -158,6 +175,15 @@ export function getActionsForUserMessage(input: string): AssistantAction[] {
   }
   if (/\b(karriere|career|job coach)\b/i.test(lower)) {
     return getActionsForTopic('career')
+  }
+  if (/\b(assessment center|assessment centre|assessmentcenter)\b/i.test(lower)) {
+    return getActionsForTopic('assessmentCenter')
+  }
+  if (/\b(business coach|business coaching|unternehmenscoach)\b/i.test(lower)) {
+    return getActionsForTopic('businessCoaching')
+  }
+  if (/\b(test prep|testvorbereitung|test preparation)\b/i.test(lower)) {
+    return getActionsForTopic('testPreparation')
   }
   if (/\b(kontakt|contact|phone|telefon|whatsapp|anruf)\b/i.test(lower)) {
     return getActionsForTopic('contact')

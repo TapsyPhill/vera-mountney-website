@@ -7,17 +7,17 @@
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "DM Sans", system-ui, sans-serif;
 
-  --color-brand-50: #f3f0ff;
-  --color-brand-100: #ede9fe;
-  --color-brand-200: #ddd6fe;
-  --color-brand-300: #c4b5fd;
+  --color-brand-50: #faf7fc;
+  --color-brand-100: #f4eef9;
+  --color-brand-200: #e8dff2;
+  --color-brand-300: #d4c4e4;
   --color-brand-400: #a78bfa;
   --color-brand-500: #8b5cf6;
-  --color-brand-600: #7c3aed;
+  --color-brand-600: #7b2ff2;
   --color-brand-700: #6d28d9;
   --color-brand-800: #5b21b6;
   --color-brand-900: #4c1d95;
-  --color-brand-950: #2e1065;
+  --color-brand-950: #24152f;
 
   --color-accent-300: #fde68a;
   --color-accent-400: #fbbf24;
@@ -26,8 +26,8 @@
 
   --color-surface-dark: #120a24;
   --color-surface-dark-elevated: #1a1033;
-  --color-surface-light: #ddd6e8;
-  --color-surface-light-elevated: #d4c9e0;
+  --color-surface-light: #f4eef9;
+  --color-surface-light-elevated: #fdfbff;
 
   --animate-fade-in: fade-in 0.7s ease-out both;
   --animate-fade-in-up: fade-in-up 0.7s ease-out both;
@@ -66,10 +66,10 @@ body {
 }
 
 .light body {
-  @apply bg-surface-light text-brand-900;
+  @apply bg-surface-light text-brand-950;
   background-image:
-    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(109, 40, 217, 0.14), transparent 70%),
-    radial-gradient(ellipse 80% 50% at 100% 100%, rgba(180, 140, 60, 0.05), transparent 60%);
+    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(123, 47, 242, 0.08), transparent 70%),
+    radial-gradient(ellipse 80% 50% at 100% 100%, rgba(95, 74, 109, 0.04), transparent 60%);
 }
 
 .dark body {
@@ -89,7 +89,7 @@ h1, h2, h3, h4 {
 }
 
 .light .glass-card {
-  @apply border-brand-400/40 bg-brand-100/85 shadow-lg shadow-brand-900/8;
+  @apply border-brand-300/40 bg-white shadow-lg shadow-brand-950/5;
 }
 
 .dark .glass-card {
@@ -97,12 +97,16 @@ h1, h2, h3, h4 {
 }
 
 .btn-primary {
-  @apply inline-flex min-h-[44px] items-center justify-center rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-900/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-500 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400;
-  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35), inset 0 1px 0 rgba(251, 191, 36, 0.15);
+  @apply inline-flex min-h-[44px] items-center justify-center rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-900/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-500 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600;
+  box-shadow: 0 4px 20px rgba(123, 47, 242, 0.35);
+}
+
+.light .btn-primary {
+  @apply bg-brand-600 text-white hover:bg-brand-700;
 }
 
 .btn-primary:hover {
-  box-shadow: 0 6px 28px rgba(124, 58, 237, 0.45), 0 0 20px rgba(251, 191, 36, 0.2), inset 0 1px 0 rgba(251, 191, 36, 0.25);
+  box-shadow: 0 6px 28px rgba(123, 47, 242, 0.4);
 }
 
 .btn-secondary {
@@ -110,7 +114,7 @@ h1, h2, h3, h4 {
 }
 
 .light .btn-secondary {
-  @apply border-brand-400/60 text-brand-800 hover:border-accent-500/60 hover:bg-brand-100/80;
+  @apply border-brand-600/35 bg-white text-brand-950 hover:border-brand-600/55 hover:bg-brand-50;
 }
 
 .dark .btn-secondary {
@@ -135,9 +139,19 @@ h1, h2, h3, h4 {
   filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.15));
 }
 
+.light .gradient-text {
+  @apply from-brand-700 via-brand-600 to-brand-800 bg-clip-text text-transparent;
+  filter: none;
+}
+
 .text-accent-glow {
   @apply text-accent-400;
   text-shadow: 0 0 20px rgba(251, 191, 36, 0.35);
+}
+
+.light .text-accent-glow {
+  @apply text-brand-700;
+  text-shadow: none;
 }
 
 .hero-gradient {
@@ -150,9 +164,9 @@ h1, h2, h3, h4 {
 
 .light .hero-gradient {
   background:
-    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(109, 40, 217, 0.12), transparent),
-    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(91, 33, 182, 0.08), transparent),
-    radial-gradient(ellipse 50% 40% at 50% 90%, rgba(180, 140, 60, 0.06), transparent);
+    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(123, 47, 242, 0.1), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(91, 33, 182, 0.06), transparent),
+    radial-gradient(ellipse 50% 40% at 50% 90%, rgba(95, 74, 109, 0.05), transparent);
 }
 
 @keyframes hero-shift {
@@ -191,7 +205,11 @@ h1, h2, h3, h4 {
 
 .light .text-brand-200,
 .light .text-brand-300 {
-  @apply text-brand-700;
+  color: #5f4a6d;
+}
+
+.light .text-brand-100 {
+  @apply text-brand-800;
 }
 
 @media (prefers-reduced-motion: reduce) {

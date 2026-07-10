@@ -47,6 +47,9 @@ const iconPaths: Record<ServiceIcon, ReactNode> = {
   special: (
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l1.5 4.5H18l-3.8 2.8 1.5 4.5L12 12l-3.7 2.8 1.5-4.5L6 7.5h4.5L12 3z" />
   ),
+  business: (
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3 21h18M5 21V9l7-4 7 4v12M9 21v-6h6v6" />
+  ),
 }
 
 interface ServiceIconDisplayProps {

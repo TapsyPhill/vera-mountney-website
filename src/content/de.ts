@@ -75,14 +75,15 @@ const de = {
     communication: 'Langjährige Erfahrung in Kommunikation & Sprachen',
     bamf: 'Offizielle Zulassung für Deutschkurse (BAMF, A2 to C2) und berufsbezogene Sprachkurse',
     certifications: 'Verschiedene Kommunikations- und Fachzertifizierungen',
-    biqEsf: 'Erfahrung in BIQ / ESF-Projekten',
+    biqEsf: 'Erfahrung mit BIQ / ESF-Projekten',
     telc: 'TELC-Prüfungsvorbereitung (A2 to C1)',
-    supervisor: 'Registrierte Supervisorin / Fachkraft für den Landkreis Verden',
+    supervisor: 'Registrierte Supervisorin / Fachkraft',
     socialEngagement: 'Engagiertes soziales Engagement',
     intercultural: 'Internationale & interkulturelle Kompetenz',
   },
   organizations: {
     title: 'Engagement & Netzwerk',
+    placeholder: 'Weitere Netzwerk-Inhalte folgen in Kürze.',
     ebnBremen: 'EBN Bremen',
     fmksKiel: 'FMKS Kiel',
     heartkids: 'HEARTKIDS',
@@ -117,9 +118,9 @@ const de = {
         'Gezielte Unterstützung bei Jobsuche, Bewerbungsstrategie und beruflichem Einstieg.',
     },
     careerCoaching: {
-      title: 'Karriere-Coaching',
+      title: 'Karriereunterstützung',
       description:
-        'Persönliche Karriereplanung und Begleitung bei beruflichen Veränderungen.',
+        'Persönliche Karriereplanung und Begleitung bei beruflichen Veränderungen — einschließlich Assessment Center erfolgreich bestehen.',
     },
     applicationHelp: {
       title: 'Bewerbungs- & CV-Hilfe',
@@ -166,6 +167,26 @@ const de = {
       description:
         'Gezielte Vorbereitung auf Deutschprüfungen als Teil Ihrer Integrations- und Karriereplanung.',
     },
+    testPreparation: {
+      title: 'Testvorbereitung',
+      description:
+        'Gezielte Vorbereitung auf Sprach- und Integrationsprüfungen — als eigenständiger Schwerpunkt, getrennt von der Karriereberatung.',
+    },
+    assessmentCenter: {
+      title: 'Assessment Center-Vorbereitung',
+      description:
+        'Vorbereitung auf Assessment Center — strukturiert, praxisnah und zielgerichtet für Ihren nächsten Karriereschritt.',
+    },
+    businessCoaching: {
+      title: 'Business Coaching',
+      description:
+        'Als Business Coach ist es mir wichtig, eine vertrauensvolle und wertschätzende Zusammenarbeit aufzubauen. Durch aktives Zuhören, analytisches Denken und eine lösungsorientierte Arbeitsweise unterstütze ich Führungskräfte, Teams und Mitarbeitende dabei, ihre Kompetenzen weiterzuentwickeln, Veränderungsprozesse erfolgreich zu gestalten und ihre Leistungsfähigkeit nachhaltig zu steigern.',
+    },
+    bookInquiry: {
+      title: 'Buch- / Autoren-Anfrage',
+      description:
+        'Fragen zum Buch, zu Lesungen, Autorenpräsentationen oder Verlagsangelegenheiten.',
+    },
     telc: {
       title: 'TELC A2 to C1 Vorbereitung',
       description:
@@ -193,6 +214,9 @@ const de = {
       'Mit Studien in Angewandter Linguistik, Psychologie und Pädagogik begann sie als freiberufliche Dozentin für Kommunikation und Sprachen. Im Laufe der Jahre entwickelte sie sich zur systemischen Coach und Prozessberaterin.',
     bio3:
       'Neben ihrer professionellen Arbeit hat Vera internationale Erfahrungen in Italien, Spanien, Südafrika, Nigeria und durch ausgedehnte Reisen in Asien gesammelt. Ihr Hobby: Forensik.',
+    businessCoachTitle: 'Business Coaching',
+    businessCoach:
+      'Als Business Coach ist es mir wichtig, eine vertrauensvolle und wertschätzende Zusammenarbeit aufzubauen. Durch aktives Zuhören, analytisches Denken und eine lösungsorientierte Arbeitsweise unterstütze ich Führungskräfte, Teams und Mitarbeitende dabei, ihre Kompetenzen weiterzuentwickeln, Veränderungsprozesse erfolgreich zu gestalten und ihre Leistungsfähigkeit nachhaltig zu steigern.',
     studiesTitle: 'Ausbildung',
     studies: {
       linguistics: 'Angewandte Linguistik',
@@ -281,6 +305,8 @@ const de = {
     appointment: 'Termin per Telefon',
     appointmentNote:
       'Gerne vereinbare ich ein telefonisches Beratungsgespräch. Bitte beschreiben Sie Ihr Anliegen kurz im Formular.',
+    linkedinNote:
+      'Mehr über Veras beruflichen Werdegang und Erfahrung finden Sie auf LinkedIn.',
     form: {
       name: 'Name',
       email: 'E-Mail',
@@ -418,9 +444,9 @@ const de = {
     cancel: 'Abbrechen',
     skip: 'Überspringen',
     success:
-      'Vielen Dank. Ihre Anfrage wurde gesendet. Vera Mountney wird sich so bald wie möglich bei Ihnen melden.',
+      'Vielen Dank. Ihre Anfrage wurde gesendet. Vera wird sich bei Ihnen per E-Mail oder Telefon melden.',
     successPhone:
-      'Vielen Dank. Ihre Anfrage wurde gesendet. Vera Mountney wird sich so bald wie möglich bei Ihnen melden oder Sie zurückrufen.',
+      'Vielen Dank. Ihre Anfrage wurde gesendet. Vera wird sich bei Ihnen per E-Mail oder Telefon melden.',
     errorSend:
       'Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es gleich erneut oder nutzen Sie „Jetzt anfragen“.',
     newRequest: 'Neue Anfrage starten',
@@ -440,7 +466,9 @@ const de = {
       whatsapp: 'WhatsApp',
       inquiryCv: 'Anfrage: Bewerbungshilfe',
       inquiryCareer: 'Anfrage: Karriere-Coaching',
-      inquiryGermanTest: 'Anfrage: Deutschtest-Vorbereitung',
+      inquiryGermanTest: 'Anfrage: Testvorbereitung',
+      inquiryAssessment: 'Anfrage: Assessment Center',
+      inquiryBusiness: 'Anfrage: Business Coaching',
       inquiryAppointment: 'Termin anfragen',
     },
     menu: {
@@ -477,7 +505,13 @@ const de = {
       intercultural:
         'Ja. Interkulturelles Training und Integrationsbegleitung gehören zu Veras Schwerpunkten — im Alltag, Beruf und in der Kommunikation.',
       germanTest:
-        'Vera bereitet auf Deutschtests wie DTZ, telc und BSK vor — praxisnah und auf Prüfung sowie Alltag ausgerichtet.',
+        'Vera bereitet auf Sprach- und Integrationsprüfungen vor — praxisnah und auf Prüfung sowie Alltag ausgerichtet. Testvorbereitung ist ein eigener Schwerpunkt.',
+      testPreparation:
+        'Testvorbereitung ist ein eigenständiger Bereich — getrennt von der Karriereberatung. Vera bereitet gezielt auf relevante Prüfungen vor, inklusive TELC und BSK.',
+      assessmentCenter:
+        'Vera unterstützt bei der Vorbereitung auf Assessment Center — strukturiert und praxisnah für Ihren nächsten Karriereschritt.',
+      businessCoaching:
+        'Als Business Coach begleitet Vera Führungskräfte, Teams und Mitarbeitende mit vertrauensvoller, lösungsorientierter Zusammenarbeit.',
       proofreading:
         'Ja, Vera bietet Lektorat und Textkorrektur an — für Bewerbungen, berufliche Texte und andere wichtige Unterlagen.',
       pricing:
@@ -513,6 +547,44 @@ const de = {
     contactForm: 'Nachricht senden',
     comingSoon: 'Demnächst',
   },
+  gallery: {
+    title: 'Einblicke',
+    intro:
+      'Einige Momente aus Veras Arbeit, Lernräumen, internationaler Erfahrung und persönlichem Weg.',
+    like: 'Gefällt mir',
+    items: {
+      appreciation: {
+        title: 'Wertschätzung & Verbindung',
+        caption: 'Ein warmer Moment der Wertschätzung, des Vertrauens und der persönlichen Verbindung.',
+        category: 'Persönlich',
+      },
+      bremen: {
+        title: 'Bremen-Momente',
+        caption: 'Verbunden mit Menschen, Bewegung und dem Leben in der Stadt.',
+        category: 'Leben & Erfahrung',
+      },
+      career: {
+        title: 'Karriere & Sprachtraining',
+        caption: 'Unterstützung bei Berufssprache, Karriere und Prüfungsvorbereitung.',
+        category: 'Karriere',
+      },
+      classroom: {
+        title: 'Lernräume',
+        caption: 'Training, Lernen und Kommunikation in einer echten Unterrichtssituation.',
+        category: 'Unterricht',
+      },
+      communication: {
+        title: 'Kommunikation öffnet Türen',
+        caption: 'Sprachen öffnen Türen. Kommunikation verbindet Menschen.',
+        category: 'Kommunikation',
+      },
+      travel: {
+        title: 'Interkulturelle Erfahrung',
+        caption: 'Erfahrungen mit Orten, Kulturen und Menschen.',
+        category: 'Interkulturell',
+      },
+    },
+  },
   common: {
     learnMore: 'Mehr erfahren',
     getInTouch: 'Kontakt aufnehmen',
@@ -523,6 +595,7 @@ const de = {
     themeDark: 'Dunkelmodus',
     languageDe: 'Deutsch',
     languageEn: 'English',
+    linkedinProfile: 'LinkedIn-Profil',
   },
   home: {
     servicesPreview: 'Ausgewählte Leistungen',

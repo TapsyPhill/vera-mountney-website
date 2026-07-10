@@ -107,6 +107,29 @@ export const chatbotKnowledge: ChatbotEntry[] = [
     ],
   },
   {
+    id: 'testPreparation',
+    keywords: ['test prep', 'testvorbereitung', 'test preparation'],
+  },
+  {
+    id: 'assessmentCenter',
+    keywords: [
+      'assessment center',
+      'assessment centre',
+      'assessment-center',
+      'assessmentcenter',
+    ],
+  },
+  {
+    id: 'businessCoaching',
+    keywords: [
+      'business coach',
+      'business coaching',
+      'unternehmenscoach',
+      'führungskräfte',
+      'leadership coaching',
+    ],
+  },
+  {
     id: 'proofreading',
     keywords: [
       'proofread',

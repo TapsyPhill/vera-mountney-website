@@ -10,6 +10,5 @@ export const profile = {
   phoneSecondary: '',
   whatsapp: '491788547697',
   website: 'https://vera-mountney.de',
-  linkedin: 'https://www.linkedin.com/in/vera-mountney-88a05b25',
-  linkedinLabel: 'LinkedIn',
+  linkedin: 'https://share.google/VwIHy8pLNzqPtiqgB',
 } as const

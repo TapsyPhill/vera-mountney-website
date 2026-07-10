@@ -75,14 +75,15 @@ const en = {
     communication: 'Extensive experience in communication & languages',
     bamf: 'Official approval for German courses (BAMF, A2 to C2) and vocational language courses',
     certifications: 'Various communication and professional certifications',
-    biqEsf: 'Experience in BIQ / ESF projects',
+    biqEsf: 'Experience with BIQ / ESF projects',
     telc: 'TELC exam preparation (A2 to C1)',
-    supervisor: 'Registered supervisor / support professional for Landkreis Verden',
+    supervisor: 'Registered supervisor / support professional',
     socialEngagement: 'Committed social engagement',
     intercultural: 'International & intercultural competence',
   },
   organizations: {
     title: 'Engagement & Network',
+    placeholder: 'Further network content will be added soon.',
     ebnBremen: 'EBN Bremen',
     fmksKiel: 'FMKS Kiel',
     heartkids: 'HEARTKIDS',
@@ -117,9 +118,9 @@ const en = {
         'Targeted support for job search, application strategy and career entry.',
     },
     careerCoaching: {
-      title: 'Career Coaching',
+      title: 'Career Support',
       description:
-        'Personal career planning and support through professional transitions.',
+        'Personal career planning and support through professional transitions — including successfully passing assessment centers.',
     },
     applicationHelp: {
       title: 'Application & CV Help',
@@ -166,6 +167,26 @@ const en = {
       description:
         'Targeted preparation for German exams as part of your integration and career planning.',
     },
+    testPreparation: {
+      title: 'Test Preparation',
+      description:
+        'Targeted preparation for language and integration exams — as a dedicated focus, separate from career support.',
+    },
+    assessmentCenter: {
+      title: 'Assessment Center Preparation',
+      description:
+        'Preparation for assessment centers — structured, practical and focused on your next career step.',
+    },
+    businessCoaching: {
+      title: 'Business Coaching',
+      description:
+        'As a business coach, it is important to me to build a trusting and appreciative working relationship. Through active listening, analytical thinking and a solution-oriented approach, I support leaders, teams and employees in developing their skills, shaping change processes successfully and sustainably increasing their performance.',
+    },
+    bookInquiry: {
+      title: 'Book / Author Inquiry',
+      description:
+        'Questions about the book, readings, author presentations or publishing matters.',
+    },
     telc: {
       title: 'TELC A2 to C1 Preparation',
       description:
@@ -193,6 +214,9 @@ const en = {
       'With studies in applied linguistics, psychology and pedagogy, she began as a freelance lecturer in communication and languages. Over the years she developed into a systemic coach and process adviser.',
     bio3:
       'Beyond her professional work, Vera has international experience in Italy, Spain, South Africa, Nigeria and through extensive travel in Asia. Her hobby: forensics.',
+    businessCoachTitle: 'Business Coaching',
+    businessCoach:
+      'As a business coach, it is important to me to build a trusting and appreciative working relationship. Through active listening, analytical thinking and a solution-oriented approach, I support leaders, teams and employees in developing their skills, shaping change processes successfully and sustainably increasing their performance.',
     studiesTitle: 'Education',
     studies: {
       linguistics: 'Applied Linguistics',
@@ -280,6 +304,8 @@ const en = {
     appointment: 'Phone appointment',
     appointmentNote:
       'I am happy to arrange a phone consultation. Please briefly describe your request in the form.',
+    linkedinNote:
+      'Read more about Vera’s professional background and experience on LinkedIn.',
     form: {
       name: 'Name',
       email: 'Email',
@@ -416,9 +442,9 @@ const en = {
     cancel: 'Cancel',
     skip: 'Skip',
     success:
-      'Thank you. Your request has been sent. Vera Mountney will get back to you as soon as possible.',
+      'Thank you. Your inquiry has been sent. Vera will contact you by email or phone.',
     successPhone:
-      'Thank you. Your request has been sent. Vera Mountney will get back to you or call you as soon as possible.',
+      'Thank you. Your inquiry has been sent. Vera will contact you by email or phone.',
     errorSend:
       'Your request could not be sent right now. Please try again in a moment, or use Inquiry Now to reach us.',
     newRequest: 'Start a new request',
@@ -438,7 +464,9 @@ const en = {
       whatsapp: 'WhatsApp',
       inquiryCv: 'Inquiry: application help',
       inquiryCareer: 'Inquiry: career coaching',
-      inquiryGermanTest: 'Inquiry: German test prep',
+      inquiryGermanTest: 'Inquiry: test preparation',
+      inquiryAssessment: 'Inquiry: assessment center',
+      inquiryBusiness: 'Inquiry: business coaching',
       inquiryAppointment: 'Request an appointment',
     },
     menu: {
@@ -475,7 +503,13 @@ const en = {
       intercultural:
         'Yes. Intercultural training and integration guidance are central to Vera\'s work. She supports people navigating life, work and communication in Germany.',
       germanTest:
-        'Vera prepares people for German tests such as DTZ, telc and BSK — with practical language support tailored to the exam and everyday life.',
+        'Vera prepares people for language and integration exams — practical support tailored to exams and everyday life. Test preparation is a dedicated focus area.',
+      testPreparation:
+        'Test preparation is a separate service area — distinct from career support. Vera prepares you for relevant exams, including TELC and BSK.',
+      assessmentCenter:
+        'Vera supports preparation for assessment centers — structured and practical for your next career step.',
+      businessCoaching:
+        'As a business coach, Vera supports leaders, teams and employees with trusting, solution-oriented collaboration.',
       proofreading:
         'Yes, Vera offers proofreading and text review — for applications, professional texts and other important documents.',
       pricing:
@@ -511,6 +545,44 @@ const en = {
     contactForm: 'Send a message',
     comingSoon: 'Coming soon',
   },
+  gallery: {
+    title: 'Moments & Work',
+    intro:
+      'A few moments from Vera’s work, learning spaces, international experience and personal journey.',
+    like: 'Like',
+    items: {
+      appreciation: {
+        title: 'Appreciation & Connection',
+        caption: 'A warm moment of appreciation, trust and personal connection.',
+        category: 'Personal',
+      },
+      bremen: {
+        title: 'Bremen Moments',
+        caption: 'Connected to people, movement and everyday life in the city.',
+        category: 'Life & Experience',
+      },
+      career: {
+        title: 'Career & Language Training',
+        caption: 'Supporting professional language, career growth and exam preparation.',
+        category: 'Career',
+      },
+      classroom: {
+        title: 'Learning Spaces',
+        caption: 'Training, learning and communication in a real classroom setting.',
+        category: 'Teaching',
+      },
+      communication: {
+        title: 'Communication Opens Doors',
+        caption: 'Languages open doors. Communication connects people.',
+        category: 'Communication',
+      },
+      travel: {
+        title: 'Intercultural Experience',
+        caption: 'Experiences across places, cultures and people.',
+        category: 'Intercultural',
+      },
+    },
+  },
   common: {
     learnMore: 'Learn more',
     getInTouch: 'Get in touch',
@@ -521,6 +593,7 @@ const en = {
     themeDark: 'Dark mode',
     languageDe: 'Deutsch',
     languageEn: 'English',
+    linkedinProfile: 'LinkedIn Profile',
   },
   home: {
     servicesPreview: 'Selected services',

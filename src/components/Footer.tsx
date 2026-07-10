@@ -59,7 +59,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-accent-400"
                 >
-                  {profile.linkedinLabel}
+                  {t('common.linkedinProfile')}
                 </a>
               </li>
             </ul>

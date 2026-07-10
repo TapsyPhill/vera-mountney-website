@@ -47,12 +47,29 @@ export function ContactPage() {
               </div>
 
               <div className="glass-card p-5 sm:p-6">
-                <h3 className="font-display text-lg font-semibold sm:text-xl light:text-brand-950">
+                <h3 className="font-display text-lg font-semibold sm:text-xl light:text-[#24152F]">
                   {t('contact.appointment')}
                 </h3>
-                <p className="mt-2 text-sm text-brand-200 light:text-brand-800">
+                <p className="mt-2 text-sm text-brand-200 light:text-[#5F4A6D]">
                   {t('contact.appointmentNote')}
                 </p>
+              </div>
+
+              <div className="glass-card p-5 sm:p-6">
+                <h3 className="font-display text-lg font-semibold sm:text-xl light:text-[#24152F]">
+                  LinkedIn
+                </h3>
+                <p className="mt-2 text-sm text-brand-200 light:text-[#5F4A6D]">
+                  {t('contact.linkedinNote')}
+                </p>
+                <a
+                  href={profile.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary mt-4 inline-flex text-xs"
+                >
+                  {t('common.linkedinProfile')}
+                </a>
               </div>
             </div>
 
