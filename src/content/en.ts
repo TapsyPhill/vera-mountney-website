@@ -77,6 +77,7 @@ const en = {
   },
   credentials: {
     aevo: 'AEVO / IHK Bremen, trainer qualification',
+    controller: 'Controller certification',
     systemicCoach: 'Certified systemic coach & process adviser',
     communication: 'Extensive experience in communication & languages',
     bamf: 'Official approval for German courses (BAMF, A2 to C2) and vocational language courses',
@@ -186,7 +187,7 @@ const en = {
     businessCoaching: {
       title: 'Business Coaching',
       description:
-        'As a business coach, it is important to me to build a trusting and appreciative working relationship. Through active listening, analytical thinking and a solution-oriented approach, I support leaders, teams and employees in developing their skills, shaping change processes successfully and sustainably increasing their performance.',
+        'Vera Mountney supports leaders, teams and employees through trusting, solution-oriented collaboration — helping them develop skills and sustainably increase their performance.',
     },
     bookInquiry: {
       title: 'Book / Author Inquiry',
@@ -211,18 +212,18 @@ const en = {
   },
   about: {
     title: 'About Vera Mountney',
-    subtitle: 'Author, Coach, Trainer & Adviser',
+    subtitle: 'Author, Translator, Coach & Adviser',
     intro:
-      'Vera Mountney lives and works in Verden. As an author, coach, trainer and adviser, she combines expert knowledge with warmth and an international perspective.',
+      'Vera Mountney lives and works in Verden. As an author, translator, systemic coach and adviser, she combines professional clarity with a warm, personal approach.',
     bio1:
-      'She writes poems and texts, has been published in anthologies and is listed in Who is Who Germany. Her commitment to multilingualism, women, children and intercultural work is reflected in her membership and support of organisations such as EBN Bremen, FMKS Kiel and HEARTKIDS.',
+      'Her work spans coaching, language, application support and intercultural guidance — in person in Verden or online.',
     bio2:
-      'With studies in applied linguistics, psychology and pedagogy, she began as a freelance lecturer in communication and languages. Over the years she developed into a systemic coach and process adviser.',
+      'Vera holds trainer qualification (AEVO/IHK Bremen) and controller certification. As a certified systemic coach and process adviser, she supports people through professional and personal development.',
     bio3:
-      'Beyond her professional work, Vera has international experience in Italy, Spain, South Africa, Nigeria and through extensive travel in Asia. Her hobby: forensics.',
+      'Through the Interdisciplinary Forum for Forensics (IFF) in Bremen, she deepens her interest in forensic topics — including specialist events also associated with Prof. Dr. Axel Petermann.',
     businessCoachTitle: 'Business Coaching',
     businessCoach:
-      'As a business coach, it is important to me to build a trusting and appreciative working relationship. Through active listening, analytical thinking and a solution-oriented approach, I support leaders, teams and employees in developing their skills, shaping change processes successfully and sustainably increasing their performance.',
+      'In business coaching, Vera Mountney focuses on trusting collaboration. Through active listening, analytical thinking and a solution-oriented approach, she helps leaders, teams and employees develop their skills, navigate change successfully and sustainably increase their performance.',
     studiesTitle: 'Education',
     studies: {
       linguistics: 'Applied Linguistics',
@@ -553,40 +554,52 @@ const en = {
     comingSoon: 'Coming soon',
   },
   gallery: {
-    title: 'Moments & Work',
+    title: 'Vera in Action',
     intro:
-      'A few moments from Vera’s work, learning spaces, international experience and personal journey.',
+      'Impressions from work, learning spaces, international experience and personal moments.',
     like: 'Like',
+    viewImage: 'View larger',
+    close: 'Close',
     items: {
       appreciation: {
-        title: 'Appreciation & Connection',
-        caption: 'A warm moment of appreciation, trust and personal connection.',
+        title: 'Appreciation Moment',
+        caption: 'A warm moment of appreciation and connection.',
         category: 'Personal',
       },
       bremen: {
-        title: 'Bremen Moments',
-        caption: 'Connected to people, movement and everyday life in the city.',
+        title: 'Bremen Moment',
+        caption: 'Open perspectives, movement and new impressions.',
         category: 'Life & Experience',
       },
       career: {
-        title: 'Career & Language Training',
-        caption: 'Supporting professional language, career growth and exam preparation.',
+        title: 'Career & Language',
+        caption: 'Supporting people through language, confidence and preparation.',
         category: 'Career',
       },
       classroom: {
-        title: 'Learning Spaces',
-        caption: 'Training, learning and communication in a real classroom setting.',
+        title: 'Training Room',
+        caption: 'Learning, preparation and personal development.',
         category: 'Teaching',
       },
       communication: {
-        title: 'Communication Opens Doors',
-        caption: 'Languages open doors. Communication connects people.',
+        title: 'Communication',
+        caption: 'Communication is at the heart of guidance and growth.',
         category: 'Communication',
       },
       travel: {
         title: 'Intercultural Experience',
-        caption: 'Experiences across places, cultures and people.',
+        caption: 'International experience with openness and curiosity.',
         category: 'Intercultural',
+      },
+      redPortrait: {
+        title: 'Professional Presence',
+        caption: 'Warm, confident and personal.',
+        category: 'Portrait',
+      },
+      portrait: {
+        title: 'Vera Mountney',
+        caption: 'Personal, professional and approachable.',
+        category: 'Portrait',
       },
     },
   },

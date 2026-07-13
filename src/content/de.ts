@@ -77,6 +77,7 @@ const de = {
   },
   credentials: {
     aevo: 'AEVO / IHK Bremen, Trainerqualifikation',
+    controller: 'Controller-Zertifizierung',
     systemicCoach: 'Zertifizierte systemische Coach & Prozessberaterin',
     communication: 'Langjährige Erfahrung in Kommunikation & Sprachen',
     bamf: 'Offizielle Zulassung für Deutschkurse (BAMF, A2 to C2) und berufsbezogene Sprachkurse',
@@ -186,7 +187,7 @@ const de = {
     businessCoaching: {
       title: 'Business Coaching',
       description:
-        'Als Business Coach ist es mir wichtig, eine vertrauensvolle und wertschätzende Zusammenarbeit aufzubauen. Durch aktives Zuhören, analytisches Denken und eine lösungsorientierte Arbeitsweise unterstütze ich Führungskräfte, Teams und Mitarbeitende dabei, ihre Kompetenzen weiterzuentwickeln, Veränderungsprozesse erfolgreich zu gestalten und ihre Leistungsfähigkeit nachhaltig zu steigern.',
+        'Vera Mountney begleitet Führungskräfte, Teams und Mitarbeitende mit vertrauensvoller, lösungsorientierter Zusammenarbeit — und unterstützt sie dabei, Kompetenzen weiterzuentwickeln und ihre Leistungsfähigkeit nachhaltig zu steigern.',
     },
     bookInquiry: {
       title: 'Buch- / Autoren-Anfrage',
@@ -211,18 +212,18 @@ const de = {
   },
   about: {
     title: 'Über Vera Mountney',
-    subtitle: 'Autorin, Coach, Trainerin & Beraterin',
+    subtitle: 'Autorin, Übersetzerin, Coach & Beraterin',
     intro:
-      'Vera Mountney lebt und arbeitet in Verden. Als Autorin, Coach, Trainerin und Beraterin verbindet sie fundiertes Fachwissen mit menschlicher Wärme und internationalem Blick.',
+      'Vera Mountney lebt und arbeitet in Verden. Als Autorin, Übersetzerin, systemische Coach und Beraterin verbindet sie fachliche Klarheit mit persönlicher Wärme.',
     bio1:
-      'Sie schreibt Gedichte und Texte, wurde in Anthologien veröffentlicht und ist im Who is Who Germany gelistet. Ihr Engagement für Mehrsprachigkeit, Frauen, Kinder und interkulturelle Arbeit spiegelt sich in ihrer Mitgliedschaft und Unterstützung von Organisationen wie EBN Bremen, FMKS Kiel und HEARTKIDS wider.',
+      'Ihre Arbeit umfasst Coaching, Sprache, Bewerbungsunterstützung und interkulturelle Begleitung — persönlich in Verden oder online.',
     bio2:
-      'Mit Studien in Angewandter Linguistik, Psychologie und Pädagogik begann sie als freiberufliche Dozentin für Kommunikation und Sprachen. Im Laufe der Jahre entwickelte sie sich zur systemischen Coach und Prozessberaterin.',
+      'Vera verfügt über Ausbilderqualifikation (AEVO/IHK Bremen) und Controller-Zertifizierung. Als zertifizierte systemische Coach und Prozessberaterin begleitet sie Menschen in beruflichen und persönlichen Entwicklungsprozessen.',
     bio3:
-      'Neben ihrer professionellen Arbeit hat Vera internationale Erfahrungen in Italien, Spanien, Südafrika, Nigeria und durch ausgedehnte Reisen in Asien gesammelt. Ihr Hobby: Forensik.',
+      'Über das Interdisziplinäre Forum für Forensik (IFF) in Bremen vertieft sie ihr Interesse an forensischen Themen — unter anderem durch Fachveranstaltungen, die auch von Prof. Dr. Axel Petermann begleitet werden.',
     businessCoachTitle: 'Business Coaching',
     businessCoach:
-      'Als Business Coach ist es mir wichtig, eine vertrauensvolle und wertschätzende Zusammenarbeit aufzubauen. Durch aktives Zuhören, analytisches Denken und eine lösungsorientierte Arbeitsweise unterstütze ich Führungskräfte, Teams und Mitarbeitende dabei, ihre Kompetenzen weiterzuentwickeln, Veränderungsprozesse erfolgreich zu gestalten und ihre Leistungsfähigkeit nachhaltig zu steigern.',
+      'Im Business Coaching legt Vera Mountney Wert auf vertrauensvolle Zusammenarbeit. Mit aktivem Zuhören, analytischem Denken und lösungsorientierter Arbeitsweise unterstützt sie Führungskräfte, Teams und Mitarbeitende dabei, Kompetenzen weiterzuentwickeln, Veränderungen erfolgreich zu gestalten und ihre Leistungsfähigkeit nachhaltig zu steigern.',
     studiesTitle: 'Ausbildung',
     studies: {
       linguistics: 'Angewandte Linguistik',
@@ -555,40 +556,52 @@ const de = {
     comingSoon: 'Demnächst',
   },
   gallery: {
-    title: 'Einblicke',
+    title: 'Vera in Aktion',
     intro:
-      'Einige Momente aus Veras Arbeit, Lernräumen, internationaler Erfahrung und persönlichem Weg.',
+      'Einblicke in Arbeit, Lernräume, internationale Erfahrung und persönliche Momente.',
     like: 'Gefällt mir',
+    viewImage: 'Bild vergrößern',
+    close: 'Schließen',
     items: {
       appreciation: {
-        title: 'Wertschätzung & Verbindung',
-        caption: 'Ein warmer Moment der Wertschätzung, des Vertrauens und der persönlichen Verbindung.',
+        title: 'Wertschätzung',
+        caption: 'Ein schöner Moment der Wertschätzung und Verbindung.',
         category: 'Persönlich',
       },
       bremen: {
-        title: 'Bremen-Momente',
-        caption: 'Verbunden mit Menschen, Bewegung und dem Leben in der Stadt.',
+        title: 'Bremen-Moment',
+        caption: 'Neue Perspektiven, Bewegung und frische Eindrücke.',
         category: 'Leben & Erfahrung',
       },
       career: {
-        title: 'Karriere & Sprachtraining',
-        caption: 'Unterstützung bei Berufssprache, Karriere und Prüfungsvorbereitung.',
+        title: 'Karriere & Sprache',
+        caption: 'Unterstützung durch Sprache, Sicherheit und Vorbereitung.',
         category: 'Karriere',
       },
       classroom: {
-        title: 'Lernräume',
-        caption: 'Training, Lernen und Kommunikation in einer echten Unterrichtssituation.',
+        title: 'Trainingsraum',
+        caption: 'Lernen, Vorbereitung und persönliche Entwicklung.',
         category: 'Unterricht',
       },
       communication: {
-        title: 'Kommunikation öffnet Türen',
-        caption: 'Sprachen öffnen Türen. Kommunikation verbindet Menschen.',
+        title: 'Kommunikation',
+        caption: 'Kommunikation steht im Mittelpunkt von Beratung und Entwicklung.',
         category: 'Kommunikation',
       },
       travel: {
         title: 'Interkulturelle Erfahrung',
-        caption: 'Erfahrungen mit Orten, Kulturen und Menschen.',
+        caption: 'Internationale Erfahrung mit Offenheit und Neugier.',
         category: 'Interkulturell',
+      },
+      redPortrait: {
+        title: 'Professionelle Präsenz',
+        caption: 'Warm, sicher und persönlich.',
+        category: 'Portrait',
+      },
+      portrait: {
+        title: 'Vera Mountney',
+        caption: 'Persönlich, professionell und nahbar.',
+        category: 'Portrait',
       },
     },
   },

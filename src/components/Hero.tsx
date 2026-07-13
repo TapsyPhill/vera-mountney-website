@@ -31,7 +31,7 @@ export function Hero() {
     <section className="relative overflow-hidden hero-gradient">
       <div className="container-narrow section-padding grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
         <div ref={contentRef} className="order-2 lg:order-1">
-          <p className="hero-badge mb-4 inline-block rounded-full border border-accent-400/40 bg-accent-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent-glow">
+          <p className="hero-badge mb-4 inline-block rounded-full border border-accent-400/40 bg-accent-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent-glow light:border-brand-600/25 light:bg-brand-100 light:text-brand-800">
             {t('hero.badge')}
           </p>
           <h1 className="hero-title font-display text-4xl font-semibold leading-tight sm:text-5xl lg:text-7xl light:text-brand-950">

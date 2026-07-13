@@ -14,8 +14,8 @@ export function ServiceCard({ service }: ServiceCardProps) {
   return (
     <article className="glass-card card-shine group p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/30 hover:shadow-xl hover:shadow-brand-900/20">
       <ServiceIconDisplay icon={service.icon} />
-      <h3 className="mt-4 font-display text-xl font-semibold">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-brand-200 light:text-brand-700">
+      <h3 className="mt-4 font-display text-xl font-semibold light:text-[#24152F]">{title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-brand-200 light:text-[#5F4A6D]">
         {description}
       </p>
     </article>

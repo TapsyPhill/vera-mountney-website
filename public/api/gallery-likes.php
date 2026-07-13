@@ -20,6 +20,8 @@ $defaults = [
     'classroom' => 136,
     'communication' => 201,
     'travel' => 189,
+    'redPortrait' => 276,
+    'portrait' => 142,
 ];
 
 function readLikes(string $path, array $defaults): array

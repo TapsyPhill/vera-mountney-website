@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { galleryImages } from '../data/gallery'
 import { SectionHeading } from './SectionHeading'
 
-const PREVIEW_IDS = ['appreciation', 'classroom', 'travel'] as const
+const PREVIEW_IDS = ['redPortrait', 'classroom', 'travel'] as const
 
 export function GalleryPreview() {
   const { t } = useTranslation()

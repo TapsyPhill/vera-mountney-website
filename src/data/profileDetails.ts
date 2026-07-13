@@ -18,6 +18,7 @@ export const languageLevels: Record<(typeof languages)[number], 'native' | 'flue
 
 export const credentials = [
   'aevo',
+  'controller',
   'systemicCoach',
   'communication',
   'bamf',

@@ -1,20 +1,25 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { PROFILE_IMAGE } from '../utils/constants'
+import { HERO_PORTRAITS } from '../utils/constants'
 import { prefersReducedMotion } from '../utils/animation'
 
 gsap.registerPlugin(useGSAP)
 
+const ROTATION_MS = 5000
+
 export function HeroVisual() {
   const { t } = useTranslation()
   const containerRef = useRef<HTMLDivElement>(null)
-  const imageRef = useRef<HTMLDivElement>(null)
+  const frameRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const reducedMotion = prefersReducedMotion()
 
   useGSAP(
     () => {
-      if (prefersReducedMotion()) return
+      if (reducedMotion) return
 
       const orbs = gsap.utils.toArray<HTMLElement>('.hero-orb')
       orbs.forEach((orb, i) => {
@@ -29,7 +34,7 @@ export function HeroVisual() {
         })
       })
 
-      gsap.from(imageRef.current, {
+      gsap.from(frameRef.current, {
         opacity: 0,
         scale: 0.92,
         duration: 1.2,
@@ -49,6 +54,16 @@ export function HeroVisual() {
     { scope: containerRef },
   )
 
+  useEffect(() => {
+    if (reducedMotion || paused) return
+
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % HERO_PORTRAITS.length)
+    }, ROTATION_MS)
+
+    return () => window.clearInterval(timer)
+  }, [paused, reducedMotion])
+
   return (
     <div ref={containerRef} className="relative mx-auto max-w-md lg:max-w-none">
       <div
@@ -67,31 +82,53 @@ export function HeroVisual() {
       <div className="hero-glow absolute -inset-4 rounded-3xl bg-gradient-to-br from-brand-600/40 via-brand-500/20 to-accent-400/30 blur-2xl" />
 
       <div
-        ref={imageRef}
+        ref={frameRef}
         className="relative overflow-hidden rounded-3xl border border-white/15 shadow-2xl"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
       >
-        <img
-          src={PROFILE_IMAGE}
-          alt="Vera Mountney"
-          className="aspect-[3/2] w-full object-cover"
-          width={1536}
-          height={1024}
-          onError={(e) => {
-            e.currentTarget.src =
-              'data:image/svg+xml,' +
-              encodeURIComponent(
-                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400"><rect fill="#4c1d95" width="600" height="400"/><text x="300" y="210" text-anchor="middle" fill="#e8c99b" font-family="Georgia,serif" font-size="28">Vera Mountney</text></svg>',
-              )
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-950/40 via-transparent to-transparent" />
+        <div className="relative aspect-[4/5] w-full sm:aspect-[3/4] lg:aspect-[4/5]">
+          {HERO_PORTRAITS.map((src, index) => (
+            <img
+              key={src}
+              src={src}
+              alt="Vera Mountney"
+              className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1400ms] ease-in-out ${
+                index === activeIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02]'
+              }`}
+              style={{ transitionProperty: 'opacity, transform' }}
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
+          ))}
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-950/45 via-transparent to-transparent" />
+
+        {!reducedMotion && (
+          <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
+            {HERO_PORTRAITS.map((src, index) => (
+              <button
+                key={src}
+                type="button"
+                aria-label={`Portrait ${index + 1}`}
+                onClick={() => setActiveIndex(index)}
+                className={`h-2 w-2 rounded-full transition ${
+                  index === activeIndex
+                    ? 'bg-white shadow-sm'
+                    : 'bg-white/40 hover:bg-white/70'
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
-      <div className="absolute -bottom-3 -right-3 hidden rounded-2xl border border-accent-400/30 bg-brand-900/90 px-4 py-3 shadow-xl backdrop-blur-md sm:block light:bg-white/90">
-        <p className="font-display text-sm font-semibold text-accent-glow">
+      <div className="absolute -bottom-3 -right-3 hidden rounded-2xl border border-accent-400/30 bg-brand-900/90 px-4 py-3 shadow-xl backdrop-blur-md sm:block light:border-brand-300/50 light:bg-white/95">
+        <p className="font-display text-sm font-semibold text-accent-glow light:text-brand-800">
           {t('hero.badge')}
         </p>
-        <p className="text-xs text-brand-200 light:text-brand-700">Verden, Germany</p>
+        <p className="text-xs text-brand-200 light:text-[#5F4A6D]">Verden, Germany</p>
       </div>
     </div>
   )

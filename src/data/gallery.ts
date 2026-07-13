@@ -29,6 +29,16 @@ export const galleryImages = [
     src: '/assets/images/profile/vera-travel-intercultural-moment-01.jpg',
     defaultLikes: 189,
   },
+  {
+    id: 'redPortrait',
+    src: '/assets/images/profile/vera-red-portrait-main-01.jpg',
+    defaultLikes: 276,
+  },
+  {
+    id: 'portrait',
+    src: '/assets/images/profile/vera-mountney-main.jpg',
+    defaultLikes: 142,
+  },
 ] as const
 
 export type GalleryImageId = (typeof galleryImages)[number]['id']

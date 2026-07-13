@@ -42,6 +42,11 @@ export function GallerySection() {
   const [likedIds, setLikedIds] = useState<Set<string>>(new Set())
   const [loading, setLoading] = useState(true)
   const [pendingId, setPendingId] = useState<string | null>(null)
+  const [lightboxId, setLightboxId] = useState<GalleryImageId | null>(null)
+
+  const lightboxImage = lightboxId
+    ? galleryImages.find((image) => image.id === lightboxId)
+    : null
 
   useEffect(() => {
     const stored = new Set<string>()
@@ -103,7 +108,12 @@ export function GallerySection() {
                 key={image.id}
                 className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-lg transition duration-300 hover:border-brand-400/30 light:border-brand-300/50 light:bg-white light:shadow-brand-900/5"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setLightboxId(image.id)}
+                  className="relative block aspect-[4/3] w-full overflow-hidden text-left"
+                  aria-label={t('gallery.viewImage')}
+                >
                   <img
                     src={image.src}
                     alt={t(`gallery.items.${image.id}.title`)}
@@ -115,7 +125,7 @@ export function GallerySection() {
                       {t(`gallery.items.${image.id}.category`)}
                     </p>
                   </div>
-                </div>
+                </button>
 
                 <div className="space-y-2 p-4 sm:p-5">
                   <h3 className="font-display text-lg font-semibold leading-snug light:text-[#24152F]">
@@ -142,6 +152,42 @@ export function GallerySection() {
           })}
         </div>
       </div>
+
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label={t(`gallery.items.${lightboxImage.id}.title`)}
+          onClick={() => setLightboxId(null)}
+        >
+          <div
+            className="relative max-h-[90vh] w-full max-w-3xl overflow-hidden rounded-2xl border border-white/15 bg-brand-950 shadow-2xl light:border-brand-300/40 light:bg-white"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setLightboxId(null)}
+              className="absolute right-3 top-3 z-10 rounded-full border border-white/20 bg-black/50 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm light:border-brand-300/50 light:bg-white/90 light:text-[#24152F]"
+            >
+              {t('gallery.close')}
+            </button>
+            <img
+              src={lightboxImage.src}
+              alt={t(`gallery.items.${lightboxImage.id}.title`)}
+              className="max-h-[70vh] w-full object-contain bg-black/20"
+            />
+            <div className="space-y-1 p-4 sm:p-5">
+              <h3 className="font-display text-lg font-semibold light:text-[#24152F]">
+                {t(`gallery.items.${lightboxImage.id}.title`)}
+              </h3>
+              <p className="text-sm text-brand-200 light:text-[#5F4A6D]">
+                {t(`gallery.items.${lightboxImage.id}.caption`)}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
