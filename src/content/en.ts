@@ -212,18 +212,20 @@ const en = {
   },
   about: {
     title: 'About Vera Mountney',
-    subtitle: 'Author, Translator, Coach & Adviser',
+    subtitle: 'Translator, systemic coach & adviser',
     intro:
-      'Vera Mountney lives and works in Verden. As an author, translator, systemic coach and adviser, she combines professional clarity with a warm, personal approach.',
+      'Vera Mountney lives and works in the district of Verden. She is a translator, systemic coach, and holds qualifications as a trainer and controller.',
     bio1:
-      'Her work spans coaching, language, application support and intercultural guidance — in person in Verden or online.',
-    bio2:
-      'Vera holds trainer qualification (AEVO/IHK Bremen) and controller certification. As a certified systemic coach and process adviser, she supports people through professional and personal development.',
-    bio3:
-      'Through the Interdisciplinary Forum for Forensics (IFF) in Bremen, she deepens her interest in forensic topics — including specialist events also associated with Prof. Dr. Axel Petermann.',
+      'She combines professional expertise with warmth, clear communication, and international experience. Her work supports people who are looking for personal, professional, or intercultural guidance.',
+    bio2BeforeAxel:
+      'She also attended IFF conferences in Bremen in the past, including in the professional context of',
+    axelPetermannLabel: 'Axel Petermann',
+    bio2Between: '. She currently continues her professional development at the',
+    schulzVonThunLabel: 'Schulz von Thun Institute',
+    bio2After: '.',
     businessCoachTitle: 'Business Coaching',
     businessCoach:
-      'In business coaching, Vera Mountney focuses on trusting collaboration. Through active listening, analytical thinking and a solution-oriented approach, she helps leaders, teams and employees develop their skills, navigate change successfully and sustainably increase their performance.',
+      'As a business coach, Vera values trustful and respectful collaboration. Through active listening, analytical thinking, and a solution-oriented approach, she supports leaders, teams and employees in developing their skills, shaping change processes successfully, and sustainably improving their performance.',
     studiesTitle: 'Education',
     studies: {
       linguistics: 'Applied Linguistics',
@@ -499,7 +501,9 @@ const en = {
       'Hello! I assist Vera Mountney here on the website. Ask me anything about her work, or tell me if you would like to send an inquiry.',
     responses: {
       whoIsVera:
-        'Vera Mountney is an author, coach, trainer and adviser based in Verden, Germany. With an international background, she supports people through coaching, applications, integration and intercultural communication — personally or via Zoom.',
+        'Vera Mountney lives and works in the district of Verden. She is a translator, systemic coach, and holds qualifications as a trainer and controller. She supports people through coaching, applications, integration and intercultural communication.',
+      qualifications:
+        'Vera Mountney lives and works in the district of Verden. She is a translator, systemic coach, and holds qualifications as a trainer and controller. She attended IFF conferences in Bremen in the past, including in the professional context of Axel Petermann — these are past references, not current activity. She currently continues her professional development at the Schulz von Thun Institute.',
       services:
         'Vera offers consultation, coaching, job and career coaching, application help, proofreading, integration guidance, intercultural training, workshops, German test preparation and publishing guidance. Tell me what you are looking for and I can narrow it down.',
       coaching:

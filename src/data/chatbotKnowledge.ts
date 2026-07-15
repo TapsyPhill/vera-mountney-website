@@ -5,6 +5,26 @@ export interface ChatbotEntry {
 
 export const chatbotKnowledge: ChatbotEntry[] = [
   {
+    id: 'qualifications',
+    keywords: [
+      'qualification',
+      'qualifications',
+      'ausbildung',
+      'training',
+      'weiterbildung',
+      'iff',
+      'schulz',
+      'controller',
+      'aevo',
+      'ausbilder',
+      'background',
+      'credentials',
+      'professional development',
+      'fortbildung',
+      'werdegang',
+    ],
+  },
+  {
     id: 'whoIsVera',
     keywords: [
       'who is vera',

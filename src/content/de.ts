@@ -212,18 +212,20 @@ const de = {
   },
   about: {
     title: 'Über Vera Mountney',
-    subtitle: 'Autorin, Übersetzerin, Coach & Beraterin',
+    subtitle: 'Übersetzerin, systemischer Coach & Beraterin',
     intro:
-      'Vera Mountney lebt und arbeitet in Verden. Als Autorin, Übersetzerin, systemische Coach und Beraterin verbindet sie fachliche Klarheit mit persönlicher Wärme.',
+      'Vera Mountney lebt und arbeitet im Landkreis Verden. Sie ist Übersetzerin, systemischer Coach und verfügt über Qualifikationen als Ausbilderin sowie Controllerin.',
     bio1:
-      'Ihre Arbeit umfasst Coaching, Sprache, Bewerbungsunterstützung und interkulturelle Begleitung — persönlich in Verden oder online.',
-    bio2:
-      'Vera verfügt über Ausbilderqualifikation (AEVO/IHK Bremen) und Controller-Zertifizierung. Als zertifizierte systemische Coach und Prozessberaterin begleitet sie Menschen in beruflichen und persönlichen Entwicklungsprozessen.',
-    bio3:
-      'Über das Interdisziplinäre Forum für Forensik (IFF) in Bremen vertieft sie ihr Interesse an forensischen Themen — unter anderem durch Fachveranstaltungen, die auch von Prof. Dr. Axel Petermann begleitet werden.',
+      'Sie verbindet fundiertes Fachwissen mit menschlicher Wärme, klarer Kommunikation und internationaler Erfahrung. Ihre Arbeit richtet sich an Menschen, die persönliche, berufliche oder interkulturelle Unterstützung suchen.',
+    bio2BeforeAxel:
+      'Ergänzend nahm sie an IFF-Tagungen in Bremen teil, unter anderem im fachlichen Umfeld von',
+    axelPetermannLabel: 'Axel Petermann',
+    bio2Between: '. Ihre Weiterbildung setzt sie aktuell am',
+    schulzVonThunLabel: 'Schulz von Thun Institut',
+    bio2After: ' fort.',
     businessCoachTitle: 'Business Coaching',
     businessCoach:
-      'Im Business Coaching legt Vera Mountney Wert auf vertrauensvolle Zusammenarbeit. Mit aktivem Zuhören, analytischem Denken und lösungsorientierter Arbeitsweise unterstützt sie Führungskräfte, Teams und Mitarbeitende dabei, Kompetenzen weiterzuentwickeln, Veränderungen erfolgreich zu gestalten und ihre Leistungsfähigkeit nachhaltig zu steigern.',
+      'Als Business Coach ist ihr eine vertrauensvolle und wertschätzende Zusammenarbeit wichtig. Durch aktives Zuhören, analytisches Denken und eine lösungsorientierte Arbeitsweise unterstützt sie Führungskräfte, Teams und Mitarbeitende dabei, ihre Kompetenzen weiterzuentwickeln, Veränderungsprozesse erfolgreich zu gestalten und ihre Leistungsfähigkeit nachhaltig zu steigern.',
     studiesTitle: 'Ausbildung',
     studies: {
       linguistics: 'Angewandte Linguistik',
@@ -501,7 +503,9 @@ const de = {
       'Hallo! Ich unterstütze Sie hier auf der Website im Namen von Vera Mountney. Fragen Sie gern zu ihren Leistungen — oder sagen Sie mir, wenn Sie eine Anfrage senden möchten.',
     responses: {
       whoIsVera:
-        'Vera Mountney ist Autorin, Coach, Trainerin und Beraterin in Verden. Mit internationalem Hintergrund begleitet sie Menschen bei Coaching, Bewerbung, Integration und interkultureller Kommunikation — persönlich oder via Zoom.',
+        'Vera Mountney lebt und arbeitet im Landkreis Verden. Sie ist Übersetzerin, systemischer Coach und verfügt über Qualifikationen als Ausbilderin sowie Controllerin. Sie begleitet Menschen bei Coaching, Bewerbung, Integration und interkultureller Kommunikation.',
+      qualifications:
+        'Vera Mountney lebt und arbeitet im Landkreis Verden. Sie ist Übersetzerin, systemischer Coach und verfügt über Qualifikationen als Ausbilderin sowie Controllerin. Sie nahm in der Vergangenheit an IFF-Tagungen in Bremen teil, unter anderem im fachlichen Umfeld von Axel Petermann — das sind vergangene Referenzen, keine aktuelle Tätigkeit. Ihre Weiterbildung setzt sie aktuell am Schulz von Thun Institut fort.',
       services:
         'Vera bietet Beratung, Coaching, Job- und Karriere-Coaching, Bewerbungshilfe, Lektorat, Integrationsbegleitung, interkulturelles Training, Workshops, Deutschtest-Vorbereitung und Verlagsberatung. Sagen Sie mir, wobei Sie Unterstützung suchen.',
       coaching:

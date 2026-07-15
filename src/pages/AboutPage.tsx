@@ -38,10 +38,25 @@ export function AboutPage() {
                 {t('about.bio1')}
               </p>
               <p className="leading-relaxed text-brand-200 light:text-[#5F4A6D]">
-                {t('about.bio2')}
-              </p>
-              <p className="leading-relaxed text-brand-200 light:text-[#5F4A6D]">
-                {t('about.bio3')}
+                {t('about.bio2BeforeAxel')}{' '}
+                <a
+                  href={profile.axelPetermannUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent-glow underline-offset-2 hover:underline light:text-brand-700"
+                >
+                  {t('about.axelPetermannLabel')}
+                </a>
+                {t('about.bio2Between')}{' '}
+                <a
+                  href={profile.schulzVonThunUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent-glow underline-offset-2 hover:underline light:text-brand-700"
+                >
+                  {t('about.schulzVonThunLabel')}
+                </a>
+                {t('about.bio2After')}
               </p>
             </div>
           </div>
