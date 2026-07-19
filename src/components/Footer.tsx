@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { profile } from '../data/profile'
-import { NAV_LINKS } from '../utils/constants'
+import { DESIGN_CREDIT_URL, NAV_LINKS } from '../utils/constants'
 
 export function Footer() {
   const { t } = useTranslation()
@@ -66,8 +66,28 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-white/10 pt-6 text-center text-xs text-gray-400 light:border-brand-200/50 light:text-brand-600 sm:mt-10">
-          © {year} Vera Mountney. {t('footer.rights')}
+        <div className="mt-8 border-t border-white/10 pt-6 sm:mt-10 light:border-brand-200/50">
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <p className="text-center text-xs text-gray-400 light:text-brand-600 sm:text-left">
+              © {year} Vera Mountney. {t('footer.rights')}
+            </p>
+
+            <a
+              href={DESIGN_CREDIT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('footer.designedByAria')}
+              className="designer-signature group ml-auto shrink-0"
+            >
+              <span className="designer-signature__line" aria-hidden="true" />
+              <span className="designer-signature__text">
+                {t('footer.designedByPrefix')}{' '}
+                <span className="designer-signature__brand">
+                  Kingstone <span className="designer-signature__grace">Grace</span>
+                </span>
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>

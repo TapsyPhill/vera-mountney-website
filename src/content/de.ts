@@ -558,6 +558,8 @@ const de = {
     contact: 'Kontakt',
     contactForm: 'Nachricht senden',
     comingSoon: 'Demnächst',
+    designedByPrefix: 'Gestaltet von',
+    designedByAria: 'Website gestaltet von Kingstone Grace — öffnet in neuem Tab',
   },
   gallery: {
     title: 'Vera in Aktion',

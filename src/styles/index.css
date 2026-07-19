@@ -154,6 +154,50 @@ h1, h2, h3, h4 {
   text-shadow: none;
 }
 
+.designer-signature {
+  @apply inline-flex items-center gap-2.5 rounded-full border border-white/5 bg-white/[0.02] px-3.5 py-1.5 text-[11px] text-brand-300/75 transition-all duration-300 hover:border-accent-400/25 hover:bg-white/[0.05] hover:text-brand-200/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400/60;
+}
+
+.light .designer-signature {
+  @apply border-brand-300/35 bg-white/70 text-brand-600/80 shadow-sm shadow-brand-950/5 hover:border-brand-500/35 hover:bg-white hover:text-brand-700;
+}
+
+.designer-signature__line {
+  @apply h-px w-5 shrink-0 bg-gradient-to-r from-transparent via-accent-400/35 to-accent-400/70 transition-all duration-300;
+}
+
+.light .designer-signature__line {
+  @apply via-brand-500/30 to-brand-600/55;
+}
+
+.group:hover .designer-signature__line {
+  @apply via-accent-400/55 to-accent-300/90;
+}
+
+.light .group:hover .designer-signature__line {
+  @apply via-brand-500/45 to-brand-600/80;
+}
+
+.designer-signature__text {
+  @apply tracking-[0.12em] uppercase;
+}
+
+.designer-signature__brand {
+  @apply font-display font-semibold normal-case tracking-normal text-white/90;
+}
+
+.light .designer-signature__brand {
+  @apply text-brand-900;
+}
+
+.designer-signature__grace {
+  @apply bg-gradient-to-r from-accent-300 via-accent-400 to-accent-500 bg-clip-text text-transparent;
+}
+
+.light .designer-signature__grace {
+  @apply from-brand-600 via-brand-700 to-brand-800;
+}
+
 .hero-gradient {
   background:
     radial-gradient(ellipse 80% 60% at 20% 20%, rgba(124, 58, 237, 0.35), transparent),

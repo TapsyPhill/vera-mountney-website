@@ -1,4 +1,5 @@
 export const SITE_URL = 'https://vera-mountney.de'
+export const DESIGN_CREDIT_URL = 'https://tech.kingstonegrace.com/'
 
 export const NAV_LINKS = [
   { key: 'home', path: '/' },
