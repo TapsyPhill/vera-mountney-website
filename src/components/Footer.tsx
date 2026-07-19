@@ -8,7 +8,7 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-white/10 bg-surface-dark-elevated pb-[env(safe-area-inset-bottom,0px)] light:border-brand-200/60 light:bg-brand-100/80">
+    <footer className="border-t border-white/10 bg-surface-dark-elevated pb-[calc(5.75rem+env(safe-area-inset-bottom,0px))] light:border-brand-200/60 light:bg-brand-100/80 sm:pb-[calc(6.25rem+env(safe-area-inset-bottom,0px))]">
       <div className="container-narrow section-padding !py-10 sm:!py-12">
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 md:gap-10">
           <div>
@@ -67,7 +67,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t border-white/10 pt-6 sm:mt-10 light:border-brand-200/50">
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pr-44 lg:pr-48">
             <p className="text-center text-xs text-gray-400 light:text-brand-600 sm:text-left">
               © {year} Vera Mountney. {t('footer.rights')}
             </p>
@@ -77,7 +77,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t('footer.designedByAria')}
-              className="designer-signature group ml-auto shrink-0"
+              className="designer-signature group max-w-full shrink-0"
             >
               <span className="designer-signature__line" aria-hidden="true" />
               <span className="designer-signature__text">
