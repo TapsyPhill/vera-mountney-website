@@ -67,7 +67,7 @@ function actionById(id: string): AssistantAction | null {
         id,
         type: 'phone',
         labelKey: 'assistant.actions.call',
-        phone: profile.phone.replace(/\s/g, ''),
+        phone: profile.phoneTel,
       }
     case 'whatsapp':
       return {

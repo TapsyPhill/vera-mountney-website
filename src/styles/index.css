@@ -198,6 +198,14 @@ h1, h2, h3, h4 {
   @apply from-brand-600 via-brand-700 to-brand-800;
 }
 
+.footer-legal-link {
+  @apply transition-colors hover:text-brand-300/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500/50;
+}
+
+.light .footer-legal-link {
+  @apply hover:text-brand-800;
+}
+
 .hero-gradient {
   background:
     radial-gradient(ellipse 80% 60% at 20% 20%, rgba(124, 58, 237, 0.35), transparent),

@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
-import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+import { Trans, useTranslation } from 'react-i18next'
 import { DateTimePicker } from './DateTimePicker'
 import { inquiryServiceIds, getInquiryServiceLabel } from '../data/services'
 import type { InquiryLanguage, PreferredContactMethod } from '../types/inquiry'
@@ -231,7 +232,19 @@ export function ContactForm() {
         </p>
       )}
 
-      <p className="text-xs text-brand-300 light:text-brand-700">{t('contact.form.privacy')}</p>
+      <p className="text-xs text-brand-300 light:text-brand-700">
+        <Trans
+          i18nKey="contact.form.privacy"
+          components={{
+            privacyLink: (
+              <Link
+                to="/datenschutz"
+                className="underline underline-offset-2 transition-colors hover:text-accent-400 light:hover:text-brand-800"
+              />
+            ),
+          }}
+        />
+      </p>
 
       <button type="submit" disabled={status === 'loading'} className="btn-primary w-full min-h-[48px] sm:w-auto disabled:opacity-60">
         {status === 'loading' ? t('contact.form.sending') : t('contact.form.submit')}

@@ -23,7 +23,15 @@ const en = {
     contact: {
       title: 'Contact, Vera Mountney',
       description:
-        'Contact Vera Mountney by email, WhatsApp or phone. Appointment requests welcome.',
+        'Contact Vera Mountney by email, phone, or inquiry form. Appointment requests welcome.',
+    },
+    impressum: {
+      title: 'Legal Notice, Vera Mountney',
+      description: 'Legal notice and provider information pursuant to Section 5 DDG.',
+    },
+    privacy: {
+      title: 'Privacy Policy, Vera Mountney',
+      description: 'Privacy information for the Vera Mountney website.',
     },
     gallery: {
       title: 'Moments & Work, Vera Mountney',
@@ -354,7 +362,7 @@ const en = {
         'Your request could not be sent right now. Please try again in a moment.',
       error: 'Please fill in all required fields.',
       privacy:
-        'By submitting, you agree that your details will be used to process your request.',
+        'By submitting, you agree that your details will be used to process your request. Further information is available in the <privacyLink>Privacy Policy</privacyLink>.',
     },
     writeEmail: 'Write email',
     callNow: 'Call now',
@@ -386,11 +394,11 @@ const en = {
       },
       appointment: {
         q: 'How can I request an appointment?',
-        a: 'Via the contact form, the Vera Assistant chat, or by phone at 0178 8547697. Please briefly describe your request.',
+        a: 'Via the contact form, the Vera Assistant chat, or by phone at +49 173 9595752. Please briefly describe your request.',
       },
       contact: {
         q: 'How can I contact Vera?',
-        a: 'Use the contact form on this website, the Vera Assistant chat, phone (0178 8547697), or WhatsApp.',
+        a: 'Use the contact form on this website, the Vera Assistant chat, email at sprachen-stuebchen@gmx.de, phone (+49 173 9595752), or WhatsApp.',
       },
       book: {
         q: 'Where can I buy the book?',
@@ -531,7 +539,7 @@ const en = {
       appointment:
         'You can request an appointment through the inquiry form or here in chat. Share your preferred time and a brief description of your request, and Vera will get back to you.',
       contact:
-        'You can reach Vera through this chat, the inquiry form on the contact page, or by phone at 0178 8547697.',
+        'You can reach Vera at sprachen-stuebchen@gmx.de, through this chat, the inquiry form on the contact page, or by phone at +49 173 9595752.',
       book: 'Vera\'s book is available in English and German through Verlag Kern. Visit the book page on this site for details and purchase links.',
       linkedin:
         'You can read more about Vera\'s professional background on LinkedIn — her experience as coach, language adviser and author.',
@@ -556,8 +564,110 @@ const en = {
     contact: 'Contact',
     contactForm: 'Send a message',
     comingSoon: 'Coming soon',
+    impressum: 'Legal Notice',
+    privacy: 'Privacy Policy',
+    legalNavAria: 'Legal information',
     designedByPrefix: 'Designed by',
     designedByAria: 'Website designed by Kingstone Grace — opens in a new tab',
+  },
+  legal: {
+    backToContact: 'Back to contact page',
+    impressum: {
+      meta: {
+        title: 'Legal Notice, Vera Mountney',
+        description: 'Legal notice and provider information pursuant to Section 5 DDG.',
+      },
+      heading: 'Legal Notice',
+      subtitle: '',
+      ddgHeading: 'Information pursuant to Section 5 DDG',
+      providerLabel: 'Provider',
+      contactLabel: 'Contact',
+      emailLabel: 'Email',
+      phoneLabel: 'Phone',
+      sections: [
+        {
+          title: 'Liability for content',
+          paragraphs: [
+            'As a service provider, I am responsible for my own content on these pages in accordance with general laws. There is no obligation to monitor transmitted or stored third-party information.',
+          ],
+        },
+        {
+          title: 'Liability for links',
+          paragraphs: [
+            'This website contains links to external third-party websites. I cannot accept liability for their content. The respective provider is always responsible for the content of linked pages.',
+          ],
+        },
+        {
+          title: 'Copyright',
+          paragraphs: [
+            'The content and works published on this website are subject to German copyright law. Reproduction, editing and distribution require the prior written consent of Vera Mountney unless otherwise permitted by law.',
+          ],
+        },
+      ],
+    },
+    privacy: {
+      meta: {
+        title: 'Privacy Policy, Vera Mountney',
+        description: 'Privacy information for the Vera Mountney website.',
+      },
+      heading: 'Privacy Policy',
+      subtitle: 'Information on the processing of personal data',
+      responsibleHeading: 'Controller',
+      updated: 'Last updated: July 2026',
+      sections: [
+        {
+          title: 'General information',
+          paragraphs: [
+            'Protecting your personal data is important to me. Personal data means any information relating to an identified or identifiable person.',
+            'This privacy policy explains which data is processed on this website and for what purpose.',
+          ],
+        },
+        {
+          title: 'Contact form and inquiries',
+          paragraphs: [
+            'When you use the contact form, we process the details you provide — for example your name, email address, phone number, requested service and message — solely to handle your inquiry.',
+            'Processing is based on Art. 6(1)(b) GDPR where your inquiry relates to pre-contractual steps, and on Art. 6(1)(f) GDPR on the basis of my legitimate interest in responding to inquiries.',
+          ],
+        },
+        {
+          title: 'Email communication',
+          paragraphs: [
+            'If you contact me by email, your details will be stored to handle the inquiry. Processing is based on Art. 6(1)(b) and (f) GDPR.',
+          ],
+        },
+        {
+          title: 'Vera Assistant',
+          paragraphs: [
+            'If you use the Vera Assistant on this website, you can ask questions or send an inquiry. The information you enter is processed like a contact request in order to respond to or forward your request.',
+          ],
+        },
+        {
+          title: 'Technically necessary local storage',
+          paragraphs: [
+            'This website stores certain settings locally in your browser, for example your language choice, colour theme or gallery likes you have already set. This storage supports usability and is based on Art. 6(1)(f) GDPR.',
+          ],
+        },
+        {
+          title: 'Gallery likes',
+          paragraphs: [
+            'In the gallery, you can mark images with “Like”. These preferences are stored locally in your browser and may also be counted anonymously to display the number of likes.',
+          ],
+        },
+        {
+          title: 'External links',
+          paragraphs: [
+            'This website contains links to external pages, for example LinkedIn or book purchase links. The privacy policies of the respective providers apply to data processing on those external sites.',
+          ],
+        },
+        {
+          title: 'Your rights',
+          paragraphs: [
+            'You have the right to access, rectification, erasure, restriction of processing, objection to processing and data portability, where the legal requirements are met.',
+            'You also have the right to lodge a complaint with a data protection supervisory authority if you believe that the processing of your personal data is unlawful.',
+          ],
+        },
+      ],
+    },
   },
   gallery: {
     title: 'Vera in Action',

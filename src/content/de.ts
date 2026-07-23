@@ -23,7 +23,15 @@ const de = {
     contact: {
       title: 'Kontakt, Vera Mountney',
       description:
-        'Kontaktieren Sie Vera Mountney per E-Mail, WhatsApp oder Telefon. Terminanfragen willkommen.',
+        'Kontaktieren Sie Vera Mountney per E-Mail, Telefon oder Anfrageformular. Terminanfragen willkommen.',
+    },
+    impressum: {
+      title: 'Impressum, Vera Mountney',
+      description: 'Impressum und Anbieterkennzeichnung gemäß § 5 DDG.',
+    },
+    privacy: {
+      title: 'Datenschutzerklärung, Vera Mountney',
+      description: 'Informationen zum Datenschutz auf der Website von Vera Mountney.',
     },
     gallery: {
       title: 'Einblicke, Vera Mountney',
@@ -355,7 +363,7 @@ const de = {
         'Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es gleich erneut.',
       error: 'Bitte füllen Sie alle Pflichtfelder aus.',
       privacy:
-        'Mit dem Absenden erklären Sie sich einverstanden, dass Ihre Angaben zur Bearbeitung Ihrer Anfrage verwendet werden.',
+        'Mit dem Absenden erklären Sie sich einverstanden, dass Ihre Angaben zur Bearbeitung Ihrer Anfrage verwendet werden. Weitere Informationen finden Sie in der <privacyLink>Datenschutzerklärung</privacyLink>.',
     },
     writeEmail: 'E-Mail schreiben',
     callNow: 'Jetzt anrufen',
@@ -387,11 +395,11 @@ const de = {
       },
       appointment: {
         q: 'Wie kann ich einen Termin anfragen?',
-        a: 'Über das Kontaktformular, den Vera Assistenten im Chat oder telefonisch unter 0178 8547697. Bitte beschreiben Sie Ihr Anliegen kurz.',
+        a: 'Über das Kontaktformular, den Vera Assistenten im Chat oder telefonisch unter +49 173 9595752. Bitte beschreiben Sie Ihr Anliegen kurz.',
       },
       contact: {
         q: 'Wie kann ich Vera kontaktieren?',
-        a: 'Über das Kontaktformular, den Vera Assistenten, Telefon (0178 8547697) oder WhatsApp.',
+        a: 'Über das Kontaktformular, den Vera Assistenten, per E-Mail an sprachen-stuebchen@gmx.de, telefonisch unter +49 173 9595752 oder WhatsApp.',
       },
       book: {
         q: 'Wo kann ich das Buch kaufen?',
@@ -533,7 +541,7 @@ const de = {
       appointment:
         'Einen Termin können Sie über das Anfrageformular oder hier im Chat anfragen. Nennen Sie gern Wunschzeit und Anliegen, Vera meldet sich bei Ihnen.',
       contact:
-        'Sie erreichen Vera über diesen Chat, das Anfrageformular oder telefonisch unter 0178 8547697.',
+        'Sie erreichen Vera per E-Mail unter sprachen-stuebchen@gmx.de, über diesen Chat, das Anfrageformular oder telefonisch unter +49 173 9595752.',
       book: 'Veras Buch gibt es auf Deutsch und Englisch im Verlag Kern. Auf der Buchseite finden Sie Details und Kauflinks.',
       linkedin:
         'Mehr über Veras beruflichen Werdegang finden Sie auf LinkedIn — als Coach, Sprachberaterin und Autorin.',
@@ -558,8 +566,110 @@ const de = {
     contact: 'Kontakt',
     contactForm: 'Nachricht senden',
     comingSoon: 'Demnächst',
+    impressum: 'Impressum',
+    privacy: 'Datenschutz',
+    legalNavAria: 'Rechtliche Informationen',
     designedByPrefix: 'Gestaltet von',
     designedByAria: 'Website gestaltet von Kingstone Grace — öffnet in neuem Tab',
+  },
+  legal: {
+    backToContact: 'Zur Kontaktseite',
+    impressum: {
+      meta: {
+        title: 'Impressum, Vera Mountney',
+        description: 'Impressum und Anbieterkennzeichnung gemäß § 5 DDG.',
+      },
+      heading: 'Impressum',
+      subtitle: '',
+      ddgHeading: 'Angaben gemäß § 5 DDG',
+      providerLabel: 'Anbieter',
+      contactLabel: 'Kontakt',
+      emailLabel: 'E-Mail',
+      phoneLabel: 'Telefon',
+      sections: [
+        {
+          title: 'Haftung für Inhalte',
+          paragraphs: [
+            'Als Diensteanbieterin bin ich für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Eine Verpflichtung zur Überwachung übermittelter oder gespeicherter fremder Informationen besteht nicht.',
+          ],
+        },
+        {
+          title: 'Haftung für Links',
+          paragraphs: [
+            'Diese Website enthält Links zu externen Websites Dritter. Für deren Inhalte übernehme ich keine Gewähr. Für die Inhalte der verlinkten Seiten ist stets die jeweilige Anbieterin oder der jeweilige Anbieter verantwortlich.',
+          ],
+        },
+        {
+          title: 'Urheberrecht',
+          paragraphs: [
+            'Die auf dieser Website veröffentlichten Inhalte und Werke unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung und Verbreitung bedürfen der vorherigen schriftlichen Zustimmung von Vera Mountney, soweit gesetzlich nichts anderes vorgesehen ist.',
+          ],
+        },
+      ],
+    },
+    privacy: {
+      meta: {
+        title: 'Datenschutzerklärung, Vera Mountney',
+        description: 'Informationen zum Datenschutz auf der Website von Vera Mountney.',
+      },
+      heading: 'Datenschutzerklärung',
+      subtitle: 'Informationen zur Verarbeitung personenbezogener Daten',
+      responsibleHeading: 'Verantwortliche Stelle',
+      updated: 'Stand: Juli 2026',
+      sections: [
+        {
+          title: 'Allgemeine Hinweise',
+          paragraphs: [
+            'Der Schutz Ihrer personenbezogenen Daten ist mir wichtig. Personenbezogene Daten sind alle Informationen, die sich auf eine identifizierte oder identifizierbare Person beziehen.',
+            'Diese Datenschutzerklärung informiert Sie darüber, welche Daten auf dieser Website verarbeitet werden und zu welchem Zweck.',
+          ],
+        },
+        {
+          title: 'Kontaktformular und Anfragen',
+          paragraphs: [
+            'Wenn Sie das Kontaktformular nutzen, verarbeiten wir die von Ihnen angegebenen Daten — zum Beispiel Name, E-Mail-Adresse, Telefonnummer, gewünschte Leistung und Nachricht — ausschließlich zur Bearbeitung Ihrer Anfrage.',
+            'Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, soweit Ihre Anfrage mit der Erfüllung vorvertraglicher Maßnahmen zusammenhängt, sowie Art. 6 Abs. 1 lit. f DSGVO auf Basis meines berechtigten Interesses, Anfragen zu beantworten.',
+          ],
+        },
+        {
+          title: 'E-Mail-Kommunikation',
+          paragraphs: [
+            'Wenn Sie mich per E-Mail kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage gespeichert. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b und lit. f DSGVO.',
+          ],
+        },
+        {
+          title: 'Vera Assistent',
+          paragraphs: [
+            'Wenn Sie den Vera Assistenten auf dieser Website nutzen, können Sie Fragen stellen oder eine Anfrage senden. Die dabei eingegebenen Angaben werden wie bei einer Kontaktanfrage verarbeitet, um Ihr Anliegen zu beantworten oder weiterzuleiten.',
+          ],
+        },
+        {
+          title: 'Technisch notwendige lokale Speicherung',
+          paragraphs: [
+            'Diese Website speichert bestimmte Einstellungen lokal in Ihrem Browser, zum Beispiel Ihre Sprachauswahl, das Farbschema oder bereits gesetzte Galerie-Likes. Diese Speicherung dient der Nutzbarkeit der Website und erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.',
+          ],
+        },
+        {
+          title: 'Galerie-Likes',
+          paragraphs: [
+            'In der Galerie können Sie Bilder mit „Gefällt mir“ markieren. Diese Angaben werden lokal in Ihrem Browser gespeichert und können zusätzlich anonymisiert gezählt werden, um die Anzahl der Likes anzuzeigen.',
+          ],
+        },
+        {
+          title: 'Externe Links',
+          paragraphs: [
+            'Diese Website enthält Links zu externen Seiten, zum Beispiel LinkedIn oder Buchlinks. Für die Datenverarbeitung auf diesen externen Seiten gelten die Datenschutzhinweise der jeweiligen Anbieter.',
+          ],
+        },
+        {
+          title: 'Ihre Rechte',
+          paragraphs: [
+            'Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch gegen die Verarbeitung sowie auf Datenübertragbarkeit, soweit die gesetzlichen Voraussetzungen erfüllt sind.',
+            'Außerdem haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer personenbezogenen Daten rechtswidrig erfolgt.',
+          ],
+        },
+      ],
+    },
   },
   gallery: {
     title: 'Vera in Aktion',

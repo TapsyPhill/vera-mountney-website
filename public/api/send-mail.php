@@ -8,7 +8,7 @@ require_once __DIR__ . '/vendor/phpmailer/phpmailer/PHPMailer.php';
 require_once __DIR__ . '/vendor/phpmailer/phpmailer/SMTP.php';
 require_once __DIR__ . '/vendor/phpmailer/phpmailer/Exception.php';
 
-const DEFAULT_RECIPIENT = 'veramountney@gmx.net';
+const DEFAULT_RECIPIENT = 'sprachen-stuebchen@gmx.de';
 const SMTP_TIMEOUT_SECONDS = 12;
 
 /**

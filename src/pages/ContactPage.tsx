@@ -26,6 +26,12 @@ export function ContactPage() {
                 <p className="mt-2 text-sm text-brand-200 light:text-brand-800">
                   {t('contact.formHint')}
                 </p>
+                <a
+                  href={`mailto:${profile.email}`}
+                  className="mt-3 block text-accent-glow underline-offset-2 hover:underline"
+                >
+                  {profile.email}
+                </a>
               </div>
 
               <div className="glass-card p-5 sm:p-6">
@@ -33,13 +39,13 @@ export function ContactPage() {
                   {t('contact.phone')}
                 </h3>
                 <a
-                  href={`tel:${profile.phone.replace(/\s/g, '')}`}
+                  href={`tel:${profile.phoneTel}`}
                   className="mt-2 block text-accent-glow hover:underline"
                 >
                   {profile.phone}
                 </a>
                 <a
-                  href={`tel:${profile.phone.replace(/\s/g, '')}`}
+                  href={`tel:${profile.phoneTel}`}
                   className="btn-secondary mt-4 inline-flex text-xs"
                 >
                   {t('contact.callNow')}

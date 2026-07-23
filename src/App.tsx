@@ -6,6 +6,7 @@ import { ServicesPage } from './pages/ServicesPage'
 import { BookPage } from './pages/BookPage'
 import { GalleryPage } from './pages/GalleryPage'
 import { ContactPage } from './pages/ContactPage'
+import { LegalPage } from './pages/LegalPage'
 
 export default function App() {
   return (
@@ -18,6 +19,8 @@ export default function App() {
           <Route path="/book" element={<BookPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/impressum" element={<LegalPage kind="impressum" />} />
+          <Route path="/datenschutz" element={<LegalPage kind="privacy" />} />
           <Route path="/faq" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

@@ -47,7 +47,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href={`tel:${profile.phone.replace(/\s/g, '')}`} className="hover:text-accent-400">
+                <a href={`tel:${profile.phoneTel}`} className="hover:text-accent-400">
                   {profile.phone}
                 </a>
               </li>
@@ -68,9 +68,25 @@ export function Footer() {
 
         <div className="mt-8 border-t border-white/10 pt-6 sm:mt-10 light:border-brand-200/50">
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pr-44 lg:pr-48">
-            <p className="text-center text-xs text-gray-400 light:text-brand-600 sm:text-left">
-              © {year} Vera Mountney. {t('footer.rights')}
-            </p>
+            <div className="flex flex-col items-center gap-2 sm:items-start">
+              <p className="text-center text-xs text-gray-400 light:text-brand-600 sm:text-left">
+                © {year} Vera Mountney. {t('footer.rights')}
+              </p>
+              <nav
+                className="flex items-center gap-2.5 text-[11px] text-gray-500 light:text-brand-600"
+                aria-label={t('footer.legalNavAria', { defaultValue: 'Legal information' })}
+              >
+                <Link to="/impressum" className="footer-legal-link">
+                  {t('footer.impressum')}
+                </Link>
+                <span aria-hidden="true" className="text-gray-600/70 light:text-brand-500">
+                  ·
+                </span>
+                <Link to="/datenschutz" className="footer-legal-link">
+                  {t('footer.privacy')}
+                </Link>
+              </nav>
+            </div>
 
             <a
               href={DESIGN_CREDIT_URL}

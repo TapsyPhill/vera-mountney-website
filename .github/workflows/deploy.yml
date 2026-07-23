@@ -60,7 +60,7 @@ jobs:
             password: process.env.SMTP_PASS || '',
             from_email: process.env.SMTP_FROM || process.env.SMTP_USER || '',
             from_name: process.env.SMTP_FROM_NAME || 'Vera Mountney Website',
-            recipient_email: process.env.RECIPIENT_EMAIL || 'veramountney@gmx.net',
+            recipient_email: process.env.RECIPIENT_EMAIL || 'sprachen-stuebchen@gmx.de',
           };
           const body = `<?php\nreturn json_decode(${JSON.stringify(JSON.stringify(config))}, true);\n`;
           fs.writeFileSync('dist/api/smtp.config.php', body);
