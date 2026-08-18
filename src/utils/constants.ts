@@ -14,5 +14,8 @@ export const LANGUAGE_STORAGE_KEY = 'vera-language'
 
 export const PROFILE_IMAGE = '/assets/images/profile/vera-mountney-main.jpg'
 export const PROFILE_IMAGE_RED = '/assets/images/profile/vera-red-portrait-main-01.jpg'
+export const OG_IMAGE = '/og-image.jpg'
+export const OG_IMAGE_WIDTH = 1200
+export const OG_IMAGE_HEIGHT = 630
 
 export const HERO_PORTRAITS = [PROFILE_IMAGE, PROFILE_IMAGE_RED] as const
