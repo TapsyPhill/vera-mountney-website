@@ -4,6 +4,7 @@ const en = {
       title: 'Vera Mountney, Coach, Trainer, Author & Adviser',
       description:
         'Coaching, guidance, authorship and intercultural support in Verden. Personal support for applications, career, integration and communication.',
+      ogImageAlt: 'Vera Mountney — Coach, Trainer, Author & Adviser',
     },
     about: {
       title: 'About Vera Mountney',

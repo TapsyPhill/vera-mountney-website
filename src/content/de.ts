@@ -4,6 +4,7 @@ const de = {
       title: 'Vera Mountney, Coach, Trainer, Autorin & Beraterin',
       description:
         'Coaching, Beratung, Autorenschaft und interkulturelle Unterstützung in Verden. Individuelle Begleitung für Bewerbung, Karriere, Integration und Kommunikation.',
+      ogImageAlt: 'Vera Mountney — Coach, Trainerin, Autorin & Beraterin',
     },
     about: {
       title: 'Über Vera Mountney',

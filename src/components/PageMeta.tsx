@@ -39,13 +39,13 @@ export function PageMeta({ titleKey, descriptionKey, image = OG_IMAGE }: PageMet
     setMeta('og:image:type', 'image/jpeg', true)
     setMeta('og:image:width', String(OG_IMAGE_WIDTH), true)
     setMeta('og:image:height', String(OG_IMAGE_HEIGHT), true)
-    setMeta('og:image:alt', 'Vera Mountney — Creative Language Adviser, Coach & Author', true)
+    setMeta('og:image:alt', t('meta.home.ogImageAlt'), true)
     setMeta('og:locale', i18n.language === 'de' ? 'de_DE' : 'en_US', true)
     setMeta('twitter:card', 'summary_large_image')
     setMeta('twitter:title', title)
     setMeta('twitter:description', description)
     setMeta('twitter:image', imageUrl)
-    setMeta('twitter:image:alt', 'Vera Mountney — Creative Language Adviser, Coach & Author')
+    setMeta('twitter:image:alt', t('meta.home.ogImageAlt'))
   }, [t, i18n.language, titleKey, descriptionKey, image])
 
   return null
