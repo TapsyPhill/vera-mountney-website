@@ -128,6 +128,7 @@ if ($errors !== []) {
 require_once __DIR__ . '/send-mail.php';
 
 $recipient = getInquiryRecipient();
+$recipientCc = getInquiryRecipientCc();
 
 $sourceLabel = $source === 'vera_assistant' ? 'Vera Assistant' : 'Contact Form';
 $appointmentLabel = $appointmentRequest ? 'Ja / Yes' : 'Nein / No';
@@ -170,7 +171,8 @@ $mailResult = sendInquiryEmail(
     $plainBody,
     $email,
     $name,
-    $htmlBody
+    $htmlBody,
+    $recipientCc
 );
 
 $sent = $mailResult['sent'];
@@ -182,6 +184,7 @@ $backupPayload = [
     'mailHost' => $mailResult['host'] ?? null,
     'mailError' => $mailResult['error'],
     'recipient' => $recipient,
+    'recipientCc' => $recipientCc,
     'data' => [
         'name' => $name,
         'email' => $email,

@@ -2,7 +2,7 @@
 /**
  * Production config is generated at deploy from GitHub Actions secrets:
  * SMTP_HOST, SMTP_PORT, SMTP_ENCRYPTION, SMTP_USER, SMTP_PASS,
- * SMTP_FROM, SMTP_FROM_NAME, RECIPIENT_EMAIL
+ * SMTP_FROM, SMTP_FROM_NAME, RECIPIENT_EMAIL, RECIPIENT_CC_EMAIL (optional)
  */
 return [
     'host' => 'vera-mountney.de',
@@ -13,4 +13,5 @@ return [
     'from_email' => 'noreply@vera-mountney.de',
     'from_name' => 'Vera Mountney Website',
     'recipient_email' => 'sprachen-stuebchen@gmx.de',
+    'recipient_cc_email' => 'veramountney@gmx.net',
 ];

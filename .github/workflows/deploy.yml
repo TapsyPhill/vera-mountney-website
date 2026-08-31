@@ -41,6 +41,7 @@ jobs:
           SMTP_FROM_NAME: ${{ secrets.SMTP_FROM_NAME }}
           SMTP_ENCRYPTION: ${{ secrets.SMTP_ENCRYPTION }}
           RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+          RECIPIENT_CC_EMAIL: ${{ secrets.RECIPIENT_CC_EMAIL }}
         run: |
           if [ -z "$SMTP_PASS" ] || [ -z "$SMTP_USER" ] || [ -z "$SMTP_HOST" ]; then
             echo "Error: SMTP secrets are required (SMTP_HOST, SMTP_USER, SMTP_PASS)."
@@ -61,10 +62,12 @@ jobs:
             from_email: process.env.SMTP_FROM || process.env.SMTP_USER || '',
             from_name: process.env.SMTP_FROM_NAME || 'Vera Mountney Website',
             recipient_email: process.env.RECIPIENT_EMAIL || 'sprachen-stuebchen@gmx.de',
+            recipient_cc_email: process.env.RECIPIENT_CC_EMAIL || '',
           };
           const body = `<?php\nreturn json_decode(${JSON.stringify(JSON.stringify(config))}, true);\n`;
           fs.writeFileSync('dist/api/smtp.config.php', body);
-          console.log('SMTP config written for', config.from_email, '->', config.recipient_email);
+          const cc = config.recipient_cc_email ? ` (cc: ${config.recipient_cc_email})` : '';
+          console.log('SMTP config written for', config.from_email, '->', config.recipient_email + cc);
           NODE
 
       - name: Deploy to FTP server

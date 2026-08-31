@@ -39,6 +39,18 @@ function getInquiryRecipient(): string
     return DEFAULT_RECIPIENT;
 }
 
+function getInquiryRecipientCc(): ?string
+{
+    $config = loadMailConfig();
+    $cc = trim((string)($config['recipient_cc_email'] ?? ''));
+
+    if ($cc !== '' && filter_var($cc, FILTER_VALIDATE_EMAIL)) {
+        return $cc;
+    }
+
+    return null;
+}
+
 /**
  * @return list<string>
  */
@@ -63,11 +75,21 @@ function sendInquiryEmail(
     string $plainBody,
     string $replyToEmail,
     string $replyToName,
-    ?string $htmlBody = null
+    ?string $htmlBody = null,
+    ?string $ccRecipient = null
 ): array {
     $smtpConfig = loadMailConfig();
     if ($smtpConfig !== null) {
-        return sendViaSmtpWithFallback($smtpConfig, $recipient, $subject, $plainBody, $replyToEmail, $replyToName, $htmlBody);
+        return sendViaSmtpWithFallback(
+            $smtpConfig,
+            $recipient,
+            $subject,
+            $plainBody,
+            $replyToEmail,
+            $replyToName,
+            $htmlBody,
+            $ccRecipient
+        );
     }
 
     $fallbackFrom = 'noreply@vera-mountney.de';
@@ -79,6 +101,10 @@ function sendInquiryEmail(
         'Content-Type: text/plain; charset=UTF-8',
         'Content-Transfer-Encoding: 8bit',
     ];
+
+    if ($ccRecipient !== null && $ccRecipient !== '') {
+        $headers[] = 'Cc: ' . $ccRecipient;
+    }
 
     ini_set('sendmail_from', $fallbackFrom);
     $headerString = implode("\r\n", $headers);
@@ -107,7 +133,8 @@ function sendViaSmtpWithFallback(
     string $plainBody,
     string $replyToEmail,
     string $replyToName,
-    ?string $htmlBody = null
+    ?string $htmlBody = null,
+    ?string $ccRecipient = null
 ): array {
     $primaryHost = (string)($config['host'] ?? '');
     $username = (string)($config['username'] ?? '');
@@ -132,7 +159,8 @@ function sendViaSmtpWithFallback(
             $plainBody,
             $replyToEmail,
             $replyToName,
-            $htmlBody
+            $htmlBody,
+            $ccRecipient
         );
 
         if ($attempt['sent']) {
@@ -162,7 +190,8 @@ function sendViaSmtpHost(
     string $plainBody,
     string $replyToEmail,
     string $replyToName,
-    ?string $htmlBody = null
+    ?string $htmlBody = null,
+    ?string $ccRecipient = null
 ): array {
     $username = (string)($config['username'] ?? '');
     $password = (string)($config['password'] ?? '');
@@ -195,6 +224,9 @@ function sendViaSmtpHost(
 
         $mail->setFrom($fromEmail, $fromName);
         $mail->addAddress($recipient);
+        if ($ccRecipient !== null && $ccRecipient !== '') {
+            $mail->addCC($ccRecipient);
+        }
         $mail->addReplyTo($replyToEmail, $replyToName);
         $mail->Subject = $subject;
 
