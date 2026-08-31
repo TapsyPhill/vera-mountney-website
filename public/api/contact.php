@@ -36,13 +36,35 @@ if (!empty($data['botcheck'])) {
     exit;
 }
 
-function sanitize(string $value, int $maxLength = 5000): string
+function sanitizeField(string $value, int $maxLength = 5000): string
 {
     $value = trim(strip_tags($value));
     if (strlen($value) > $maxLength) {
         $value = substr($value, 0, $maxLength);
     }
     return $value;
+}
+
+function sanitizeMessage(string $value, int $maxLength = 5000): string
+{
+    $value = trim(str_replace(["\r\n", "\r"], "\n", $value));
+    if (strlen($value) > $maxLength) {
+        $value = substr($value, 0, $maxLength);
+    }
+    return $value;
+}
+
+function isValidEmail(string $email): bool
+{
+    if ($email === '') {
+        return false;
+    }
+
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return true;
+    }
+
+    return (bool) preg_match('/^[^\s@]+@[^\s@]+\.[^\s@]+$/', $email);
 }
 
 function encodeSubject(string $subject): string
@@ -53,26 +75,34 @@ function encodeSubject(string $subject): string
     return $subject;
 }
 
-$name = sanitize((string)($data['name'] ?? ''), 200);
-$email = sanitize((string)($data['email'] ?? ''), 200);
-$phone = sanitize((string)($data['phone'] ?? ''), 50);
-$preferredContactMethod = sanitize((string)($data['preferredContactMethod'] ?? ''), 50);
-$selectedService = sanitize((string)($data['selectedService'] ?? ''), 200);
-$otherService = sanitize((string)($data['otherService'] ?? ''), 300);
-$preferredDateTime = sanitize((string)($data['preferredDateTime'] ?? ''), 300);
-$address = sanitize((string)($data['address'] ?? ''), 300);
-$subject = sanitize((string)($data['subject'] ?? ''), 200);
-$message = sanitize((string)($data['message'] ?? ''), 5000);
-$language = sanitize((string)($data['language'] ?? 'de'), 10);
-$source = sanitize((string)($data['source'] ?? 'contact_form'), 50);
+$name = sanitizeField((string)($data['name'] ?? ''), 200);
+$email = sanitizeField((string)($data['email'] ?? ''), 200);
+$phone = sanitizeField((string)($data['phone'] ?? ''), 50);
+$preferredContactMethod = sanitizeField(
+    (string)($data['preferredContactMethod'] ?? $data['contactMethod'] ?? ''),
+    50
+);
+$selectedService = sanitizeField((string)($data['selectedService'] ?? ''), 200);
+$selectedServiceId = sanitizeField((string)($data['selectedServiceId'] ?? ''), 100);
+$otherService = sanitizeField((string)($data['otherService'] ?? ''), 300);
+$preferredDateTime = sanitizeField((string)($data['preferredDateTime'] ?? ''), 300);
+$address = sanitizeField((string)($data['address'] ?? ''), 300);
+$subject = sanitizeField((string)($data['subject'] ?? ''), 200);
+$message = sanitizeMessage((string)($data['message'] ?? ''));
+$language = sanitizeField((string)($data['language'] ?? 'de'), 10);
+$source = sanitizeField((string)($data['source'] ?? 'contact_form'), 50);
 $appointmentRequest = !empty($data['appointmentRequest']);
+
+if ($selectedService === '' && $selectedServiceId !== '') {
+    $selectedService = $selectedServiceId;
+}
 
 $errors = [];
 
 if ($name === '') {
     $errors[] = 'name';
 }
-if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if (!isValidEmail($email)) {
     $errors[] = 'email';
 }
 if ($message === '') {
@@ -95,7 +125,6 @@ if ($errors !== []) {
     exit;
 }
 
-// Recipient comes from smtp.config.php (RECIPIENT_EMAIL secret at deploy time)
 require_once __DIR__ . '/send-mail.php';
 
 $recipient = getInquiryRecipient();
@@ -159,6 +188,7 @@ $backupPayload = [
         'phone' => $phone,
         'preferredContactMethod' => $preferredContactMethod,
         'selectedService' => $selectedService,
+        'selectedServiceId' => $selectedServiceId,
         'otherService' => $otherService,
         'preferredDateTime' => $preferredDateTime,
         'address' => $address,

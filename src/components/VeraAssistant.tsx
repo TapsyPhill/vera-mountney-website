@@ -354,6 +354,7 @@ export function VeraAssistant() {
       phone: draft.phone || undefined,
       preferredContactMethod: draft.preferredContactMethod,
       selectedService: serviceLabel,
+      selectedServiceId: draft.selectedService,
       otherService: draft.otherService || undefined,
       preferredDateTime: draft.preferredDateTime || undefined,
       message: draft.message,
@@ -371,6 +372,11 @@ export function VeraAssistant() {
     }
 
     setInquiryStep('confirm')
+    if (result.errors?.includes('email')) {
+      appendAssistant(t('contact.form.errorEmail'))
+      setInquiryStep('email')
+      return
+    }
     appendAssistant(t('assistant.errorSend'))
   }
 

@@ -2,14 +2,37 @@ import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { Trans, useTranslation } from 'react-i18next'
 import { DateTimePicker } from './DateTimePicker'
-import { inquiryServiceIds, getInquiryServiceLabel } from '../data/services'
+import { inquiryServiceIds, getInquiryServiceLabel, type InquiryServiceId } from '../data/services'
 import type { InquiryLanguage, PreferredContactMethod } from '../types/inquiry'
 import { submitInquiry } from '../utils/submitInquiry'
+import {
+  validateInquiryFields,
+  type InquiryValidationField,
+} from '../utils/validateInquiry'
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error'
 
 const inputClass =
   'w-full min-h-[48px] rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-base outline-none transition focus:border-accent-400 sm:text-sm light:border-brand-300 light:bg-white light:text-brand-900'
+
+const errorInputClass =
+  'border-red-400/60 focus:border-red-400 light:border-red-400'
+
+function validationMessage(
+  fields: InquiryValidationField[],
+  t: (key: string) => string,
+): string {
+  const labels: Record<InquiryValidationField, string> = {
+    name: t('contact.form.errorName'),
+    email: t('contact.form.errorEmail'),
+    message: t('contact.form.errorMessage'),
+    selectedService: t('contact.form.errorService'),
+    preferredContactMethod: t('contact.form.errorContactMethod'),
+    otherService: t('contact.form.errorOtherService'),
+  }
+
+  return fields.map((field) => labels[field]).join(' ')
+}
 
 export function ContactForm() {
   const { t, i18n } = useTranslation()
@@ -19,6 +42,8 @@ export function ContactForm() {
   const [appointmentRequest, setAppointmentRequest] = useState(false)
   const [preferredDateTime, setPreferredDateTime] = useState('')
   const [honeypot, setHoneypot] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
+  const [invalidFields, setInvalidFields] = useState<InquiryValidationField[]>([])
 
   const language = (i18n.language === 'en' ? 'en' : 'de') as InquiryLanguage
   const showOtherService = selectedService === 'other'
@@ -29,6 +54,9 @@ export function ContactForm() {
     preferredContactMethod === 'phone' || preferredContactMethod === 'whatsapp'
       ? t('contact.form.successPhone')
       : t('contact.form.success')
+
+  const fieldClass = (field: InquiryValidationField) =>
+    `${inputClass}${invalidFields.includes(field) ? ` ${errorInputClass}` : ''}`
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -42,29 +70,43 @@ export function ContactForm() {
     const message = String(data.get('message') || '').trim()
     const subject = String(data.get('subject') || '').trim()
     const address = String(data.get('address') || '').trim()
-    const preferredDateTime = String(data.get('preferredDateTime') || '').trim()
+    const preferredDateTimeValue = String(data.get('preferredDateTime') || '').trim()
     const otherService = String(data.get('otherService') || '').trim()
+    const serviceId = String(data.get('selectedService') || selectedService).trim()
+    const contactMethod = String(data.get('contactMethod') || preferredContactMethod).trim()
 
-    if (!name || !email || !message || !selectedService || !preferredContactMethod) {
+    const validation = validateInquiryFields({
+      name,
+      email,
+      message,
+      selectedService: serviceId,
+      preferredContactMethod: contactMethod,
+      otherService,
+    })
+
+    if (!validation.valid) {
+      setInvalidFields(validation.fields)
+      setErrorMessage(validationMessage(validation.fields, t))
       setStatus('error')
       return
     }
 
-    if (selectedService === 'other' && !otherService) {
-      setStatus('error')
-      return
-    }
-
+    setInvalidFields([])
+    setErrorMessage('')
     setStatus('loading')
+
+    const serviceLabel =
+      getInquiryServiceLabel(serviceId as InquiryServiceId, t) || serviceId
 
     const result = await submitInquiry({
       name,
       email,
       phone: phone || undefined,
-      preferredContactMethod,
-      selectedService: getInquiryServiceLabel(selectedService as (typeof inquiryServiceIds)[number], t),
+      preferredContactMethod: contactMethod as PreferredContactMethod,
+      selectedService: serviceLabel,
+      selectedServiceId: serviceId,
       otherService: otherService || undefined,
-      preferredDateTime: preferredDateTime || undefined,
+      preferredDateTime: preferredDateTimeValue || undefined,
       address: address || undefined,
       subject: subject || undefined,
       message,
@@ -76,6 +118,8 @@ export function ContactForm() {
 
     if (result.success) {
       setStatus('success')
+      setErrorMessage('')
+      setInvalidFields([])
       form.reset()
       setSelectedService('')
       setPreferredContactMethod('email')
@@ -84,6 +128,12 @@ export function ContactForm() {
       return
     }
 
+    if (result.errors?.length) {
+      setInvalidFields(result.errors as InquiryValidationField[])
+      setErrorMessage(validationMessage(result.errors as InquiryValidationField[], t))
+    } else {
+      setErrorMessage(t('contact.form.errorSend'))
+    }
     setStatus('error')
   }
 
@@ -107,13 +157,13 @@ export function ContactForm() {
           <label htmlFor="name" className="mb-1.5 block text-sm font-medium">
             {t('contact.form.name')} *
           </label>
-          <input id="name" name="name" type="text" required autoComplete="name" className={inputClass} />
+          <input id="name" name="name" type="text" required autoComplete="name" className={fieldClass('name')} />
         </div>
         <div>
           <label htmlFor="email" className="mb-1.5 block text-sm font-medium">
             {t('contact.form.email')} *
           </label>
-          <input id="email" name="email" type="email" required autoComplete="email" className={inputClass} />
+          <input id="email" name="email" type="email" required autoComplete="email" className={fieldClass('email')} />
         </div>
       </div>
 
@@ -134,7 +184,7 @@ export function ContactForm() {
             required
             value={preferredContactMethod}
             onChange={(e) => setPreferredContactMethod(e.target.value as PreferredContactMethod)}
-            className={inputClass}
+            className={fieldClass('preferredContactMethod')}
           >
             {contactMethods.map((method) => (
               <option key={method} value={method}>
@@ -155,7 +205,7 @@ export function ContactForm() {
           required
           value={selectedService}
           onChange={(e) => setSelectedService(e.target.value)}
-          className={inputClass}
+          className={fieldClass('selectedService')}
         >
           <option value="">{t('contact.form.servicePlaceholder')}</option>
           {inquiryServiceIds.map((id) => (
@@ -171,7 +221,7 @@ export function ContactForm() {
           <label htmlFor="otherService" className="mb-1.5 block text-sm font-medium">
             {t('contact.form.otherService')} *
           </label>
-          <input id="otherService" name="otherService" type="text" required className={inputClass} />
+          <input id="otherService" name="otherService" type="text" required className={fieldClass('otherService')} />
         </div>
       )}
 
@@ -208,7 +258,7 @@ export function ContactForm() {
         <label htmlFor="message" className="mb-1.5 block text-sm font-medium">
           {t('contact.form.message')} *
         </label>
-        <textarea id="message" name="message" rows={5} required autoComplete="off" className={inputClass} />
+        <textarea id="message" name="message" rows={5} required autoComplete="off" className={fieldClass('message')} />
       </div>
 
       <label className="flex items-start gap-3 text-sm">
@@ -221,9 +271,9 @@ export function ContactForm() {
         <span>{t('contact.form.appointment')}</span>
       </label>
 
-      {status === 'error' && (
+      {status === 'error' && errorMessage && (
         <p className="rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300 light:text-red-700" role="alert">
-          {t('contact.form.errorSend')}
+          {errorMessage}
         </p>
       )}
       {status === 'success' && (

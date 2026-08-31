@@ -19,6 +19,7 @@ export interface InquiryPayload {
   language: InquiryLanguage
   source: InquirySource
   botcheck?: string
+  selectedServiceId?: string
 }
 
 export interface InquirySubmitResult {

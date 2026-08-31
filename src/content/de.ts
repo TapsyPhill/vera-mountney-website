@@ -363,6 +363,12 @@ const de = {
       errorSend:
         'Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es gleich erneut.',
       error: 'Bitte füllen Sie alle Pflichtfelder aus.',
+      errorName: 'Bitte geben Sie Ihren Namen ein.',
+      errorEmail: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
+      errorMessage: 'Bitte geben Sie eine Nachricht ein.',
+      errorService: 'Bitte wählen Sie eine Leistung aus.',
+      errorContactMethod: 'Bitte wählen Sie eine Kontaktart.',
+      errorOtherService: 'Bitte beschreiben Sie die gewünschte Leistung.',
       privacy:
         'Mit dem Absenden erklären Sie sich einverstanden, dass Ihre Angaben zur Bearbeitung Ihrer Anfrage verwendet werden. Weitere Informationen finden Sie in der <privacyLink>Datenschutzerklärung</privacyLink>.',
     },

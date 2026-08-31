@@ -362,6 +362,12 @@ const en = {
       errorSend:
         'Your request could not be sent right now. Please try again in a moment.',
       error: 'Please fill in all required fields.',
+      errorName: 'Please enter your name.',
+      errorEmail: 'Please enter a valid email address.',
+      errorMessage: 'Please enter a message.',
+      errorService: 'Please select a service.',
+      errorContactMethod: 'Please choose a contact method.',
+      errorOtherService: 'Please describe the service you need.',
       privacy:
         'By submitting, you agree that your details will be used to process your request. Further information is available in the <privacyLink>Privacy Policy</privacyLink>.',
     },
